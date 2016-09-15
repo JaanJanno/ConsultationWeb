@@ -4,6 +4,6 @@ Web application for arranging consultations for academic writing in University o
 
 Team members:
 
-Jaan Jano
-Tõnis Kasekamp 
+Jaan Jano,
+Tõnis Kasekamp, 
 Salman Lashkarara
