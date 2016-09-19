@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>Empty page</title>
+<object th:replace="fragments/util :: standardCSS"></object>
+</head>
+
+<body id="mimin" class="dashboard">
+	<!-- start: Header -->
+	<div th:replace="fragments/header :: header"></div>
+	<!-- end: Header -->
+
+	<div class="container-fluid mimin-wrapper">
+
+		<!-- start:Left Menu -->
+		<div th:replace="fragments/menu :: leftMenu"></div>
+		<!-- end: Left Menu -->
+
+
+		<!-- start: content -->
+		<div id="content">
+			<div class="panel box-shadow-none content-header">
+				<div class="panel-body">
+					<div class="col-md-12">
+						<h3 class="animated fadeInLeft">Empty</h3>
+						<p class="animated fadeInDown">
+							Empty <span class="fa-angle-right fa"></span> Empty
+						</p>
+					</div>
+				</div>
+			</div>
+
+			<div class="col-md-12" style="padding: 20px;"></div>
+		</div>
+		<!-- end: content -->
+
+	</div>
+
+	<!-- start: Mobile -->
+	<div id="mimin-mobile" class="reverse" th:include="fragments/menu :: mobileMenu"></div>
+	<button id="mimin-mobile-menu-opener" class="animated rubberBand btn btn-circle btn-danger">
+		<span class="fa fa-bars"></span>
+	</button>
+	<!-- end: Mobile -->
+
+	<!-- start: Javascript -->
+	<div th:replace="fragments/util :: standardJS"></div>
+	<!-- end: Javascript -->
+</body>
+</html>

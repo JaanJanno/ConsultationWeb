@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+</head>
+<body>
+	<div th:fragment="leftMenu" id="left-menu">
+		<div class="sub-left-menu scroll">
+			<ul class="nav nav-list">
+				<li><div class="left-bg"></div></li>
+				<li class="time">
+					<h1 class="animated fadeInLeft">21:00</h1>
+					<p class="animated fadeInRight">Sat,October 1st 2029</p>
+				</li>
+				<li class="ripple"><a href="/" th:href="@{/}"><span class="fa-home fa"></span> Front
+						page </a></li>
+				<li class="ripple"><a href="/" th:href="@{/}"> <span class="fa-check-square fa"></span>
+						Page 1
+				</a></li>
+				<li class="ripple"><a href="/" th:href="@{/}"> <span class="fa-cubes fa"></span> Page 2
+				</a></li>
+				<li class="ripple"><a href="/" th:href="@{/}"> <span class="fa-sitemap fa"></span> Page
+						3
+				</a></li>
+				<li class="ripple"><a href="/" th:href="@{/}"><span class="fa-car fa"></span> Page 4 </a></li>
+				<li class="ripple"><a class="tree-toggle nav-header"> <span class="fa fa-info"></span>
+						Page 5 <span class="fa-angle-right fa right-arrow text-right"></span>
+				</a>
+					<ul class="nav nav-list tree" style="display: none;">
+						<li><a th:href="@{/}">Page 6</a></li>
+						<li><a th:href="@{/}">Page 7</a></li>
+					</ul></li>
+			</ul>
+		</div>
+	</div>
+
+	<div th:fragment="mobileMenu" id="mimin-mobile" class="reverse">
+		<div class="mimin-mobile-menu-list">
+			<div class="col-md-12 sub-mimin-mobile-menu-list animated fadeInLeft">
+				<ul class="nav nav-list">
+					<li class="ripple"><a href="/" th:href="@{/}"><span class="fa-home fa"></span> Front
+							page </a></li>
+					<li class="ripple"><a href="/" th:href="@{/}"> <span class="fa-check-square fa"></span>
+							Page 1
+					</a></li>
+					<li class="ripple"><a href="/" th:href="@{/}"> <span class="fa-cubes fa"></span> Page
+							2
+					</a></li>
+					<li class="ripple"><a href="/" th:href="@{/}"> <span class="fa-sitemap fa"></span>
+							Page 3
+					</a></li>
+					<li class="ripple"><a href="/" th:href="@{/}"><span class="fa-car fa"></span> Page 4 </a></li>
+					<li class="ripple"><a class="tree-toggle nav-header"> <span class="fa fa-info"></span>
+							Page 5 <span class="fa-angle-right fa right-arrow text-right"></span>
+					</a>
+						<ul class="nav nav-list tree" style="display: none;">
+							<li><a th:href="@{/}">Page 6</a></li>
+							<li><a th:href="@{/}">Page 7</a></li>
+						</ul></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+
+</body>
+</html>
