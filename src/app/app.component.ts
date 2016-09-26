@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
+import {ConsultationRequest} from './con-request.component';
 
 @Component({
-  moduleId: module.id,
+
   selector: 'app-root',
-  templateUrl: 'app.component.html',
-  styleUrls: ['app.component.css']
+  template: `<request></request>`,
+  directives:[ConsultationRequest]
 })
 export class AppComponent {
   title = 'app works!';
