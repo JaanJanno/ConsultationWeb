@@ -1,12 +1,14 @@
 import { Component } from '@angular/core';
-import {ConsultationRequest} from './con-request.component';
+import { ROUTER_DIRECTIVES} from '@angular/router';
+
 
 @Component({
 
   selector: 'app-root',
-  template: `<request></request>`,
-  directives:[ConsultationRequest]
+  template: ` <router-outlet></router-outlet>`,
+  directives:[ROUTER_DIRECTIVES]
 })
+
 export class AppComponent {
   title = 'app works!';
 }
