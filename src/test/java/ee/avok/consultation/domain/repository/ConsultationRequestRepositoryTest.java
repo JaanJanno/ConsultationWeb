@@ -4,6 +4,7 @@ import static org.junit.Assert.assertEquals;
 
 import javax.transaction.Transactional;
 
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +27,10 @@ public class ConsultationRequestRepositoryTest {
 	@Autowired
 	ConsultationRequestRepository conReqRepo;
 
+	@Before
+	public void setup(){
+		conReqRepo.deleteAll();
+	}
 	@Test
 	public void createAndSave() {
 		conReqRepo.save(new ConsultationRequest());
