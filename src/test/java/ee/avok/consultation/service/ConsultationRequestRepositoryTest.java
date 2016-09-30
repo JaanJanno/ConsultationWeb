@@ -1,4 +1,4 @@
-package ee.avok.consultation.domain.repository;
+package ee.avok.consultation.service;
 
 import static org.junit.Assert.assertEquals;
 
@@ -16,6 +16,7 @@ import org.springframework.test.context.transaction.TransactionalTestExecutionLi
 
 import ee.avok.consultation.ConsultationWebApplication;
 import ee.avok.consultation.domain.model.ConsultationRequest;
+import ee.avok.consultation.domain.model.ConsultationStatus;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringApplicationConfiguration(classes = ConsultationWebApplication.class)
@@ -24,11 +25,15 @@ import ee.avok.consultation.domain.model.ConsultationRequest;
 @Transactional
 public class ConsultationRequestRepositoryTest {
 	@Autowired
-	ConsultationRequestRepository conReqRepo;
+	ConsultationService conServ;
 
 	@Test
-	public void createAndSave() {
-		conReqRepo.save(new ConsultationRequest());
-		assertEquals(1, conReqRepo.count());
+	public void createAndHasStatusReceived() {
+		ConsultationRequest req = new ConsultationRequest();
+		req.setName("Bla Bla");
+		req.setEmail("bla@bla.bla");
+		conServ.createConsultation(req);
+		assertEquals(ConsultationStatus.RECEIVED, req.getStatus());
 	}
+
 }

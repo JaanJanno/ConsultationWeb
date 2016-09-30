@@ -2,6 +2,8 @@ package ee.avok.consultation.domain.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -25,6 +27,8 @@ public class ConsultationRequest {
 	private String language;
 	@Column
 	private String comments;
+	@Enumerated(EnumType.STRING)
+	private ConsultationStatus status;
 
 	public ConsultationRequest() {
 	}
@@ -91,6 +95,14 @@ public class ConsultationRequest {
 
 	public void setComments(String comments) {
 		this.comments = comments;
+	}
+
+	public ConsultationStatus getStatus() {
+		return status;
+	}
+
+	public void setStatus(ConsultationStatus status) {
+		this.status = status;
 	}
 
 }

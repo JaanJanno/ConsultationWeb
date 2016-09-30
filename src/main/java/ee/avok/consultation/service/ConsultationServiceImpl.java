@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import ee.avok.consultation.domain.model.ConsultationRequest;
+import ee.avok.consultation.domain.model.ConsultationStatus;
 import ee.avok.consultation.domain.repository.ConsultationRequestRepository;
 
 @Service
@@ -14,6 +15,7 @@ public class ConsultationServiceImpl implements ConsultationService {
 
 	@Override
 	public void createConsultation(ConsultationRequest conReq) {
+		conReq.setStatus(ConsultationStatus.RECEIVED);
 		conReqRepo.save(conReq);
 
 	}
