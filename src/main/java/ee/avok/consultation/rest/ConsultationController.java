@@ -7,6 +7,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -42,6 +43,15 @@ public class ConsultationController {
 
 		List<ConsultationRequest> conReqs = conServ.findByStatus(status);
 		return new ResponseEntity<List<ConsultationRequest>>(conReqs, HttpStatus.OK);
+
+	}
+
+	@RequestMapping(method = RequestMethod.GET, value = "/{id}")
+	public ResponseEntity<ConsultationRequest> getRequest(@PathVariable int id) {
+		LOG.info("Consultation request with id {}", id);
+
+		ConsultationRequest conReq = conServ.findOne(id);
+		return new ResponseEntity<ConsultationRequest>(conReq, HttpStatus.OK);
 
 	}
 }

@@ -39,6 +39,7 @@ public class ConsultationControllerTest {
 
 	private MockMvc mockMvc;
 
+	private ConsultationRequest conReq2;
 	@Autowired
 	private WebApplicationContext webApplicationContext;
 
@@ -54,7 +55,9 @@ public class ConsultationControllerTest {
 		ConsultationRequest conReq1 = new ConsultationRequest();
 		conReq1.setName("Bla1");
 		conReq1.setStatus(ConsultationStatus.RECEIVED);
-		ConsultationRequest conReq2 = new ConsultationRequest();
+
+		// So id is accessible in test
+		conReq2 = new ConsultationRequest();
 		conReq2.setName("Bla2");
 		conReq2.setStatus(ConsultationStatus.ACCEPTED);
 		conReqRepo.save(conReq1);
@@ -87,6 +90,13 @@ public class ConsultationControllerTest {
 	public void findAll() throws Exception {
 		this.mockMvc.perform(get("/requests").accept(contentType)).andExpect(status().isOk())
 				.andExpect(content().contentType(contentType)).andExpect(jsonPath("$", hasSize(2)));
+	}
+
+	@Test
+	public void findOne() throws Exception {
+		this.mockMvc.perform(get("/requests/{id}", conReq2.getId()).accept(contentType)).andExpect(status().isOk())
+				.andExpect(content().contentType(contentType)).andExpect(jsonPath("$.name", is("Bla2")))
+				.andExpect(jsonPath("$.status", is("ACCEPTED")));
 	}
 
 	private String json() {

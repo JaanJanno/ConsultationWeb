@@ -35,4 +35,9 @@ public class ConsultationServiceImpl implements ConsultationService {
 		return (List<ConsultationRequest>) conReqRepo.findAll();
 	}
 
+	@Override
+	public ConsultationRequest findOne(int id) {
+		return conReqRepo.findOne(id);
+	}
+
 }

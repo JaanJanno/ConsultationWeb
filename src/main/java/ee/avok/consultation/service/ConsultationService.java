@@ -12,4 +12,6 @@ public interface ConsultationService {
 	List<ConsultationRequest> findByStatus(ConsultationStatus status);
 
 	List<ConsultationRequest> findAll();
+
+	ConsultationRequest findOne(int id);
 }
