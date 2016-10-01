@@ -1,5 +1,7 @@
 package ee.avok.consultation.rest;
 
+import java.util.List;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,9 +10,11 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import ee.avok.consultation.domain.model.ConsultationRequest;
+import ee.avok.consultation.domain.model.ConsultationStatus;
 import ee.avok.consultation.service.ConsultationService;
 
 @RestController
@@ -28,6 +32,16 @@ public class ConsultationController {
 
 		conServ.createConsultation(conReq);
 		return new ResponseEntity<String>(HttpStatus.CREATED);
+
+	}
+
+	@RequestMapping(method = RequestMethod.GET)
+	public ResponseEntity<List<ConsultationRequest>> getRequests(
+			@RequestParam(value = "status", required = false) ConsultationStatus status) {
+		LOG.info("All consultation requests with status {}", status);
+
+		List<ConsultationRequest> conReqs = conServ.findByStatus(status);
+		return new ResponseEntity<List<ConsultationRequest>>(conReqs, HttpStatus.OK);
 
 	}
 }

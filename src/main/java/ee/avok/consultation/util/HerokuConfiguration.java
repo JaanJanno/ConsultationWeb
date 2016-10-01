@@ -25,13 +25,12 @@ import org.springframework.jdbc.datasource.DriverManagerDataSource;
 public class HerokuConfiguration {
 
 	@SuppressWarnings("unused")
-	private static Logger LOG = LoggerFactory
-			.getLogger(HerokuConfiguration.class);
+	private static Logger LOG = LoggerFactory.getLogger(HerokuConfiguration.class);
 
 	@Bean
 	public DataSource dataSource() {
 		String databaseUrl = System.getenv("DATABASE_URL");
-		//LOG.info("Using Heroku configuration with variable: " + databaseUrl);
+		// LOG.info("Using Heroku configuration with variable: " + databaseUrl);
 
 		String[] a = databaseUrl.split("@");
 		String[] b = a[0].split(":");
