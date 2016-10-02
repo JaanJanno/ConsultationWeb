@@ -4,7 +4,7 @@ import {Component} from '@angular/core';
     selector:"request-detail",
     template:`
         <div class="container">
-                <div class="zippy__title" (click)="toggle()">
+                <div class="zippy__title" >
                     <div class="row">
                         <div class="col-sm-1">
                             <label>Name:</label>
@@ -15,9 +15,13 @@ import {Component} from '@angular/core';
                         <div class="col-sm-1">
                             <label>Email:</label>
                         </div>
-                        <div class="col-sm-5">    
+                        <div class="col-sm-4">    
                             <label>salmanlashkarara@gmail.com</label>
                         </div>
+                        <div class="col-sm-1">    
+                            <i class="fa fa-expand" aria-hidden="true" (click)="toggle()"></i>
+                        </div>
+                        
                     </div>
                 </div>
                 
@@ -67,7 +71,7 @@ import {Component} from '@angular/core';
 
 
 export class requestDetailComponent{
-    visible = true;
+    visible = false;
     toggle() {
     this.visible = !this.visible;
   }

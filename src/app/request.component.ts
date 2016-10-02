@@ -1,18 +1,19 @@
-import {Component} from '@angular/core';
+import {Component,OnInit} from '@angular/core';
+import {requestService} from './request.service';
 
 @Component({
     selector:'request',
     template:`
         <div class="container">
         <h2>Submit Consultation Request</h2>
-            <form>
+            <form (ngSubmit)="onSubmit()" >
                 <div class="form-group">               
                     <div class="row">
                         <div class="col-sm-1">
                             <label for="name">Name:</label>
                         </div>
                         <div class="col-sm-6">    
-                            <input type="text" class="form-control" id="name" placeholder="Enter name">
+                            <input type="text" class="form-control" [(ngModel)]="name" placeholder="Enter name" required>
                         </div>
                     </div>    
                 </div>
@@ -23,68 +24,78 @@ import {Component} from '@angular/core';
                             <label for="email">Email:</label>
                         </div>    
                         <div class="col-sm-6">
-                            <input type="email" class="form-control" id="email" placeholder="Enter email">
+                            <input type="email" class="form-control" [(ngModel)]="email"  placeholder="Enter email" required>
+                        </div>    
+                    </div>
+                </div>
+                                <div class="form-group">
+                    <div class="row">
+                        <div class="col-sm-1">
+                            <label for="email">Programme:</label>
+                        </div>    
+                        <div class="col-sm-6">
+                            <input type="text" class="form-control" [(ngModel)]="programme"  placeholder="Enter programme" required>
                         </div>    
                     </div>
                 </div>
 
                 <div class="form-group">
-                <div class="row">
-                        <div class="col-sm-1">
-                            <label for="name">Department:</label>
-                        </div>
-                        <div class=col-sm-3>
-                            <div class="dropdown">
-                                <button class="btn btn-info dropdown-toggle" type="button" data-toggle="dropdown">Department
-                                <span class="caret"></span></button>
-                                <ul class="dropdown-menu">
-                                <li><a href="#">Faculty of Art and Humanities</a></li>
-                                <li><a href="#">Faculty of Social Sciences</a></li>
-                                <li><a href="#">Faculty of Medicine</a></li>
-                                <li><a href="#">Faculty of Science and Technology</a></li>
-                                <li><a href="#">Office of Academic Affairs</a></li>
-                                <li><a href="#">Estonian Genom Center, Univercity of Tartu</a></li>
-                                </ul>
+                    <div class="row">
+                            <div class="col-sm-1">
+                                <label for="name">Department:</label>
                             </div>
-                        </div>
+                            <div class=col-sm-3>
+                                    <div>
+                                        <div>
+                                            <select class="btn btn-info dropdown-toggle" [(ngModel)]="department">
+                                                <option>Faculty of Art and Humanities</option>
+                                                <option>Faculty of Social Sciences</option>
+                                                <option>Faculty of Medicine</option>
+                                                <option>Faculty of Science and Technology</option>
+                                                <option>Office of Academic Affairs</option>
+                                                <option>Estonian Genom Center, Univercity of Tartu</option>
+                                            </select>
+                                        </div>
+                                    </div>    
+                            </div>
+                    </div>
+                </div>    
+                <div class="form-group">
+                    <div class="row">
+                            <div class="col-sm-1">
+                                <label for="name">Language:</label>
+                            </div>
+                            <div class=col-sm-3>
+                                    <div>
+                                        <div>
+                                            <select class="btn btn-info dropdown-toggle" [(ngModel)]="language">
+                                                <option>English</option>
+                                                <option>Estonian</option>
+                                                <option>Russian</option>
+                                                <option>German</option>
+                                            </select>
+                                        </div>
+                                    </div>    
+                            </div>
                     </div>
                 </div>
 
                 <div class="form-group">
                     <div class="row">
-                        <div class="col-sm-1">
-                            <label for="name"> Degree:</label>
-                        </div>
-                        <div class=col-sm-3>
-                                <div class="dropdown">
-                                    <button class="btn btn-info dropdown-toggle" type="button" data-toggle="dropdown"> Degree
-                                    <span class="caret"></span></button>
-                                    <ul class="dropdown-menu">
-                                    <li><a href="#">Bachelor</a></li>
-                                    <li><a href="#">Master</a></li>
-                                    <li><a href="#">Phd</a></li>
-                                    </ul>
-                                </div>
-                        </div>
-                      </div>  
-                </div>
-
-                <div class="form-group">
-                    <div class="row">
-                        <div class="col-sm-1">
-                            <label for="name">Type:</label>
-                        </div> 
-                        <div class=col-sm-2>
-                                <div class="dropdown">
-                                    <button class="btn btn-info dropdown-toggle" type="button" data-toggle="dropdown">Type
-                                    <span class="caret"></span></button>
-                                    <ul class="dropdown-menu">
-                                    <li><a href="#">Thesis</a></li>
-                                    <li><a href="#">Article</a></li>
-                                    <li><a href="#">Essay</a></li>
-                                    </ul>
-                                </div>
-                        </div>
+                            <div class="col-sm-1">
+                                <label for="name">Type:</label>
+                            </div>
+                            <div class=col-sm-3>
+                                    <div>
+                                        <div>
+                                            <select class="btn btn-info dropdown-toggle" [(ngModel)]="purpose">
+                                                <option>Essay</option>
+                                                <option>Article</option>
+                                                <option>Thesis</option>
+                                            </select>
+                                        </div>
+                                    </div>    
+                            </div>
                     </div>
                 </div>
 
@@ -94,7 +105,7 @@ import {Component} from '@angular/core';
                             <label for="name"> Comment:</label>
                         </div>
                         <div class="col-sm-6">
-                            <textarea class="form-control" rows="3"></textarea>
+                            <textarea class="form-control" rows="3" [(ngModel)]="comments"></textarea>
                         </div>
                     </div>
                 </div>
@@ -111,8 +122,43 @@ import {Component} from '@angular/core';
                         </div>
                 </div>
             </form>
+            <div class="form-group" *ngIf="result">
+                <p>       </p>
+                    <div class="alert alert-success">
+                        <strong>Perfect!</strong> We received your message. Our colleague will contact you via Email.
+                    </div>
+                
+            </div>
         </div>`,
-        styleUrls:['app/app.component.css']
+        styleUrls:['app/app.component.css'],
+        providers:[requestService ]
 })
 
-export class ConsultationRequest{}
+export class ConsultationRequest{
+    name="";
+    email="";
+    department="Faculty of Art and Humanities";
+    language="English";
+    purpose="Essay";
+    comments="";
+    programme="";
+    result;
+  
+    constructor(private http:requestService){}
+   
+    onSubmit(){
+        console.log(this.name+" "+this.email+" "+this.department+" "+this.language+" "+this.purpose+" "+this.comments);
+        let request={name:this.name,
+                     email:this.email,
+                     department:this.department,
+                     language:this.language,
+                     purpose:this.purpose,
+                     programme:this.programme,
+                     comments:this.comments}
+
+
+        this.result=this.http.postRequest(request);
+        
+    }
+    
+}
