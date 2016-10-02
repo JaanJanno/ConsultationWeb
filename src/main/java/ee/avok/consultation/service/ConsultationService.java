@@ -14,4 +14,6 @@ public interface ConsultationService {
 	List<ConsultationRequest> findAll();
 
 	ConsultationRequest findOne(int id);
+
+	void updateStatus(int id, ConsultationStatus status);
 }

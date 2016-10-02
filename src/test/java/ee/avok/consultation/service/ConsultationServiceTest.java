@@ -23,7 +23,7 @@ import ee.avok.consultation.domain.model.ConsultationStatus;
 @ActiveProfiles("test")
 @TestExecutionListeners({ DependencyInjectionTestExecutionListener.class, TransactionalTestExecutionListener.class })
 @Transactional
-public class ConsultationRequestRepositoryTest {
+public class ConsultationServiceTest {
 	@Autowired
 	ConsultationService conServ;
 
@@ -34,6 +34,19 @@ public class ConsultationRequestRepositoryTest {
 		req.setEmail("bla@bla.bla");
 		conServ.createConsultation(req);
 		assertEquals(ConsultationStatus.RECEIVED, req.getStatus());
+	}
+
+	@Test
+	public void changeStatus() {
+		ConsultationRequest req = new ConsultationRequest();
+		req.setName("Bla Bla");
+		req.setEmail("bla@bla.bla");
+		conServ.createConsultation(req);
+		assertEquals(ConsultationStatus.RECEIVED, req.getStatus());
+
+		conServ.updateStatus(req.getId(), ConsultationStatus.ACCEPTED);
+
+		assertEquals(ConsultationStatus.ACCEPTED, conServ.findOne(req.getId()).getStatus());
 	}
 
 }

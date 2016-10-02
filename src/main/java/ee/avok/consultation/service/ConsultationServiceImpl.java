@@ -40,4 +40,11 @@ public class ConsultationServiceImpl implements ConsultationService {
 		return conReqRepo.findOne(id);
 	}
 
+	@Override
+	public void updateStatus(int id, ConsultationStatus status) {
+		ConsultationRequest conReq = findOne(id);
+		conReq.setStatus(status);
+
+	}
+
 }
