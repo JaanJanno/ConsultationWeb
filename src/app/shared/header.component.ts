@@ -3,7 +3,7 @@ import {Component} from '@angular/core';
 @Component({
     selector:'header',
     template:`
-		<nav class="navbar navbar-default header navbar-fixed-top">
+		<nav class="navbar navbar-default header navbar-fixed-top" >
 		<div class="col-md-12 nav-wrapper">
 			<div class="navbar-header" style="width: 100%;">
 				<!--div class="opener-left-menu is-open">
@@ -37,8 +37,7 @@ import {Component} from '@angular/core';
 
 			</div>
 		</div>
-	</nav>
-		`
+	</nav>`
 })
 
 export class headerComponent{}

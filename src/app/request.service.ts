@@ -16,4 +16,7 @@ export class requestService{
        return  this._http.post('http://consultationwebserver.herokuapp.com/requests',body,options).subscribe(res=> res.status.toString);
     }
 
+    getRequest(){
+        return this._http.get("http://consultationwebserver.herokuapp.com/requests").map(res => res.json());
+    }
 }
