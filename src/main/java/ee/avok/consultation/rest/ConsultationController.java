@@ -54,4 +54,13 @@ public class ConsultationController {
 		return new ResponseEntity<ConsultationRequest>(conReq, HttpStatus.OK);
 
 	}
+
+	@RequestMapping(method = RequestMethod.POST, value = "/{id}")
+	public ResponseEntity<String> setConsultationAccepted(@PathVariable int id) {
+		LOG.info("Consultation request with id {}, set as Accepted", id);
+
+		conServ.updateStatus(id, ConsultationStatus.ACCEPTED);
+		return new ResponseEntity<String>(HttpStatus.NO_CONTENT);
+
+	}
 }

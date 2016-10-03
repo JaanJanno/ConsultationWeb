@@ -2,6 +2,7 @@ package ee.avok.consultation.domain.rest;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.collection.IsCollectionWithSize.hasSize;
+import static org.junit.Assert.assertEquals;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
@@ -39,6 +40,7 @@ public class ConsultationControllerTest {
 
 	private MockMvc mockMvc;
 
+	private ConsultationRequest conReq1;
 	private ConsultationRequest conReq2;
 	@Autowired
 	private WebApplicationContext webApplicationContext;
@@ -52,7 +54,7 @@ public class ConsultationControllerTest {
 
 		// Dummy objects
 		conReqRepo.deleteAll();
-		ConsultationRequest conReq1 = new ConsultationRequest();
+		conReq1 = new ConsultationRequest();
 		conReq1.setName("Bla1");
 		conReq1.setStatus(ConsultationStatus.RECEIVED);
 
@@ -97,6 +99,15 @@ public class ConsultationControllerTest {
 		this.mockMvc.perform(get("/requests/{id}", conReq2.getId()).accept(contentType)).andExpect(status().isOk())
 				.andExpect(content().contentType(contentType)).andExpect(jsonPath("$.name", is("Bla2")))
 				.andExpect(jsonPath("$.status", is("ACCEPTED")));
+	}
+
+	@Test
+	public void setAsAccepted() throws Exception {
+		assertEquals(ConsultationStatus.RECEIVED, conReqRepo.findOne(conReq1.getId()).getStatus());
+		this.mockMvc.perform(post("/requests/{id}", conReq1.getId()).accept(contentType))
+				.andExpect(status().isNoContent());
+
+		assertEquals(ConsultationStatus.ACCEPTED, conReqRepo.findOne(conReq1.getId()).getStatus());
 	}
 
 	private String json() {

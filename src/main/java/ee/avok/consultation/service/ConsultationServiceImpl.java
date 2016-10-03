@@ -44,6 +44,7 @@ public class ConsultationServiceImpl implements ConsultationService {
 	public void updateStatus(int id, ConsultationStatus status) {
 		ConsultationRequest conReq = findOne(id);
 		conReq.setStatus(status);
+		conReqRepo.save(conReq);
 
 	}
 
