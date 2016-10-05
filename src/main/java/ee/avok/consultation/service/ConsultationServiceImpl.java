@@ -8,16 +8,21 @@ import org.springframework.stereotype.Service;
 import ee.avok.consultation.domain.model.ConsultationRequest;
 import ee.avok.consultation.domain.model.ConsultationStatus;
 import ee.avok.consultation.domain.repository.ConsultationRequestRepository;
+import ee.avok.consultation.domain.repository.UploadRepository;
 
 @Service
 public class ConsultationServiceImpl implements ConsultationService {
 
 	@Autowired
 	ConsultationRequestRepository conReqRepo;
+	
+	@Autowired
+	UploadRepository upRepo;
 
 	@Override
 	public void createConsultation(ConsultationRequest conReq) {
 		conReq.setStatus(ConsultationStatus.RECEIVED);
+		upRepo.save(conReq.getUpload());
 		conReqRepo.save(conReq);
 
 	}

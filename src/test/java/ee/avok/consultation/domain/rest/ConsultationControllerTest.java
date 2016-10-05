@@ -11,6 +11,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.setup.MockMvcBuilders.webAppContextSetup;
 
 import java.nio.charset.Charset;
+import java.util.Base64;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -73,6 +74,25 @@ public class ConsultationControllerTest {
 	}
 
 	@Test
+	public void testCreateRequestUpload() throws Exception {
+		this.mockMvc.perform(post("/requests").contentType(contentType).content(json()))
+				.andExpect(status().isCreated());
+		ConsultationRequest request = null;
+		for (ConsultationRequest req : conReqRepo.findAll()) {
+			request = req;
+		}
+
+		byte[] expected = Base64.getDecoder().decode("SW1la290dGU");
+		byte[] received = request.getUpload().getUpload();
+
+		assertEquals(expected.length, received.length);
+		for (int i = 0; i < expected.length; i++) {
+			assertEquals(expected[i], received[i]);
+		}
+
+	}
+
+	@Test
 	public void findAllWithStatusReceived() throws Exception {
 		this.mockMvc.perform(get("/requests").param("status", "RECEIVED").accept(contentType))
 				.andExpect(status().isOk()).andExpect(content().contentType(contentType))
@@ -111,10 +131,6 @@ public class ConsultationControllerTest {
 	}
 
 	private String json() {
-		return "\r\n" + "{\r\n" + "  \"name\": \"Neeru Peeru\",\r\n" + "  \"email\": \"neerupeeru@mail.ee\",\r\n"
-				+ "  \"purpose\": \"thesis\",\r\n" + "  \"programme\": \"Software Engineering\",\r\n"
-				+ "  \"year\": 2016,\r\n" + "  \"language\": \"Estonian\",\r\n"
-				+ "  \"comments\": \"In need of correcting a dangling participle.\",\r\n"
-				+ "  \"upload\": \"GHT¤4%¤45Y&#hhg¤6%¤/#eh\"\r\n" + "}";
+		return "{\"name\": \"Neeru Peeru\",\"email\": \"neerupeeru@mail.ee\",\"purpose\": \"thesis\",\"programme\": \"Software Engineering\",\"year\": 2016,\"language\": \"Estonian\",\"comments\": \"In need of correcting a dangling participle.\",\"upload\": {\"upload\":\"SW1la290dGU=\",\"filename\":\"peer.txt\"}}";
 	}
 }

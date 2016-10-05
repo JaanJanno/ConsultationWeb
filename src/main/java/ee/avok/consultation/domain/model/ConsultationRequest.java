@@ -7,6 +7,7 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 
 @Entity
 public class ConsultationRequest {
@@ -29,6 +30,8 @@ public class ConsultationRequest {
 	private String comments;
 	@Enumerated(EnumType.STRING)
 	private ConsultationStatus status;
+	@OneToOne
+	private Upload upload;
 
 	public ConsultationRequest() {
 	}
@@ -103,6 +106,14 @@ public class ConsultationRequest {
 
 	public void setStatus(ConsultationStatus status) {
 		this.status = status;
+	}
+
+	public Upload getUpload() {
+		return upload;
+	}
+
+	public void setUpload(Upload upload) {
+		this.upload = upload;
 	}
 
 }
