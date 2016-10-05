@@ -22,7 +22,8 @@ public class ConsultationServiceImpl implements ConsultationService {
 	@Override
 	public void createConsultation(ConsultationRequest conReq) {
 		conReq.setStatus(ConsultationStatus.RECEIVED);
-		upRepo.save(conReq.getUpload());
+		if(conReq.getUpload() != null)
+			upRepo.save(conReq.getUpload());
 		conReqRepo.save(conReq);
 
 	}
