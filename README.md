@@ -14,6 +14,10 @@ Jaan Janno,
 Tõnis Kasekamp, 
 Salman Lashkarara
 
+## API Definition
+The API of the backend with examples can be observed in the following link:
+http://docs.consultationweb.apiary.io/#
+
 ## How to run the server
 The project is a web application and uses Spring Boot, Maven and Java 8. If those things sound unfamiliar to you, fear not, for the help is here!
 The web server is able to use a local in-memory database, a local Postgres database and a Heroku database.
