@@ -23,6 +23,8 @@ public class ConsultationRequest {
 	@Column
 	private String programme;
 	@Column
+	private String department;
+	@Column
 	private int year;
 	@Column
 	private String language;
@@ -114,6 +116,14 @@ public class ConsultationRequest {
 
 	public void setUpload(Upload upload) {
 		this.upload = upload;
+	}
+
+	public String getDepartment() {
+		return department;
+	}
+
+	public void setDepartment(String department) {
+		this.department = department;
 	}
 
 }

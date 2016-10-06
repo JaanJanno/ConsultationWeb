@@ -16,4 +16,5 @@ public interface ConsultationService {
 	ConsultationRequest findOne(int id);
 
 	void updateStatus(int id, ConsultationStatus status);
+
 }
