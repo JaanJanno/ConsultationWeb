@@ -61,6 +61,14 @@ public class ConsultationController {
 
 		conServ.updateStatus(id, ConsultationStatus.ACCEPTED);
 		return new ResponseEntity<String>(HttpStatus.NO_CONTENT);
-
 	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }
