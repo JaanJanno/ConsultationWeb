@@ -1,9 +1,7 @@
 # ConsultationWeb
 [![Build Status](https://travis-ci.org/JaanJanno/ConsultationWeb.svg?branch=master)](https://travis-ci.org/JaanJanno/ConsultationWeb)
 
-[Front-end server](http://consultationweb.herokuapp.com/)
-
-[Rest server](http://consultationwebserver.herokuapp.com/)
+[Server](http://avok.herokuapp.com/)
 
 Web application for arranging consultations for academic writing in University of Tartu.
 
