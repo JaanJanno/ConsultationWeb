@@ -26,10 +26,10 @@ public class RequestController {
 	}
 
 	@RequestMapping(value = "/request", method = RequestMethod.POST)
-	public String createUnit(@ModelAttribute ConsultationRequest conReq, Model model) {
+	public void createUnit(@ModelAttribute ConsultationRequest conReq, Model model) {
 		LOG.info("Saving Consultation ");
-		System.out.println("Request recieved");
+		model.addAttribute("consultation", new ConsultationRequest());
 		conServ.createConsultation(conReq);
-		return "redirect:/index";
+	
 	}
 }

@@ -7,6 +7,14 @@
 <object th:replace="fragments/util :: standardCSS"></object>
 <link rel="stylesheet" type="text/css" th:href="@{/webjars/summernote/0.8.1/dist/summernote.css}" />
 <link rel="stylesheet" type="text/css" th:href="@{/webjars/select2/4.0.2/dist/css/select2.min.css}" />
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script>
+$(document).ready(function(){
+    $("form").submit(function(){
+        alert("We recieved request. We will contact you as soon as possible");
+    });
+});
+</script>
 </head>
 
 <body id="mimin" class="dashboard">
@@ -114,8 +122,8 @@
 
 									<div class="form-group">
 										<div class="col-sm-offset-2 col-sm-10">
-											<input type="submit" value="Salvesta" class="btn btn-primary" /> <input type="reset"
-												value="Reset" class="btn btn-danger" />
+											<input type="submit" value="Salvesta" class="btn btn-primary" />
+											 <input type="reset"	value="Reset" class="btn btn-danger" />
 										</div>
 									</div>
 								</form>
