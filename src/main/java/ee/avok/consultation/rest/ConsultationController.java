@@ -64,11 +64,7 @@ public class ConsultationController {
 	}
 	
 	
-	
-	
-	
-	
-	
+
 	
 	
 }

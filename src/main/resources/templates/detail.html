@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<title>Index page</title>
+
+<object th:replace="fragments/util :: standardCSS"></object>
+<script>
+$(document).ready(function(){
+    $("form").submit(function(){
+        alert("You have successfuly accepted one request");
+    });
+});
+</script>
+</head>
+
+<body id="mimin" class="dashboard">
+	<!-- start: Header -->
+	<div th:replace="fragments/header :: header"></div>
+	<!-- end: Header -->
+
+	<div class="container-fluid mimin-wrapper">
+
+		<!-- start:Left Menu -->
+		<div th:replace="fragments/menu :: leftMenu"></div>
+		<!-- end: Left Menu -->
+
+
+		<!-- start: content -->
+		<div id="content">
+			<div class="panel box-shadow-none content-header">
+				<div class="panel-body">
+					<div class="col-md-12">
+						<h3 class="animated fadeInLeft">Index page</h3>
+						<p class="animated fadeInDown">
+							Index page <span class="fa-angle-right fa"></span> Index page
+						</p>
+					</div>
+				</div>
+			</div>
+
+			<div class="col-md-12" style="padding: 20px;">
+				<div class="col-md-12 padding-0">
+					<div class="col-md-12 padding-0">
+					  <div>
+                    <div class="row">
+                        <div class="col-sm-1">
+                            <label><strong>Name:</strong></label>
+                        </div>
+                        <div class="col-sm-5">    
+                            <label th:text="${consultation.name}"></label>
+                        </div>
+                        <div class="col-sm-1">
+                            <label><strong>Email:</strong></label>
+                        </div>
+                        <div class="col-sm-4">    
+                            <label th:text="${consultation.email}"></label>
+                        </div>
+                        
+                        
+                    </div>
+                </div>
+                
+                <div>
+                    <div class="row">
+                            <div class="col-sm-1">
+                                <label><strong>Language</strong></label>
+                            </div>
+                            <div class="col-sm-3">
+                                <label th:text="${consultation.language}"></label>
+                            </div>
+                     </div>       
+                    <div class="row">
+                            <div class="col-sm-1">    
+                                <label><strong>programme:</strong></label>
+                            </div>
+                            <div class="col-sm-10">    
+                                <label th:text="${consultation.programme}"></label>
+                            </div>
+                    </div>
+                    <div class="row">
+                            <div class="col-sm-1">    
+                                <label><strong>purpose:</strong></label>
+                            </div>
+                            <div class="col-sm-4">    
+                                <label th:text="${consultation.purpose}"></label>
+                            </div>
+                    </div>
+                    <div class="row">
+                            <div class="col-sm-1">
+                                <label for="name"><strong>Comment:</strong></label>
+                            </div>
+                            <div class="col-sm-10">    
+                                <label for="name" th:text="${consultation.comments}"></label>
+                            </div>
+                    </div>
+                    <div class="row">
+                            <div class="col-sm-2">
+                                <label><strong>Attached file:</strong></label>
+                            </div>
+                            <div class="col-sm-2">    
+                                <label>file</label>
+                            </div>
+                    </div>
+                    <td>
+		                <form   th:object="${p}" th:method="post" th:action="@{/requests/{id}(id=${consultation.id})}">
+		                   
+		                	<button class="btn btn-primary" type="submit">Accept</button>
+		                </form>
+	                </td>
+                    
+                </div>
+					</div>
+				</div>
+
+				<div class="col-md-12 card-wrap padding-0"></div>
+
+			</div>
+		</div>
+		<!-- end: content -->
+
+	</div>
+
+	<!-- start: Mobile -->
+	<div id="mimin-mobile" class="reverse" th:include="fragments/menu :: mobileMenu"></div>
+	<button id="mimin-mobile-menu-opener" class="animated rubberBand btn btn-circle btn-danger">
+		<span class="fa fa-bars"></span>
+	</button>
+	<!-- end: Mobile -->
+
+	<!-- start: Javascript -->
+	<div th:replace="fragments/util :: standardJS"></div>
+	<!-- plugins -->
+	<script th:src="@{/webjars/morrisjs/0.5.1/morris.min.js}"></script>
+	<script th:src="@{/webjars/raphaeljs/2.1.2/raphael-min.js}"></script>
+	<!-- end: Javascript -->
+</body>
+</html>
