@@ -25,6 +25,8 @@ public class ConsultationRequest {
 	@Column
 	private String department;
 	@Column
+	private String degree;
+	@Column
 	private int year;
 	@Column
 	private String language;

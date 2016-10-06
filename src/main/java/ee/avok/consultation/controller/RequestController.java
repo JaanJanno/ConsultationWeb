@@ -1,5 +1,7 @@
 package ee.avok.consultation.controller;
 
+import java.util.List;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,7 +31,8 @@ public class RequestController {
 	public void createUnit(@ModelAttribute ConsultationRequest conReq, Model model) {
 		LOG.info("Saving Consultation ");
 		model.addAttribute("consultation", new ConsultationRequest());
-		conServ.createConsultation(conReq);
 	
+		conServ.createConsultation(conReq);
+		
 	}
 }
