@@ -24,8 +24,8 @@ public class ConsultationRequest {
 	private String programme;
 	@Column
 	private String department;
-	@Column
-	private String degree;
+	
+
 	@Column
 	private int year;
 	@Column
@@ -34,6 +34,10 @@ public class ConsultationRequest {
 	private String comments;
 	@Enumerated(EnumType.STRING)
 	private ConsultationStatus status;
+	
+	@Column
+	private String degree;
+	
 	@OneToOne
 	private Upload upload;
 
@@ -122,6 +126,12 @@ public class ConsultationRequest {
 
 	public String getDepartment() {
 		return department;
+	}
+	public String getDegree() {
+		return degree;
+	}
+	public String setDegree(String degree) {
+		return this.degree=degree;
 	}
 
 	public void setDepartment(String department) {

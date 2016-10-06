@@ -29,7 +29,8 @@ public class RequestController {
 
 	@RequestMapping(value = "/request", method = RequestMethod.POST)
 	public void createUnit(@ModelAttribute ConsultationRequest conReq, Model model) {
-		LOG.info("Saving Consultation ");
+	
+		LOG.info("Saving Consultation "+conReq.getPurpose());
 		model.addAttribute("consultation", new ConsultationRequest());
 	
 		conServ.createConsultation(conReq);
