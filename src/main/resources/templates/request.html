@@ -55,28 +55,51 @@ $(document).ready(function(){
 									class="form-horizontal">
 									<div class="form-group">
 										<label for="name" class="col-sm-2 control-label text-right">Name</label>
-										<div class="col-sm-10">
+										<div class="col-sm-6">
 											<input type="text" class="form-control" id="name" placeholder="Bla bla"
 												th:field="*{name}" th:required="required" />
 										</div>                     
 									</div>
 									<div class="form-group">
 										<label for="email" class="col-sm-2 control-label text-right">Email</label>
-										<div class="col-sm-10">
+										<div class="col-sm-6">
 											<input type="email" class="form-control" id="email" placeholder="email@asd.ee"
 												th:field="*{email}" th:required="required"/>
 										</div>
 									</div>
 									<div class="form-group">
 										<label for="programme" class="col-sm-2 control-label text-right">Programme</label>
-										<div class="col-sm-10">
+										<div class="col-sm-6">
 											<input type="text" class="form-control" id="programme" placeholder="sdasd"
 												th:field="*{programme}" th:required="required"/>
 										</div>
 									</div>
+									
+									<div class="form-group"> 
+										<label for="File" class="col-sm-2 control-label text-right">Upload File</label>	
+					                      <div class="row">
+					                        <div class="col-sm-6">
+					                          <div class="input-group fileupload-v1" style="float: right;">
+					                            <input type="file" name="manualfile" class="fileupload-v1-file hidden" th:required="required"/>
+					                            <input type="text" class="form-control fileupload-v1-path"  placeholder="File Path..." />
+					                            <span class="input-group-btn">
+					                              <button class="btn fileupload-v1-btn" type="button"><i class="fa fa-folder"></i> Choose File</button>
+					                            </span>
+					                          </div>
+					                        </div>
+					                      </div>
+				                    </div>  
+									
+									
+									
+									
+									
+									
+									
+									
 									<div class="form-group">
 										<label for="department" class="col-sm-2 control-label text-right">Department</label>
-										<div class="col-sm-10">
+										<div class="col-sm-6">
 											<select class="select2-A form-control" id="department" th:field="*{department}" th:required="required">
 												<option value="Faculty of Art and Humanities">Faculty of Art and Humanities</option>
 												<option value="Faculty of Social Sciences">Faculty of Social Sciences</option>
@@ -91,7 +114,7 @@ $(document).ready(function(){
 									</div>
 									<div class="form-group">
 										<label for="language" class="col-sm-2 control-label text-right">Language</label>
-										<div class="col-sm-10">
+										<div class="col-sm-6">
 											<select class="select2-A form-control" id="language" th:field="*{language}" th:required="required">
 												<option value="English">English</option>
 												<option value="Estonian">Estonian</option>
@@ -102,7 +125,7 @@ $(document).ready(function(){
 									</div>
 									<div class="form-group">
 										<label for="purpose" class="col-sm-2 control-label text-right">Purpose</label>
-										<div class="col-sm-10">
+										<div class="col-sm-6">
 											<select class="select2-A form-control" id="purpose" th:field="*{purpose}" th:required="required">
 												<option value="Essay">Essay</option>
 												<option value="Article">Article</option>
@@ -113,7 +136,7 @@ $(document).ready(function(){
 									
 									<div class="form-group">
 										<label for="degree" class="col-sm-2 control-label text-right">Degree</label>
-										<div class="col-sm-10">
+										<div class="col-sm-6">
 											<select class="select2-A form-control" id="degree" th:field="*{degree}" th:required="required">
 												<option value="Bsc">Bsc</option>
 												<option value="Ba">Ba</option>
@@ -126,12 +149,13 @@ $(document).ready(function(){
 
 									<div class="form-group">
 										<label for="comments" class="col-sm-2 control-label text-right">Comments</label>
-										<div class="col-sm-10">
+										<div class="col-sm-6">
 											<textarea id="summernote" th:field="*{comments}" class="summernote "></textarea>
-
 										</div>
 									</div>
-
+									
+									
+							          
 
 									<div class="form-group">
 										<div class="col-sm-offset-2 col-sm-10">
