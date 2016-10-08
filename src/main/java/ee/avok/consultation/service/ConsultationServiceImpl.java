@@ -18,15 +18,15 @@ public class ConsultationServiceImpl implements ConsultationService {
 
 	@Autowired
 	ConsultationRequestRepository conReqRepo;
-	
+
 	@Autowired
 	UploadRepository upRepo;
 
 	@Override
 	public void createConsultationREST(ConsultationRequest conReq) {
-		
+
 		conReq.setStatus(ConsultationStatus.RECEIVED);
-		if(conReq.getUpload() != null)
+		if (conReq.getUpload() != null)
 			upRepo.save(conReq.getUpload());
 		conReqRepo.save(conReq);
 
@@ -60,20 +60,22 @@ public class ConsultationServiceImpl implements ConsultationService {
 
 	@Override
 	public void createConsultation(ConsultationRequest conReq, MultipartFile file) {
-		
+
 		conReq.setStatus(ConsultationStatus.RECEIVED);
-			
-		Upload upload = new Upload();
-		try {		
-			upload.setFilename(file.getOriginalFilename());
-			upload.setUpload(file.getBytes());
-			conReq.setUpload(upload);
-			upRepo.save(upload);			
+
+		try {
+			if (file.getBytes().length > 0) {
+				Upload upload = new Upload();
+				upload.setFilename(file.getOriginalFilename());
+				upload.setUpload(file.getBytes());
+				conReq.setUpload(upload);
+				upRepo.save(upload);
+			}
 		} catch (IOException e) {
 			e.printStackTrace();
-		}	
+		}
 		conReqRepo.save(conReq);
-		
+
 	}
 
 }
