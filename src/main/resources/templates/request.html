@@ -44,7 +44,7 @@ $(document).ready(function(){
 						<div class="panel-body" style="padding-bottom: 30px;">
 							<div class="col-md-12">
 
-								<form action="#" th:action="@{/request}" th:object="${consultation}" method="post"
+								<form action="#" th:action="@{/request}" th:object="${consultation}" method="post" enctype="multipart/form-data"
 									class="form-horizontal" content="text/html; charset=UTF-8">
 									<div class="form-group">
 										<label for="name" class="col-sm-2 control-label text-right">Name</label>

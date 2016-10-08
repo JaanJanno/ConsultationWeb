@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import ee.avok.consultation.domain.model.ConsultationRequest;
 import ee.avok.consultation.service.ConsultationService;
@@ -29,24 +31,22 @@ public class RequestController {
 	}
 
 	@RequestMapping(value = "/request", method = RequestMethod.POST)
-	public void createUnit(@ModelAttribute ConsultationRequest conReq, Model model) {
-	
-		LOG.info("Saving Consultation "+conReq.getPurpose());
+	public void createUnit(@ModelAttribute ConsultationRequest conReq, @RequestParam("manualfile") MultipartFile file,
+			Model model) {
+
+		LOG.info("Received file: " + file.getOriginalFilename());
+		LOG.info("Saving Consultation " + conReq.getPurpose());
 		model.addAttribute("consultation", new ConsultationRequest());
-	
-		conServ.createConsultation(conReq);
+
+		conServ.createConsultation(conReq, file);
 	}
-	
+
 	@RequestMapping(method = RequestMethod.POST, value = "/requests/detail/{id}")
-	public String ConsultationRequestDetail(@PathVariable int id,
-											@ModelAttribute ConsultationRequest conReq,
-											Model model) {
+	public String ConsultationRequestDetail(@PathVariable int id, @ModelAttribute ConsultationRequest conReq,
+			Model model) {
 		LOG.info("Consultation request with id {} is sent to show the detail", id);
-		model.addAttribute("consultation",conServ.findOne(id) );
+		model.addAttribute("consultation", conServ.findOne(id));
 		return "detail";
 	}
-	
-	
-	
-	
+
 }

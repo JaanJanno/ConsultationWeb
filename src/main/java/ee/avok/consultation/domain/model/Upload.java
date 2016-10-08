@@ -22,6 +22,10 @@ public class Upload {
 
 	public Upload() {
 		super();
+	}	
+
+	public int getId() {
+		return id;
 	}
 
 	public byte[] getUpload() {

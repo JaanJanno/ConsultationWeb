@@ -24,7 +24,6 @@ public class ConsultationRequest {
 	private String programme;
 	@Column
 	private String department;
-	
 
 	@Column
 	private int year;
@@ -34,14 +33,26 @@ public class ConsultationRequest {
 	private String comments;
 	@Enumerated(EnumType.STRING)
 	private ConsultationStatus status;
-	
+
 	@Column
 	private String degree;
-	
+
 	@OneToOne
 	private Upload upload;
 
 	public ConsultationRequest() {
+	}
+
+	public boolean hasFile() {
+		return this.upload != null;
+	}
+
+	public String generateUploadUrl() {
+		return "/uploads/" + Integer.toString(upload.getId()) + "/" + upload.getFilename();
+	}
+	
+	public String generateUploadName() {
+		return upload.getFilename();
 	}
 
 	public int getId() {
@@ -127,11 +138,13 @@ public class ConsultationRequest {
 	public String getDepartment() {
 		return department;
 	}
+
 	public String getDegree() {
 		return degree;
 	}
+
 	public String setDegree(String degree) {
-		return this.degree=degree;
+		return this.degree = degree;
 	}
 
 	public void setDepartment(String department) {

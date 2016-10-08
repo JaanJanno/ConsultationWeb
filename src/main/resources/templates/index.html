@@ -64,7 +64,12 @@
 							                	<button class="btn btn-default btn-xs" type="submit">Detail</button>
 							                </form>
 						                </td>
-						                <td> <span class="glyphicon glyphicon-download-alt"></span> Download</td>
+						                <td>
+						                	
+							                <a th:href="${consultation.generateUploadUrl()}" th:if="${consultation.hasFile()}">
+							                	 <span class="glyphicon glyphicon-download-alt"></span> Download
+							                </a>
+						                </td>
 						                <td>
 							                <form style='float:left; padding:5px; height:0px' th:object="${consultation}" th:method="post" th:action="@{/requests/{id}(id=${consultation.id})}">
 							                   

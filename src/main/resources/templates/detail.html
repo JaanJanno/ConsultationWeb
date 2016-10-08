@@ -99,9 +99,12 @@ $(document).ready(function(){
                     <div class="row">
                             <div class="col-sm-2">
                                 <label><strong>Attached file:</strong></label>
-                            </div>
+                                <label th:text="${consultation.generateUploadName()}" th:if="${consultation.hasFile()}"></label>
+                            </div>                         
                             <div class="col-sm-2">    
-                                <label>file</label>
+                                <a th:href="${consultation.generateUploadUrl()}" th:if="${consultation.hasFile()}">
+									<span class="glyphicon glyphicon-download-alt"></span> Download
+								</a>
                             </div>
                     </div>
                     <td>

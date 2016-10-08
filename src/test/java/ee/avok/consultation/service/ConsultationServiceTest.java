@@ -32,7 +32,7 @@ public class ConsultationServiceTest {
 		ConsultationRequest req = new ConsultationRequest();
 		req.setName("Bla Bla");
 		req.setEmail("bla@bla.bla");
-		conServ.createConsultation(req);
+		conServ.createConsultationREST(req);
 		assertEquals(ConsultationStatus.RECEIVED, req.getStatus());
 	}
 
@@ -41,7 +41,7 @@ public class ConsultationServiceTest {
 		ConsultationRequest req = new ConsultationRequest();
 		req.setName("Bla Bla");
 		req.setEmail("bla@bla.bla");
-		conServ.createConsultation(req);
+		conServ.createConsultationREST(req);
 		assertEquals(ConsultationStatus.RECEIVED, req.getStatus());
 
 		conServ.updateStatus(req.getId(), ConsultationStatus.ACCEPTED);

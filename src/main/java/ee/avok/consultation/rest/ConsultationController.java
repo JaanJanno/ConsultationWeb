@@ -31,7 +31,7 @@ public class ConsultationController {
 	public ResponseEntity<String> createRequest(@RequestBody ConsultationRequest conReq) {
 		LOG.info("Creating new consultation request");
 
-		conServ.createConsultation(conReq);
+		conServ.createConsultationREST(conReq);
 		return new ResponseEntity<String>(HttpStatus.CREATED);
 
 	}
