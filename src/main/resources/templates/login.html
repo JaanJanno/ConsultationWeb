@@ -1,62 +1,40 @@
-
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org">
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>RentIt</title>
 
-    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css"></link>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>Login page</title>
+<object th:replace="fragments/util :: standardCSS"></object>
 </head>
-<body>
+<body id="mimin" class="dashboard form-signin-wrapper">
+	<div class="container">
 
-<div class="col-md-4 col-md-offset-4">
-    <div class="login-panel panel panel-primary">
-        <div class="panel-heading">
-            <h4>Sign In</h4>
-        </div>
-        <div class="panel-body">
-            <form role="form" method="post" th:action="@{/login}">
-                <fieldset>
-                    <div class="form-group">
-                        <input class="form-control input-lg" placeholder="Username"
-                               name="username" type="text" ></input>
-                               
-                               
-                    </div>
-                    <div class="form-group">
-                        <input class="form-control input-lg" placeholder="Password"
-                               name="password" type="password" value=""></input>
-                    </div>
-                    <input id="SubmitButtonID"
-                           class="btn btn-lg btn-default btn-block" type="submit" value="Login"></input>
-                </fieldset>
-            </form>
-        </div>
-    </div>
-</div>
-<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+		<form class="form-signin" method="post" th:action="@{/login}">
+			<div class="panel periodic-login">
+				<span class="atomic-number">28</span>
+				<div class="panel-body text-center">
+					<h1 class="atomic-symbol">Av</h1>
+					<p class="atomic-mass">14.072110</p>
+					<p class="element-name">Avok</p>
+
+					<i class="fa fa-angle-down" style="font-size: 2em;"></i>
+					<div class="form-group form-animate-text" style="margin-top: 40px !important;">
+						<input type="text" class="form-text" name="username" required="required" /> <span class="bar"></span>
+						<label>Username</label>
+					</div>
+					<div class="form-group form-animate-text" style="margin-top: 40px !important;">
+						<input type="password" class="form-text" name="password" required="required" /> <span
+							class="bar"></span> <label>Password</label>
+					</div>
+					<input type="submit" class="btn col-md-12" value="SignIn" />
+				</div>
+			</div>
+		</form>
+
+	</div>
+
+	<!-- start: Javascript -->
+	<div th:replace="fragments/util :: standardJS"></div>
+	<!-- end: Javascript -->
 </body>
 </html>
-
-
-<!--!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
-  <head>
-    <title>Login page</title>
-  </head>
-  <body>
-    <h1>Login page</h1>
-    <form th:action="@{/login}" method="post">
-      <label for="j_username">Username</label>:
-      <input type="text" id="j_username" name="username" /> <br />
-      <label for="j_password">Password</label>:
-      <input type="password" id="j_password" name="password" /> <br />
-      <input type="submit" value="Log in" />
-    </form>
-  </body>
-</html-->
-
-
-
-
-
-	  
