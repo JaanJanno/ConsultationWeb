@@ -1,11 +1,17 @@
 [ 
+
 {"_class" : "ee.avok.consultation.domain.model.ConsultationRequest", "id": 1, 
 				"name": "Salman", "email": "salmanlashkarara@gmail.com",
 				 "purpose": "Article",     "programme":"Software engineering", "department": "Math and CS","language":"English"
-				 ,"comments":"bla bla", "degree":"Bsc", "status":"RECEIVED"}
+				 ,"comments":"bla bla", "degree":"Bsc", "status":"RECEIVED"},
 				 
-
-
-
+{"_class" : "ee.avok.consultation.auth.domain.model.Account", 
+	"id": 1, 
+	"username": "testy", 
+	"name": "Testy Mc'Testface",
+	"email": "testy@testface.ee",
+	"role":"CONSULTANT",
+	"password": "testy"
+}
 
 ]
