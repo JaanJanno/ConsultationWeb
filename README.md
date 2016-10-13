@@ -5,7 +5,6 @@
 
 Web application for arranging consultations for academic writing in University of Tartu.
 
-
 ## Team members:
 
 Jaan Janno,
@@ -19,6 +18,14 @@ http://docs.consultationweb.apiary.io/#
 ## How to run the server
 The project is a web application and uses Spring Boot, Maven and Java 8. If those things sound unfamiliar to you, fear not, for the help is here!
 The web server is able to use a local in-memory database, a local Postgres database and a Heroku database.
+
+### Test credentials
+
+The following can be used to log in to the application for testing purposes.
+
+**Username:** testy
+
+**Password:** testy
 
 #### Necessary
 * Maven. Good setup guide here http://www.mkyong.com/maven/how-to-install-maven-in-windows/. On Linux follow http://iambusychangingtheworld.blogspot.com/2014/04/install-and-configure-java-and-maven-in.html. On Mac use Google.
