@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>Consultation request</title>
+<object th:replace="fragments/util :: standardCSS"></object>
+<link rel="stylesheet" type="text/css" th:href="@{/webjars/summernote/0.8.1/dist/summernote.css}" />
+<link rel="stylesheet" type="text/css" th:href="@{/webjars/select2/4.0.2/dist/css/select2.min.css}" />
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script>
+$(document).ready(function(){
+    $("form").submit(function(){
+        alert("We recieved request. We will contact you as soon as possible");
+    });
+});
+</script>
+</head>
+
+<body id="mimin" class="dashboard">
+	<!-- start: Header -->
+	<div th:replace="fragments/header :: header"></div>
+	<!-- end: Header -->
+
+	<div class="container-fluid mimin-wrapper">
+	<!-- start:Left Menu -->
+	<div th:replace="fragments/menu :: leftMenu"></div>
+	<!-- end: Left Menu -->
+
+		<!-- start: content -->
+		<div id="content">
+			<div class="panel box-shadow-none content-header">
+				<div class="panel-body">
+					<div class="col-md-12">
+						<h3 class="animated fadeInLeft">Create New Consultation Request</h3>
+						<p class="animated fadeInDown">
+							Create <span class="fa-angle-right fa"></span> Consultation
+						</p>
+					</div>
+				</div>
+			</div>
+
+			<div class="col-md-12">
+				<div class="col-md-12">
+					<div class="panel form-element-padding">
+						<div class="panel-heading">
+							<h4>Create new consultation</h4>
+						</div>
+						<div class="panel-body" style="padding-bottom: 30px;">
+							<div class="col-md-12">
+
+								<form action="#" th:action="@{/}" th:object="${user}" method="post" enctype="multipart/form-data"
+									class="form-horizontal" content="text/html; charset=UTF-8">
+									<div class="form-group">
+										<label for="email" class="col-sm-2 control-label text-right">New Email</label>
+										<div class="col-sm-6">
+											<input type="email" class="form-control" id="email" placeholder="email@asd.ee"
+												th:field="*{email}" th:required="required"/>
+										</div>
+									</div>
+									<div class="form-group">
+										<div class="col-sm-offset-2 col-sm-10">
+											<input type="submit" value="Salvesta" class="btn btn-primary" />
+											 
+										</div>
+									</div>
+			
+								</form>
+								
+								<form action="#" th:action="@{/pass}" th:object="${user}" method="post" enctype="multipart/form-data"
+									class="form-horizontal" content="text/html; charset=UTF-8">
+									<div class="form-group">
+										<label for="name" class="col-sm-2 control-label text-right">Previous Password</label>
+										<div class="col-sm-6">
+											<input type="password" class="form-control" id="name" placeholder="old password"
+												th:field="*{oldPassword}" th:required="required" />
+										</div>                     
+									</div>
+									<div class="form-group">
+										<label for="email" class="col-sm-2 control-label text-right">New Password</label>
+										<div class="col-sm-6">
+											<input type="password" class="form-control" id="email" placeholder="new password"
+												th:field="*{newPassword}" th:required="required"/>
+										</div>
+									</div>
+									<div class="form-group">
+										<div class="col-sm-offset-2 col-sm-10">
+											<input type="submit" value="Salvesta" class="btn btn-primary" />
+											 
+										</div>
+									</div>
+			
+								</form>
+							</div>
+						</div>
+					</div>
+				</div>
+
+
+
+			</div>
+		</div>
+		<!-- end: content -->
+
+	</div>
+
+	<!-- start: Mobile -->
+	<div id="mimin-mobile" class="reverse" th:include="fragments/menu :: mobileMenu"></div>
+	<button id="mimin-mobile-menu-opener" class="animated rubberBand btn btn-circle btn-danger">
+		<span class="fa fa-bars"></span>
+	</button>
+	<!-- end: Mobile -->
+
+	<!-- start: Javascript -->
+	<div th:replace="fragments/util :: standardJS"></div>
+	<!-- plugins -->
+	<script th:src="@{/webjars/summernote/0.8.1/dist/summernote.min.js}"></script>
+	<script th:src="@{/webjars/select2/4.0.2/dist/js/select2.full.min.js}"></script>
+
+	<!-- custom -->
+	<script th:inline="javascript">
+		$(document).ready(function() {
+			$('#summernote').summernote({
+				height : 300, // set editor height
+				minHeight : 300
+			// set minimum height of editor
+			});
+
+			// Select2A
+			$("#department").select2({
+				placeholder : "Select a department",
+				allowClear : false
+			});
+			$("#language").select2({
+				placeholder : "Select a language",
+				allowClear : false
+			});
+			$("#purpose").select2({
+				placeholder : "Select a purpose",
+				allowClear : false
+			});
+			$("#degree").select2({
+				placeholder : "Select a degree",
+				allowClear : false
+			});
+		});
+	</script>
+	<!-- end: Javascript -->
+</body>
+</html>
