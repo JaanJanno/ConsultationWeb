@@ -12,6 +12,7 @@ import ee.avok.consultation.auth.domain.model.Role;
 import ee.avok.consultation.auth.domain.model.UnauthorizedException;
 import ee.avok.consultation.auth.service.AuthService;
 import ee.avok.consultation.dto.AccountDTO;
+import ee.avok.consultation.service.AccountService;
 
 @Controller
 public class AccountController {
@@ -19,13 +20,27 @@ public class AccountController {
 	@Autowired
 	AuthService authServ;
 	
-	@RequestMapping(path="/accounts/managment")
+	@Autowired
+	AccountService accountService;
+	
+	@RequestMapping(path="/account/edit")
 	public String ManagingAccounts(@CookieValue(value = "session", defaultValue = "none") String session,
 			Model model) throws UnauthorizedException{
 		Account user = authServ.authenticateRequestForRole(session, Role.CONSULTANT);
 		model.addAttribute("user", new AccountDTO(user.getId()));
 		return "manage_account"; 
 	}
+	
+	@RequestMapping(path="/accounts/manage")
+	public String editAccounts(Model model) {
+		model.addAttribute("accounts",accountService.getAllConsultants());
+		return "deactive_accounts"; 
+	}
+	
+	
+	
+	
+	
 	
 	@ExceptionHandler(UnauthorizedException.class)
 	public String handleNotFound(Exception exc) {
