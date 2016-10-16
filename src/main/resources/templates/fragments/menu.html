@@ -11,10 +11,10 @@
 					<h1 class="animated fadeInLeft">21:00</h1>
 					<p class="animated fadeInRight">Sat,October 1st 2029</p>
 				</li>
-				<li class="ripple"><a href="/" th:href="@{/}"><span class="fa-home fa"></span> Front
-						page </a></li>
-				<li class="ripple"><a href="/" th:href="@{/}"> <span class="fa-check-square fa"></span>
-						Page 1
+				<li class="ripple"><a href="/requests" th:href="@{/requests}"><span class="fa-home fa"></span>
+						Incoming requests </a></li>
+				<li class="ripple"><a href="/request" th:href="@{/request}"> <span
+						class="fa-check-square fa"></span> Create request
 				</a></li>
 				<li class="ripple"><a href="/" th:href="@{/}"> <span class="fa-cubes fa"></span> Page 2
 				</a></li>
@@ -23,11 +23,14 @@
 				</a></li>
 				<li class="ripple"><a href="/" th:href="@{/}"><span class="fa-car fa"></span> Page 4 </a></li>
 				<li class="ripple"><a class="tree-toggle nav-header"> <span class="fa fa-info"></span>
-						Page 5 <span class="fa-angle-right fa right-arrow text-right"></span>
+						Requests by status <span class="fa-angle-right fa right-arrow text-right"></span>
 				</a>
 					<ul class="nav nav-list tree" style="display: none;">
-						<li><a th:href="@{/}">Page 6</a></li>
-						<li><a th:href="@{/}">Page 7</a></li>
+						<li><a th:href="@{/requests/RECEIVED}">Received</a></li>
+						<li><a th:href="@{/requests/ACCEPTED}">Accepted</a></li>
+						<li><a th:href="@{/requests/SCHEDULED}">SCHEDULED</a></li>
+						<li><a th:href="@{/requests/COMPLETED}">COMPLETED</a></li>
+						<li><a th:href="@{/requests/CLOSED}">CLOSED</a></li>
 					</ul></li>
 			</ul>
 		</div>
@@ -37,10 +40,10 @@
 		<div class="mimin-mobile-menu-list">
 			<div class="col-md-12 sub-mimin-mobile-menu-list animated fadeInLeft">
 				<ul class="nav nav-list">
-					<li class="ripple"><a href="/" th:href="@{/}"><span class="fa-home fa"></span> Front
-							page </a></li>
-					<li class="ripple"><a href="/" th:href="@{/}"> <span class="fa-check-square fa"></span>
-							Page 1
+					<li class="ripple"><a href="/requests" th:href="@{/requests}"><span class="fa-home fa"></span>
+							Incoming requests </a></li>
+					<li class="ripple"><a href="/request" th:href="@{/request}"> <span
+							class="fa-check-square fa"></span> Create request
 					</a></li>
 					<li class="ripple"><a href="/" th:href="@{/}"> <span class="fa-cubes fa"></span> Page
 							2
@@ -50,11 +53,14 @@
 					</a></li>
 					<li class="ripple"><a href="/" th:href="@{/}"><span class="fa-car fa"></span> Page 4 </a></li>
 					<li class="ripple"><a class="tree-toggle nav-header"> <span class="fa fa-info"></span>
-							Page 5 <span class="fa-angle-right fa right-arrow text-right"></span>
+							Requests by status <span class="fa-angle-right fa right-arrow text-right"></span>
 					</a>
 						<ul class="nav nav-list tree" style="display: none;">
-							<li><a th:href="@{/}">Page 6</a></li>
-							<li><a th:href="@{/}">Page 7</a></li>
+							<li><a th:href="@{/requests/RECEIVED}">Received</a></li>
+							<li><a th:href="@{/requests/ACCEPTED}">Accepted</a></li>
+							<li><a th:href="@{/requests/SCHEDULED}">SCHEDULED</a></li>
+							<li><a th:href="@{/requests/COMPLETED}">COMPLETED</a></li>
+							<li><a th:href="@{/requests/CLOSED}">CLOSED</a></li>
 						</ul></li>
 				</ul>
 			</div>

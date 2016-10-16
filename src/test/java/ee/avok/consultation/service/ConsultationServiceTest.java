@@ -15,8 +15,11 @@ import org.springframework.test.context.support.DependencyInjectionTestExecution
 import org.springframework.test.context.transaction.TransactionalTestExecutionListener;
 
 import ee.avok.consultation.ConsultationWebApplication;
+import ee.avok.consultation.auth.domain.model.Account;
+import ee.avok.consultation.auth.domain.model.Role;
 import ee.avok.consultation.domain.model.ConsultationRequest;
 import ee.avok.consultation.domain.model.ConsultationStatus;
+import ee.avok.consultation.domain.repository.AccountRepo;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringApplicationConfiguration(classes = ConsultationWebApplication.class)
@@ -26,6 +29,8 @@ import ee.avok.consultation.domain.model.ConsultationStatus;
 public class ConsultationServiceTest {
 	@Autowired
 	ConsultationService conServ;
+	@Autowired
+	AccountRepo accountRepo;
 
 	@Test
 	public void createAndHasStatusReceived() {
@@ -38,15 +43,21 @@ public class ConsultationServiceTest {
 
 	@Test
 	public void changeStatus() {
+		Account user = new Account();
+		user.setUsername("kalevipoeg");
+		user.setRole(Role.CONSULTANT);
+		accountRepo.save(user);
+
 		ConsultationRequest req = new ConsultationRequest();
 		req.setName("Bla Bla");
 		req.setEmail("bla@bla.bla");
-		conServ.createConsultationREST(req);
+		conServ.createConsultationREST(req); // Should be normal createConsultation
 		assertEquals(ConsultationStatus.RECEIVED, req.getStatus());
 
-		conServ.updateStatus(req.getId(), ConsultationStatus.ACCEPTED);
+		conServ.updateStatus(req.getId(), user, ConsultationStatus.ACCEPTED);
 
 		assertEquals(ConsultationStatus.ACCEPTED, conServ.findOne(req.getId()).getStatus());
+		assertEquals("kalevipoeg", conServ.findOne(req.getId()).getConsultant().getUsername());
 	}
 
 }

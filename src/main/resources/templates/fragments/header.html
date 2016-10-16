@@ -14,7 +14,7 @@
 
 				<ul class="nav navbar-nav navbar-right user-nav">
 					<li class="user-name"><span th:text="${name}" th:remove="tag">username</span></li>
-					<li class="dropdown avatar-dropdown"><img src="asset/img/avatar.jpg"
+					<li class="dropdown avatar-dropdown"><img src="/img/avatar.jpg"
 						class="img-circle avatar" th:alt="${username}" data-toggle="dropdown" aria-haspopup="true"
 						aria-expanded="true" />
 						<ul class="dropdown-menu user-dropdown">
@@ -27,7 +27,7 @@
 									<li><a href=""><span class="fa fa-lock"></span></a></li>
 									
 									<form action="#" data-th-action="@{/logout}" data-th-object="${model}" method="post">
-										<button class="fa fa-power-off" type="submit" name="action" value="logout">Log out</button>
+										<button class="fa fa-power-off" type="submit" name="action" value="logout"></button>
 									</form>
 									
 									

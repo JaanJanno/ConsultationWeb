@@ -35,52 +35,7 @@
 
 			<div class="col-md-12" style="padding: 20px;">
 				<div class="col-md-12 padding-0">
-					<div class="col-md-12 padding-0">
-						  <div class="panel-body">
-						    <table class="table table-bordered table-striped">
-						        <thead>
-						            <tr>
-						                <th>ID</th>
-						                <th>Name</th>
-						                <th>Email</th>
-						                <th>Purpose</th>
-						                <th>Language</th>
-						                <th>Detail</th>
-						                <th>Download File</th>
-						                <th>Accept</th>
-						            </tr>
-						        </thead>
-						        <tbody>
-						            <tr class="table-row" th:each="consultation : ${consultations}">
-						                <td th:text="${consultation.id}"></td>
-						                <td th:text="${consultation.name}"></td>
-						                <td th:text="${consultation.email}"></td>
-						                <td th:text="${consultation.purpose}"></td>
-						              	<td th:text="${consultation.language}"></td>
-						                <!--  td th:text="${consultation.file}"></td-->						              
-						                <td>
-							                <form style='float:left; padding:5px; height:0px' th:object="${consultation}" th:method="post" th:action="@{/requests/detail/{id}(id=${consultation.id})}">
-							                   
-							                	<button class="btn btn-default btn-xs" type="submit">Detail</button>
-							                </form>
-						                </td>
-						                <td>
-						                	
-							                <a th:href="${consultation.generateUploadUrl()}" th:if="${consultation.hasFile()}">
-							                	 <span class="glyphicon glyphicon-download-alt"></span> Download
-							                </a>
-						                </td>
-						                <td>
-							                <form style='float:left; padding:5px; height:0px' th:object="${consultation}" th:method="post" th:action="@{/requests/{id}(id=${consultation.id})}">
-							                   
-							                	<button class="btn btn-default btn-xs" type="submit">Accept</button>
-							                </form>
-						                </td>
-						            </tr>
-						        </tbody>
-						    </table>
-						    </div>
-					</div>
+					
 
 				</div>
 

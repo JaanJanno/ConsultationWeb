@@ -7,7 +7,10 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
+
+import ee.avok.consultation.auth.domain.model.Account;
 
 @Entity
 public class ConsultationRequest {
@@ -40,6 +43,9 @@ public class ConsultationRequest {
 	@OneToOne
 	private Upload upload;
 
+	@ManyToOne(optional = true)
+	private Account consultant;
+
 	public ConsultationRequest() {
 	}
 
@@ -50,7 +56,7 @@ public class ConsultationRequest {
 	public String generateUploadUrl() {
 		return "/uploads/" + Integer.toString(upload.getId()) + "/" + upload.getFilename();
 	}
-	
+
 	public String generateUploadName() {
 		return upload.getFilename();
 	}
@@ -149,6 +155,14 @@ public class ConsultationRequest {
 
 	public void setDepartment(String department) {
 		this.department = department;
+	}
+
+	public Account getConsultant() {
+		return consultant;
+	}
+
+	public void setConsultant(Account consultant) {
+		this.consultant = consultant;
 	}
 
 }

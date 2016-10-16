@@ -69,13 +69,13 @@ public class ConsultationControllerTest {
 
 	@Test
 	public void testCreateRequest() throws Exception {
-		this.mockMvc.perform(post("/requests").contentType(contentType).content(json()))
+		this.mockMvc.perform(post("/api/requests").contentType(contentType).content(json()))
 				.andExpect(status().isCreated());
 	}
 
 	@Test
 	public void testCreateRequestUpload() throws Exception {
-		this.mockMvc.perform(post("/requests").contentType(contentType).content(json()))
+		this.mockMvc.perform(post("/api/requests").contentType(contentType).content(json()))
 				.andExpect(status().isCreated());
 		ConsultationRequest request = null;
 		for (ConsultationRequest req : conReqRepo.findAll()) {
@@ -94,7 +94,7 @@ public class ConsultationControllerTest {
 
 	@Test
 	public void findAllWithStatusReceived() throws Exception {
-		this.mockMvc.perform(get("/requests").param("status", "RECEIVED").accept(contentType))
+		this.mockMvc.perform(get("/api/requests").param("status", "RECEIVED").accept(contentType))
 				.andExpect(status().isOk()).andExpect(content().contentType(contentType))
 				.andExpect(jsonPath("$", hasSize(1))).andExpect(jsonPath("$[0].name", is("Bla1")))
 				.andExpect(jsonPath("$[0].status", is("RECEIVED")));
@@ -102,7 +102,7 @@ public class ConsultationControllerTest {
 
 	@Test
 	public void findAllWithStatusAccepted() throws Exception {
-		this.mockMvc.perform(get("/requests").param("status", "ACCEPTED").accept(contentType))
+		this.mockMvc.perform(get("/api/requests").param("status", "ACCEPTED").accept(contentType))
 				.andExpect(status().isOk()).andExpect(content().contentType(contentType))
 				.andExpect(jsonPath("$", hasSize(1))).andExpect(jsonPath("$[0].name", is("Bla2")))
 				.andExpect(jsonPath("$[0].status", is("ACCEPTED")));
@@ -110,24 +110,15 @@ public class ConsultationControllerTest {
 
 	@Test
 	public void findAll() throws Exception {
-		this.mockMvc.perform(get("/requests").accept(contentType)).andExpect(status().isOk())
+		this.mockMvc.perform(get("/api/requests").accept(contentType)).andExpect(status().isOk())
 				.andExpect(content().contentType(contentType)).andExpect(jsonPath("$", hasSize(2)));
 	}
 
 	@Test
 	public void findOne() throws Exception {
-		this.mockMvc.perform(get("/requests/{id}", conReq2.getId()).accept(contentType)).andExpect(status().isOk())
+		this.mockMvc.perform(get("/api/requests/{id}", conReq2.getId()).accept(contentType)).andExpect(status().isOk())
 				.andExpect(content().contentType(contentType)).andExpect(jsonPath("$.name", is("Bla2")))
 				.andExpect(jsonPath("$.status", is("ACCEPTED")));
-	}
-
-	@Test
-	public void setAsAccepted() throws Exception {
-		assertEquals(ConsultationStatus.RECEIVED, conReqRepo.findOne(conReq1.getId()).getStatus());
-		this.mockMvc.perform(post("/requests/{id}", conReq1.getId()).accept(contentType))
-				.andExpect(status().isNoContent());
-
-		assertEquals(ConsultationStatus.ACCEPTED, conReqRepo.findOne(conReq1.getId()).getStatus());
 	}
 
 	private String json() {

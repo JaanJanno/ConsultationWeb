@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import ee.avok.consultation.auth.domain.model.Account;
 import ee.avok.consultation.domain.model.ConsultationRequest;
 import ee.avok.consultation.domain.model.ConsultationStatus;
 import ee.avok.consultation.domain.model.Upload;
@@ -41,6 +42,11 @@ public class ConsultationServiceImpl implements ConsultationService {
 	}
 
 	@Override
+	public List<ConsultationRequest> findByStatusAndConsultant(ConsultationStatus status, Account consultant) {
+		return conReqRepo.findByStatusAndConsultant(status, consultant);
+	}
+
+	@Override
 	public List<ConsultationRequest> findAll() {
 		return (List<ConsultationRequest>) conReqRepo.findAll();
 	}
@@ -48,14 +54,6 @@ public class ConsultationServiceImpl implements ConsultationService {
 	@Override
 	public ConsultationRequest findOne(int id) {
 		return conReqRepo.findOne(id);
-	}
-
-	@Override
-	public void updateStatus(int id, ConsultationStatus status) {
-		ConsultationRequest conReq = findOne(id);
-		conReq.setStatus(status);
-		conReqRepo.save(conReq);
-
 	}
 
 	@Override
@@ -74,6 +72,15 @@ public class ConsultationServiceImpl implements ConsultationService {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		conReqRepo.save(conReq);
+
+	}
+
+	@Override
+	public void updateStatus(int id, Account consultant, ConsultationStatus status) {
+		ConsultationRequest conReq = findOne(id);
+		conReq.setStatus(status);
+		conReq.setConsultant(consultant);
 		conReqRepo.save(conReq);
 
 	}

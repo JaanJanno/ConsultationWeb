@@ -19,7 +19,7 @@ import ee.avok.consultation.domain.model.ConsultationStatus;
 import ee.avok.consultation.service.ConsultationService;
 
 @RestController
-@RequestMapping("/requests")
+@RequestMapping("/api/requests")
 public class ConsultationController {
 
 	private static Logger LOG = LoggerFactory.getLogger(ConsultationController.class);
@@ -55,16 +55,14 @@ public class ConsultationController {
 
 	}
 
+	// Doesn't do anything, must authenticate user first
+	@Deprecated
 	@RequestMapping(method = RequestMethod.POST, value = "/{id}")
 	public ResponseEntity<String> setConsultationAccepted(@PathVariable int id) {
 		LOG.info("Consultation request with id {}, set as Accepted", id);
 
-		conServ.updateStatus(id, ConsultationStatus.ACCEPTED);
+		// conServ.updateStatus(id, ConsultationStatus.ACCEPTED);
 		return new ResponseEntity<String>(HttpStatus.NO_CONTENT);
 	}
-	
-	
 
-	
-	
 }

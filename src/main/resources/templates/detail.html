@@ -108,7 +108,7 @@ $(document).ready(function(){
                             </div>
                     </div>
                     <td>
-		                <form   th:object="${p}" th:method="post" th:action="@{/requests/{id}(id=${consultation.id})}">
+		                <form   th:object="${p}" th:method="post" th:action="@{/api/requests/{id}(id=${consultation.id})}">
 		                   
 		                	<button class="btn btn-primary" type="submit">Accept</button>
 		                </form>

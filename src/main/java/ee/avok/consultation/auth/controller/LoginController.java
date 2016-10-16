@@ -36,7 +36,7 @@ public class LoginController {
 		try {
 			Account account = authServ.authenticateUser(loginRequest.getUsername(), loginRequest.getPassword(), response);
 			LOG.info("User logged in: " + loginRequest.getUsername() + ", " + account.getName());
-			return "redirect:" + "/";
+			return "redirect:" + "/requests";
 		} catch (UnauthorizedException e) {
 			LOG.info("User login failed: " + loginRequest.getUsername());
 			return "redirect:" + "/login";
