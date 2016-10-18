@@ -101,7 +101,7 @@ public class RequestController {
 
 	@ExceptionHandler(UnauthorizedException.class)
 	public String handleNotFound(Exception exc) {
-		return "redirect:" + "/login";
+		return "redirect:" + "/";
 	}
 
 }

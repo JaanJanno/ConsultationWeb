@@ -17,9 +17,10 @@ import org.springframework.test.context.transaction.TransactionalTestExecutionLi
 import ee.avok.consultation.ConsultationWebApplication;
 import ee.avok.consultation.auth.domain.model.Account;
 import ee.avok.consultation.auth.domain.model.Role;
+import ee.avok.consultation.auth.domain.repository.AccountRepository;
 import ee.avok.consultation.domain.model.ConsultationRequest;
 import ee.avok.consultation.domain.model.ConsultationStatus;
-import ee.avok.consultation.domain.repository.AccountRepo;
+
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringApplicationConfiguration(classes = ConsultationWebApplication.class)
@@ -30,7 +31,7 @@ public class ConsultationServiceTest {
 	@Autowired
 	ConsultationService conServ;
 	@Autowired
-	AccountRepo accountRepo;
+	AccountRepository accountRepo;
 
 	@Test
 	public void createAndHasStatusReceived() {
