@@ -14,35 +14,42 @@
 	<div th:replace="fragments/request-header :: header"></div>
 	<!-- end: Header -->
 
-	<div class="container">
-		<div id="content">
+	<div class="container-fluid mimin-wrapper">
+		<div id="content" style="padding-left: 0px">
+			<div class="btn-wrapper">
+				<div class="col-md-12" style="margin-top: 20px;">
+					<div class="col-md-8 col-md-push-2">
+						<div class="panel text-center">
+							<div class="panel-heading ">
+								<h1>Welcome to AVOK</h1>
+							</div>
+							<div class="panel-body">
+								<h2>
+									<small>Thanks for choosing the Centre for Academic Writing and Communication
+										(AVOK). In this portal, we help our users to improve their articles, essaies, and theses,
+										in different languages. The students can submit their written document in our request form
+										and our consultants make an appointment for them as soon as possible. Please feel free to
+										make a feedback about our services at the end. We hope our service improve your results.</small>
+								</h2>
 
-			<div class="col-md-10" style="padding-top: 100px;">
-				<p><h1><strong>Welcome to AVOK</strong></h1></p>
-				<p>
-				<h4>
-					Thanks for choosing the Centre for Academic Writing and Communication (AVOK).
-					In this portal, we help our users to improve their articles, essaies, and theses, in different languages.
-					The students can submit their written document in our 
-					<a href="/" th:href="@{/request}"> <span> <i class="fa fa-file-pdf-o" style="font-size:24px"></i>  </span> Request Form</a>
-					, and our consultants 
-					make an appointment for them as soon as possible.
-					Please feel free to make a feedback about our services at the end.
-					We hope our service improve your results. If you are already one of our consultants,
-					you can
-					<a href="/" th:href="@{/login}"> <span class="fa fa-sign-in"></span> Login here</a>.
-				</h4>
-				</p>
+								<a href="/" th:href="@{/request}" class="btn btn-primary btn-round blue btn-lg"> Request
+									form <span style="margin-left: 10px;" class="fa fa-check-square-o"></span>
+								</a>
 
-					
+								<h2>
+									<small> If you are already one of our consultants, you can log in here.</small>
+								</h2>
+
+								<a href="/" th:href="@{/login}" class="btn btn-success btn-round green btn-lg"> Log in <span
+									style="margin-left: 10px;" class="fa fa-sign-in"></span></a>
+							</div>
+						</div>
+					</div>
+				</div>
 			</div>
 		</div>
-	<hr/>
-
-
-	
 	</div>
-	
+
 
 	<div id="mimin-mobile" class="reverse" th:include="fragments/menu :: mobileMenu"></div>
 	<button id="mimin-mobile-menu-opener" class="animated rubberBand btn btn-circle btn-danger">
