@@ -16,13 +16,11 @@
 	<div class="container-fluid mimin-wrapper">
 
 		
-		<div id="content">
+		<div id="content" style="padding-left: 0px">
 			<div class="panel box-shadow-none content-header">
 				<div class="panel-body">
-					<!-- div class="col-md-12"-->
-						<h3 class="animated fadeInLeft">Create New Consultation Request</h3>
-						<p class="animated fadeInDown">
-							<div class="col-md-12">
+
+							<div class="col-md-12" style="margin-top: 20px;">
 								<div class="panel form-element-padding">
 										<div class="panel-heading">
 											<h4>Please fill the form</h4>
@@ -130,8 +128,7 @@
 													
 													<div class="form-group">
 														<div class="col-sm-offset-2 col-sm-10">
-															<input type="submit" value="Salvesta" class="btn btn-primary" />
-															 <input type="reset"	value="Reset" class="btn btn-danger" />
+															<input type="submit" value="Save" class="btn btn-primary" />
 														</div>
 													</div>
 												</form>
@@ -141,19 +138,11 @@
 										</div>
 								</div>
 							</div>				
-						</p>		
+								
 					</div>
 			</div>
 		</div>
 	</div>
-	
-
-	<!-- start: Mobile -->
-	<div id="mimin-mobile" class="reverse" th:include="fragments/menu :: mobileMenu"></div>
-	<button id="mimin-mobile-menu-opener" class="animated rubberBand btn btn-circle btn-danger">
-		<span class="fa fa-bars"></span>
-	</button>
-	<!-- end: Mobile -->
 
 	<!-- start: Javascript -->
 	<div th:replace="fragments/util :: standardJS"></div>
