@@ -5,49 +5,45 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <title>Index page</title>
 
+
 <object th:replace="fragments/util :: standardCSS"></object>
 </head>
 
 <body id="mimin" class="dashboard">
 	<!-- start: Header -->
-	<div th:replace="fragments/header :: header"></div>
+	<div th:replace="fragments/request-header :: header"></div>
 	<!-- end: Header -->
 
-	<div class="container-fluid mimin-wrapper">
-
-		<!-- start:Left Menu -->
-		<div th:replace="fragments/menu :: leftMenu"></div>
-		<!-- end: Left Menu -->
-
-
-		<!-- start: content -->
+	<div class="container">
 		<div id="content">
-			<div class="panel box-shadow-none content-header">
-				<div class="panel-body">
-					<div class="col-md-12">
-						<h3 class="animated fadeInLeft">Index page</h3>
-						<p class="animated fadeInDown">
-							Index page <span class="fa-angle-right fa"></span> Index page
-						</p>
-					</div>
-				</div>
-			</div>
 
-			<div class="col-md-12" style="padding: 20px;">
-				<div class="col-md-12 padding-0">
+			<div class="col-md-10" style="padding-top: 100px;">
+				<p><h1><strong>Welcome to AVOK</strong></h1></p>
+				<p>
+				<h4>
+					Thanks for choosing the Centre for Academic Writing and Communication (AVOK).
+					In this portal, we help our users to improve their articles, essaies, and theses, in different languages.
+					The students can submit their written document in our 
+					<a href="/" th:href="@{/request}"> <span> <i class="fa fa-file-pdf-o" style="font-size:24px"></i>  </span> Request Form</a>
+					, and our consultants 
+					make an appointment for them as soon as possible.
+					Please feel free to make a feedback about our services at the end.
+					We hope our service improve your results. If you are already one of our consultants,
+					you can
+					<a href="/" th:href="@{/login}"> <span class="fa fa-sign-in"></span> Login here</a>.
+				</h4>
+				</p>
+
 					
-
-				</div>
-
-				<div class="col-md-12 card-wrap padding-0"></div>
-
 			</div>
 		</div>
-		<!-- end: content -->
+	<hr/>
 
+
+	
 	</div>
+	
 
-	<!-- start: Mobile -->
 	<div id="mimin-mobile" class="reverse" th:include="fragments/menu :: mobileMenu"></div>
 	<button id="mimin-mobile-menu-opener" class="animated rubberBand btn btn-circle btn-danger">
 		<span class="fa fa-bars"></span>
