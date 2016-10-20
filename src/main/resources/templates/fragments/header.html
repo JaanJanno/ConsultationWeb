@@ -25,12 +25,10 @@
 								<ul>
 									<li><a href=""><span class="fa fa-cogs"></span></a></li>
 									<li><a href=""><span class="fa fa-lock"></span></a></li>
-									
-									<form action="#" data-th-action="@{/logout}" data-th-object="${model}" method="post">
+									<li><a href="#" th:href="@{/logout}"><span class="fa fa-power-off"></span></a></li>		
+									<!--form action="#" data-th-action="@{/logout}" data-th-object="${model}" method="post">
 										<button class="fa fa-power-off" type="submit" name="action" value="logout"></button>
-									</form>
-									
-									
+									</form-->
 								</ul>
 							</li>
 						</ul></li>
