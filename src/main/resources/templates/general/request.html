@@ -7,6 +7,7 @@
 <object th:replace="fragments/util :: standardCSS"></object>
 <link rel="stylesheet" type="text/css" th:href="@{/webjars/summernote/0.8.1/dist/summernote.css}" />
 <link rel="stylesheet" type="text/css" th:href="@{/webjars/select2/4.0.2/dist/css/select2.min.css}" />
+<!--link rel="stylesheet" type="text/css" th:href="@{/css/Tool-Tip.css}" /-->
 
 </head>
 
@@ -35,8 +36,9 @@
 													<div class="form-group">
 														<label for="name" class="col-sm-2 control-label text-right">Name</label>
 														<div class="col-sm-6">
-															<input type="text" class="form-control" id="name" placeholder="Bla bla"
-																th:field="*{name}" th:required="required" />
+															<input type="text" class="form-control"   placeholder="Full name"
+																th:field="*{name}" th:required="required" id="name"/>
+				
 														</div>                     
 													</div>
 													<div class="form-group">
@@ -49,25 +51,25 @@
 													<div class="form-group">
 														<label for="programme" class="col-sm-2 control-label text-right">Programme</label>
 														<div class="col-sm-6">
-															<input type="text" class="form-control" id="programme" placeholder="sdasd"
+															<input type="text" class="form-control" id="programme" placeholder="Programme"
+															data-toggle="Programme" title="Math, Physic, Software engineering, etc."
 																th:field="*{programme}" th:required="required"/>
 														</div>
 													</div>
 													
-													<div class="form-group"> 
-														<label for="File" class="col-sm-2 control-label text-right">Upload File</label>	
-									                      <div class="row">
-									                        <div class="col-sm-6">
-									                          <div class="input-group fileupload-v1" style="float: right;">
-									                            <input type="file" name="manualfile" accept=".doc,.docx,.pdf" class="fileupload-v1-file hidden"/>
-									                            <input type="text" class="form-control fileupload-v1-path"  placeholder="File Path..." />
-									                            <span class="input-group-btn">
-									                              <button class="btn fileupload-v1-btn" type="button"><i class="fa fa-folder"></i> Choose File</button>
-									                            </span>
-									                          </div>
-									                        </div>
-									                      </div>
-								                    </div>  
+													<div class="form-group">
+														<label for="degree" class="col-sm-2 control-label text-right">Degree</label>
+														<div class="col-sm-6">
+															<select class="select2-A form-control" id="degree" th:field="*{degree}" th:required="required">
+																<option value="Bsc">Bsc</option>
+																<option value="Ba">Ba</option>
+																<option value="Msc">Msc</option>
+																<option value="Ma">Ma</option>
+																<option value="Phd">Phd</option>
+															</select>
+														</div>
+													</div>
+													 
 												
 													<div class="form-group">
 														<label for="department" class="col-sm-2 control-label text-right">Department</label>
@@ -95,30 +97,34 @@
 															</select>
 														</div>
 													</div>
-													<div class="form-group">
-														<label for="purpose" class="col-sm-2 control-label text-right">Purpose</label>
+						
+												    
+												    <div class="form-group">
+														<label for="programme" class="col-sm-2 control-label text-right">Text type</label>
 														<div class="col-sm-6">
-															<select class="select2-A form-control" id="purpose" th:field="*{purpose}" th:required="required">
-																<option value="Essay">Essay</option>
-																<option value="Article">Article</option>
-																<option value="Thesis">Thesis</option>
-															</select>
+												         <input type="text" class="form-control"  data-toggle="purpose" title="Article, Essay, Thesis,etc."
+												         placeholder="Purpose" th:field="*{purpose}" th:required="required"/>
 														</div>
 													</div>
+												    
+												    
+												    
+												      
+													<div class="form-group"> 
+														<label for="File" class="col-sm-2 control-label text-right">Upload File</label>	
+									                      <div class="row">
+									                        <div class="col-sm-6">
+									                          <div class="input-group fileupload-v1" style="float: right;">
+									                            <input type="file" name="manualfile" accept=".doc,.docx,.pdf" class="fileupload-v1-file hidden"/>
+									                            <input type="text" class="form-control fileupload-v1-path"  placeholder="File Path..." />
+									                            <span class="input-group-btn">
+									                              <button class="btn fileupload-v1-btn" type="button"><i class="fa fa-folder"></i> Choose File</button>
+									                            </span>
+									                          </div>
+									                        </div>
+									                      </div>
+								                    </div> 
 													
-													<div class="form-group">
-														<label for="degree" class="col-sm-2 control-label text-right">Degree</label>
-														<div class="col-sm-6">
-															<select class="select2-A form-control" id="degree" th:field="*{degree}" th:required="required">
-																<option value="Bsc">Bsc</option>
-																<option value="Ba">Ba</option>
-																<option value="Msc">Msc</option>
-																<option value="Ma">Ma</option>
-																<option value="Phd">Phd</option>
-															</select>
-														</div>
-													</div>
-				
 													<div class="form-group">
 														<label for="comments" class="col-sm-2 control-label text-right">Comments</label>
 														<div class="col-sm-6">
@@ -168,10 +174,6 @@
 				placeholder : "Select a language",
 				allowClear : false
 			});
-			$("#purpose").select2({
-				placeholder : "Select a purpose",
-				allowClear : false
-			});
 			$("#degree").select2({
 				placeholder : "Select a degree",
 				allowClear : false
@@ -181,6 +183,15 @@
 		        alert("We recieved request. We will contact you as soon as possible");
 		    });
 		});
+		
+		$(document).ready(function(){
+		    $('[data-toggle="purpose"]').tooltip();
+		});  
+		
+		$(document).ready(function(){
+		    $('[data-toggle="Programme"]').tooltip();
+		});
+		
 	</script>
 	<!-- end: Javascript -->
 </body>

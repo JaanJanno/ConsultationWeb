@@ -27,7 +27,7 @@ public class MainController {
 
 	@RequestMapping("/empty")
 	public String emptyPage(Model model) {
-		return "empty";
+		return "general/empty";
 	}
 
 }

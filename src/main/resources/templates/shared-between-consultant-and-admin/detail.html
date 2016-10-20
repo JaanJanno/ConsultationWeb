@@ -93,7 +93,7 @@ $(document).ready(function(){
                                 <label for="name"><strong>Comment:</strong></label>
                             </div>
                             <div class="col-sm-10">    
-                                <label for="name" th:text="${consultation.comments}"></label>
+                                <label for="name" th:utext="${consultation.comments}"></label>
                             </div>
                     </div>
                     <div class="row">
