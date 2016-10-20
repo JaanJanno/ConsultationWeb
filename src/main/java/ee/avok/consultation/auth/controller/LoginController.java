@@ -28,7 +28,7 @@ public class LoginController {
 
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
 	public String getLoginForm() {
-		return "login";
+		return "general/login";
 	}
 
 	@RequestMapping(value = "/login", method = RequestMethod.POST)

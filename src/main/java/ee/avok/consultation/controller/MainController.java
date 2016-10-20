@@ -22,7 +22,7 @@ public class MainController {
 
 	@RequestMapping(value = { "/", "index" })
 	public String indexPage() {
-		return "index";
+		return "general/index";
 	}
 
 	@RequestMapping("/empty")

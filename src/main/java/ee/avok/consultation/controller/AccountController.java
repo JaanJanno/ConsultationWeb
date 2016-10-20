@@ -28,18 +28,17 @@ public class AccountController {
 			throws UnauthorizedException {
 		Account user = authServ.authenticateRequestForRole(session, Role.CONSULTANT);
 		model.addAttribute("user", new AccountDTO(user.getId()));
-		return "manage_account";
+		return "admin/manage_account";
 	}
 
 	@RequestMapping(path = "/accounts/manage")
 	public String editAccounts(Model model) {
 		model.addAttribute("accounts", accountService.getAllConsultants());
-		return "deactive_accounts";
+		return "admin/deactive_accounts";
 	}
 
 	@ExceptionHandler(UnauthorizedException.class)
 	public String handleNotFound(Exception exc) {
 		return "redirect:" + "/login";
 	}
-
 }

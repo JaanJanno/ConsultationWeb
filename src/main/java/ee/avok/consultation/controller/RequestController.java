@@ -36,11 +36,11 @@ public class RequestController {
 	@RequestMapping(value = "/request", method = RequestMethod.GET)
 	public String createConsultation(Model model) {
 		model.addAttribute("consultation", new ConsultationRequest());
-		return "request";
+		return "general/request";
 	}
 
 	@RequestMapping(value = "/request", method = RequestMethod.POST)
-	public void createConsulation(@ModelAttribute ConsultationRequest conReq,
+	public String createConsulation(@ModelAttribute ConsultationRequest conReq,
 			@RequestParam("manualfile") MultipartFile file, Model model) {
 
 		LOG.info("Received file: " + file.getOriginalFilename());
@@ -48,7 +48,8 @@ public class RequestController {
 		model.addAttribute("consultation", new ConsultationRequest());
 
 		conServ.createConsultation(conReq, file);
-		// TODO return a confirmation
+		return "redirect:" + "/";
+		
 	}
 
 	@RequestMapping("/requests")
@@ -61,7 +62,7 @@ public class RequestController {
 		model.addAttribute("consultations", conReqs);
 		model.addAttribute("username", user.getUsername());
 		model.addAttribute("name", user.getName());
-		return "requests";
+		return "shared-between-consultant-and-admin/requests";
 	}
 
 	@RequestMapping(method = RequestMethod.POST, value = "/requests/{id}")
@@ -83,7 +84,7 @@ public class RequestController {
 		model.addAttribute("consultations", conReqs);
 		model.addAttribute("username", user.getUsername());
 		model.addAttribute("name", user.getName());
-		return "requests";
+		return "shared-between-consultant-and-admin/requests";
 	}
 
 	@RequestMapping(method = RequestMethod.POST, value = "/requests/detail/{id}")
@@ -96,7 +97,7 @@ public class RequestController {
 		model.addAttribute("consultation", conServ.findOne(id));
 		model.addAttribute("username", user.getUsername());
 		model.addAttribute("name", user.getName());
-		return "detail";
+		return "shared-between-consultant-and-admin/detail";
 	}
 
 	@ExceptionHandler(UnauthorizedException.class)
