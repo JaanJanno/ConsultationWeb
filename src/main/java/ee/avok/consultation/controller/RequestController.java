@@ -22,6 +22,7 @@ import ee.avok.consultation.auth.domain.model.UnauthorizedException;
 import ee.avok.consultation.auth.service.AuthService;
 import ee.avok.consultation.domain.model.ConsultationRequest;
 import ee.avok.consultation.domain.model.ConsultationStatus;
+import ee.avok.consultation.dto.FeedBackDTO;
 import ee.avok.consultation.service.ConsultationService;
 
 @Controller
@@ -51,7 +52,14 @@ public class RequestController {
 		return "redirect:" + "/";
 		
 	}
-
+	
+	@RequestMapping(value = "/feedback", method = RequestMethod.GET)
+	public String createFeedbackForm(Model model) {
+		model.addAttribute("feedback", new FeedBackDTO());
+		return "general/feedback";
+	}
+	
+	
 	@RequestMapping("/requests")
 	public String indexPage(Model model, @CookieValue(value = "session", defaultValue = "none") String session)
 			throws UnauthorizedException {
