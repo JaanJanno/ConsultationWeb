@@ -1,7 +1,14 @@
 /*!
  * (c) Mimin Admin Page v1.0
  */
-
+.button-logout {
+    background-color: Transparent;
+    background-repeat:no-repeat;
+    border: none;
+    cursor:pointer;
+    overflow: hidden;
+    outline:none;
+}
 body {
   font-family: "Source Sans Pro","Helvetica Neue",Helvetica,Arial,sans-serif;
   font-size: 13px;
