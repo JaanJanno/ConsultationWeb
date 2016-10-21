@@ -45,7 +45,7 @@ public class RequestController {
 			@RequestParam("manualfile") MultipartFile file, Model model) {
 
 		LOG.info("Received file: " + file.getOriginalFilename());
-		LOG.info("Saving Consultation " + conReq.getPurpose());
+		LOG.info("Saving Consultation " + conReq.getTextType());
 		model.addAttribute("consultation", new ConsultationRequest());
 
 		conServ.createConsultation(conReq, file);

@@ -1,6 +1,7 @@
 package ee.avok.consultation.service;
 
 import java.io.IOException;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -60,6 +61,7 @@ public class ConsultationServiceImpl implements ConsultationService {
 	public void createConsultation(ConsultationRequest conReq, MultipartFile file) {
 
 		conReq.setStatus(ConsultationStatus.RECEIVED);
+		conReq.setReceivedDate(new Date());
 
 		try {
 			if (file.getBytes().length > 0) {
