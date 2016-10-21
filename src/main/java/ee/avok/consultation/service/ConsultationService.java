@@ -22,6 +22,6 @@ public interface ConsultationService {
 
 	ConsultationRequest findOne(int id);
 
-	void updateStatus(int id, Account consultant, ConsultationStatus status);
+	void setAccepted(int id, Account consultant);
 
 }

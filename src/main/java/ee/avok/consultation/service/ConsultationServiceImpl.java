@@ -79,9 +79,10 @@ public class ConsultationServiceImpl implements ConsultationService {
 	}
 
 	@Override
-	public void updateStatus(int id, Account consultant, ConsultationStatus status) {
+	public void setAccepted(int id, Account consultant) {
 		ConsultationRequest conReq = findOne(id);
-		conReq.setStatus(status);
+		conReq.setStatus(ConsultationStatus.ACCEPTED);
+		conReq.setAcceptedDate(new Date());
 		conReq.setConsultant(consultant);
 		conReqRepo.save(conReq);
 

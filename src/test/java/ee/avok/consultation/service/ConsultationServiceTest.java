@@ -55,7 +55,7 @@ public class ConsultationServiceTest {
 		conServ.createConsultationREST(req); // Should be normal createConsultation
 		assertEquals(ConsultationStatus.RECEIVED, req.getStatus());
 
-		conServ.updateStatus(req.getId(), user, ConsultationStatus.ACCEPTED);
+		conServ.setAccepted(req.getId(), user);
 
 		assertEquals(ConsultationStatus.ACCEPTED, conServ.findOne(req.getId()).getStatus());
 		assertEquals("kalevipoeg", conServ.findOne(req.getId()).getConsultant().getUsername());

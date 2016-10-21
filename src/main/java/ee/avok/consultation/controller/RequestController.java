@@ -50,16 +50,15 @@ public class RequestController {
 
 		conServ.createConsultation(conReq, file);
 		return "redirect:" + "/";
-		
+
 	}
-	
+
 	@RequestMapping(value = "/feedback", method = RequestMethod.GET)
 	public String createFeedbackForm(Model model) {
 		model.addAttribute("feedback", new FeedBackDTO());
 		return "general/feedback";
 	}
-	
-	
+
 	@RequestMapping("/requests")
 	public String indexPage(Model model, @CookieValue(value = "session", defaultValue = "none") String session)
 			throws UnauthorizedException {
@@ -78,7 +77,7 @@ public class RequestController {
 			@PathVariable int id) throws UnauthorizedException {
 		Account user = authServ.authenticateRequestForRole(session, Role.CONSULTANT);
 		LOG.info("Consultation request with id {}, set as Accepted, user {}", id, user.getUsername());
-		conServ.updateStatus(id, user, ConsultationStatus.ACCEPTED);
+		conServ.setAccepted(id, user);
 		return "redirect:" + "/requests/ACCEPTED";
 	}
 
