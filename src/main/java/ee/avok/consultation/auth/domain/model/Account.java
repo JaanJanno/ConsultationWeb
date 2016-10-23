@@ -8,7 +8,10 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+import lombok.Data;
+
 @Entity
+@Data
 public class Account {
 
 	@Id
@@ -24,7 +27,7 @@ public class Account {
 	private Role role;
 	@Column
 	private String password;
-
+/*
 	public Account() {
 		super();
 	}
@@ -76,5 +79,5 @@ public class Account {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-
+*/
 }

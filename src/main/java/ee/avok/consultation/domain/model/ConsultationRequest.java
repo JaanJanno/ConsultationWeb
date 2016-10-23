@@ -15,8 +15,10 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 import ee.avok.consultation.auth.domain.model.Account;
+import lombok.Data;
 
 @Entity
+@Data
 public class ConsultationRequest {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -62,17 +64,21 @@ public class ConsultationRequest {
 
 	@Column
 	private String meetingPlace;
-
-	public ConsultationRequest() {
-	}
-
-	public boolean hasFile() {
-		return this.upload != null;
-	}
-
+	
 	public String generateUploadUrl() {
 		return "/uploads/" + Integer.toString(upload.getId()) + "/" + upload.getFilename();
 	}
+	
+	
+	public boolean hasFile() {
+		return this.upload != null;
+	}
+/*	public ConsultationRequest() {
+	}
+
+	
+
+
 
 	public String generateUploadName() {
 		return upload.getFilename();
@@ -221,5 +227,5 @@ public class ConsultationRequest {
 	public void setTextType(String textType) {
 		this.textType = textType;
 	}
-
+*/
 }
