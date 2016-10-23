@@ -42,19 +42,13 @@ public class LoginController {
 			return "redirect:" + "/login";
 		}
 	}
-	///*
+	
 	@RequestMapping(value = "/logout", method = RequestMethod.POST)
 	public String postLogout(@CookieValue(value = "session", defaultValue = "none") String session) {
 		authServ.endSession(session);
 		return "redirect:" + "/login";
 	}
-	//*/
-/*	@RequestMapping(value = "/logout")
-	public String postLogout(@CookieValue(value = "session", defaultValue = "none") String session) {
-		authServ.endSession(session);
-		return "redirect:" + "/";
 	
-	}*/
 	
 	
 	

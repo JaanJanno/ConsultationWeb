@@ -23,6 +23,7 @@ import ee.avok.consultation.auth.service.AuthService;
 import ee.avok.consultation.domain.model.ConsultationRequest;
 import ee.avok.consultation.domain.model.ConsultationStatus;
 import ee.avok.consultation.dto.FeedBackDTO;
+import ee.avok.consultation.dto.PostConsultationForm;
 import ee.avok.consultation.service.ConsultationService;
 
 @Controller
@@ -105,6 +106,17 @@ public class RequestController {
 		model.addAttribute("username", user.getUsername());
 		model.addAttribute("name", user.getName());
 		return "shared-between-consultant-and-admin/detail";
+	}
+	
+	@RequestMapping(value="/report")
+	public String createConsultationReportForm(Model model,
+				@CookieValue(value = "session", defaultValue = "none") String session )
+				throws UnauthorizedException{
+						Account user = authServ.authenticateRequestForRole(session, Role.CONSULTANT);
+						model.addAttribute("postConsultationReport", new PostConsultationForm());
+						model.addAttribute("username", user.getUsername());
+						model.addAttribute("name", user.getName());
+						return "shared-between-consultant-and-admin/post_consultation_form";
 	}
 
 	@ExceptionHandler(UnauthorizedException.class)
