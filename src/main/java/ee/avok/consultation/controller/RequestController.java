@@ -60,17 +60,13 @@ public class RequestController {
 		return "general/feedback";
 	}
 
+	/**
+	 * Returns the default requests view of requests with status RECEIVED
+	 */
 	@RequestMapping("/requests")
-	public String indexPage(Model model, @CookieValue(value = "session", defaultValue = "none") String session)
+	public String requestsDefault(Model model, @CookieValue(value = "session", defaultValue = "none") String session)
 			throws UnauthorizedException {
-		Account user = authServ.authenticateRequestForRole(session, Role.CONSULTANT);
-
-		List<ConsultationRequest> conReqs = conServ.findByStatus(ConsultationStatus.RECEIVED);
-		LOG.info("Request size:" + conReqs.size());
-		model.addAttribute("consultations", conReqs);
-		model.addAttribute("username", user.getUsername());
-		model.addAttribute("name", user.getName());
-		return "shared-between-consultant-and-admin/requests";
+		return requestsWithStatus(model, session, ConsultationStatus.RECEIVED);
 	}
 
 	@RequestMapping(method = RequestMethod.POST, value = "/requests/{id}")
@@ -107,49 +103,42 @@ public class RequestController {
 		model.addAttribute("name", user.getName());
 		return "shared-between-consultant-and-admin/detail";
 	}
-	
-	@RequestMapping(value="/report")
+
+	@RequestMapping(value = "/report")
 	public String createConsultationReportForm(Model model,
-				@CookieValue(value = "session", defaultValue = "none") String session )
-				throws UnauthorizedException{
-						Account user = authServ.authenticateRequestForRole(session, Role.CONSULTANT);
-						model.addAttribute("postConsultationReport", new PostConsultationForm());
-						model.addAttribute("username", user.getUsername());
-						model.addAttribute("name", user.getName());
-						return "shared-between-consultant-and-admin/post_consultation_form";
+			@CookieValue(value = "session", defaultValue = "none") String session) throws UnauthorizedException {
+		Account user = authServ.authenticateRequestForRole(session, Role.CONSULTANT);
+		model.addAttribute("postConsultationReport", new PostConsultationForm());
+		model.addAttribute("username", user.getUsername());
+		model.addAttribute("name", user.getName());
+		return "shared-between-consultant-and-admin/post_consultation_form";
 	}
 
 	@RequestMapping(value = "/requests/admin/completed")
-	public String getCompletedRequestsList( @ModelAttribute ConsultationRequest conReq,
-			Model model, @CookieValue(value = "session", defaultValue = "none") String session)
-			throws UnauthorizedException {
+	public String getCompletedRequestsList(Model model,
+			@CookieValue(value = "session", defaultValue = "none") String session) throws UnauthorizedException {
 		Account user = authServ.authenticateRequestForRole(session, Role.CONSULTANT);
 
-		
 		model.addAttribute("username", user.getUsername());
 		model.addAttribute("name", user.getName());
 		List<ConsultationRequest> completedRequests = conServ.findByStatus(ConsultationStatus.COMPLETED);
 		model.addAttribute("completedRequestsList", completedRequests);
 		return "admin/completed_requests";
 	}
-	
+
 	@RequestMapping(value = "/requests/consultant/accepted")
-	public String getConsultantLandingPage( @ModelAttribute ConsultationRequest conReq,
-			Model model, @CookieValue(value = "session", defaultValue = "none") String session)
-			throws UnauthorizedException {
+	public String getConsultantLandingPage(Model model,
+			@CookieValue(value = "session", defaultValue = "none") String session) throws UnauthorizedException {
 		Account user = authServ.authenticateRequestForRole(session, Role.CONSULTANT);
 
-		
 		model.addAttribute("username", user.getUsername());
 		model.addAttribute("name", user.getName());
-		List<ConsultationRequest> acceptedRequests = conServ.findByStatusAndConsultant(
-																		ConsultationStatus.ACCEPTED,
-																		user);
+		List<ConsultationRequest> acceptedRequests = conServ.findByStatusAndConsultant(ConsultationStatus.ACCEPTED,
+				user);
 		model.addAttribute("completedRequestsList", acceptedRequests);
 		return "shared-between-consultant-and-admin/accepted_requests";
 	}
-	
-	
+
 	@ExceptionHandler(UnauthorizedException.class)
 	public String handleNotFound(Exception exc) {
 		return "redirect:" + "/";

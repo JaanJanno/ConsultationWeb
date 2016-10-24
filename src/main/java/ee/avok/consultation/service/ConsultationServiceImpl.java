@@ -44,7 +44,10 @@ public class ConsultationServiceImpl implements ConsultationService {
 
 	@Override
 	public List<ConsultationRequest> findByStatusAndConsultant(ConsultationStatus status, Account consultant) {
-		return conReqRepo.findByStatusAndConsultant(status, consultant);
+		if (status == ConsultationStatus.RECEIVED)
+			return conReqRepo.findByStatus(status);
+		else
+			return conReqRepo.findByStatusAndConsultant(status, consultant);
 	}
 
 	@Override

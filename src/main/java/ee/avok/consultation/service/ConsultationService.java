@@ -14,6 +14,7 @@ public interface ConsultationService {
 
 	void createConsultation(ConsultationRequest conReq, MultipartFile file);
 
+	@Deprecated
 	List<ConsultationRequest> findByStatus(ConsultationStatus status);
 
 	List<ConsultationRequest> findByStatusAndConsultant(ConsultationStatus status, Account consultant);
