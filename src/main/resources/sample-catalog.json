@@ -21,5 +21,29 @@
 		"email": "testy@testface.ee",
 		"role": "CONSULTANT",
 		"password": "testy"
+	},
+	{
+		"_class": "ee.avok.consultation.domain.model.ConsultationRequest",
+		"id": 1,
+		"name": "Salman",
+		"consultant":{
+						"_class": "ee.avok.consultation.auth.domain.model.Account",
+						"id": 1,
+						"username": "testy",
+						"name": "Testy Mc'Testface",
+						"email": "testy@testface.ee",
+						"role": "CONSULTANT",
+						"password": "testy"
+					},
+		"email": "salmanlashkarara@gmail.com",
+		"textType": "Article",
+		"programme": "Software engineering",
+		"department": "Math and CS",
+		"language": "English",
+		"comments": "bla bla",
+		"degree": "1st year Bachelor's",
+		"status": "COMPLETED",
+		"receivedDate":"2016-10-21T13:49:28.243Z"
 	}
+	
 ]

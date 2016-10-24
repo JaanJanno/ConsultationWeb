@@ -119,6 +119,22 @@ public class RequestController {
 						return "shared-between-consultant-and-admin/post_consultation_form";
 	}
 
+	@RequestMapping(value = "/requests/admin/completed")
+	public String getCompletedRequestsList( @ModelAttribute ConsultationRequest conReq,
+			Model model, @CookieValue(value = "session", defaultValue = "none") String session)
+			throws UnauthorizedException {
+		Account user = authServ.authenticateRequestForRole(session, Role.CONSULTANT);
+
+		
+		model.addAttribute("username", user.getUsername());
+		model.addAttribute("name", user.getName());
+		List<ConsultationRequest> completedRequests = conServ.findByStatus(ConsultationStatus.COMPLETED);
+		model.addAttribute("completedRequestsList", completedRequests);
+		return "admin/completed_requests";
+	}
+	
+	
+	
 	@ExceptionHandler(UnauthorizedException.class)
 	public String handleNotFound(Exception exc) {
 		return "redirect:" + "/";
