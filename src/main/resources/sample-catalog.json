@@ -8,6 +8,15 @@
 		"role": "CONSULTANT",
 		"password": "testy"
 	},
+		{
+		"_class": "ee.avok.consultation.auth.domain.model.Account",
+		"id": 2,
+		"username": "admin",
+		"name": "Admin Mc'Adminface",
+		"email": "admin@admin.ee",
+		"role": "ADMINISTRATOR",
+		"password": "admin"
+	},
 	{
 		"_class": "ee.avok.consultation.domain.model.ConsultationRequest",
 		"id": 1,

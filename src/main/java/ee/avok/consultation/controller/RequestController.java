@@ -88,7 +88,18 @@ public class RequestController {
 		model.addAttribute("consultations", conReqs);
 		model.addAttribute("username", user.getUsername());
 		model.addAttribute("name", user.getName());
-		return "shared-between-consultant-and-admin/requests";
+
+		String page = "";
+		switch (status) {
+		case ACCEPTED:
+			page = "shared-between-consultant-and-admin/accepted_requests";
+			break;
+
+		default:
+			page = "shared-between-consultant-and-admin/requests";
+			break;
+		}
+		return page;
 	}
 
 	@RequestMapping(method = RequestMethod.GET, value = "/requests/detail/{id}")
@@ -114,29 +125,28 @@ public class RequestController {
 		return "shared-between-consultant-and-admin/post_consultation_form";
 	}
 
-	@RequestMapping(value = "/requests/admin/completed")
+	@RequestMapping(value = "/requests/admin/{status}")
 	public String getCompletedRequestsList(Model model,
-			@CookieValue(value = "session", defaultValue = "none") String session) throws UnauthorizedException {
-		Account user = authServ.authenticateRequestForRole(session, Role.CONSULTANT);
+			@CookieValue(value = "session", defaultValue = "none") String session,
+			@PathVariable ConsultationStatus status) throws UnauthorizedException {
+		Account user = authServ.authenticateRequestForRole(session, Role.ADMINISTRATOR);
 
 		model.addAttribute("username", user.getUsername());
 		model.addAttribute("name", user.getName());
-		List<ConsultationRequest> completedRequests = conServ.findByStatus(ConsultationStatus.COMPLETED);
+		List<ConsultationRequest> completedRequests = conServ.findByStatus(status);
 		model.addAttribute("completedRequestsList", completedRequests);
-		return "admin/completed_requests";
-	}
+		LOG.info("Admin view for requests. Displayed: {}, status {}", completedRequests.size(), status);
+		String page = "";
+		switch (status) {
+		case COMPLETED:
+			page = "admin/completed_requests";
+			break;
 
-	@RequestMapping(value = "/requests/consultant/accepted")
-	public String getConsultantLandingPage(Model model,
-			@CookieValue(value = "session", defaultValue = "none") String session) throws UnauthorizedException {
-		Account user = authServ.authenticateRequestForRole(session, Role.CONSULTANT);
-
-		model.addAttribute("username", user.getUsername());
-		model.addAttribute("name", user.getName());
-		List<ConsultationRequest> acceptedRequests = conServ.findByStatusAndConsultant(ConsultationStatus.ACCEPTED,
-				user);
-		model.addAttribute("completedRequestsList", acceptedRequests);
-		return "shared-between-consultant-and-admin/accepted_requests";
+		default:
+			// TODO view something here
+			break;
+		}
+		return page;
 	}
 
 	@ExceptionHandler(UnauthorizedException.class)
