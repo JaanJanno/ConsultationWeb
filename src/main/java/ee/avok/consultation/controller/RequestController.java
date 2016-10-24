@@ -133,6 +133,21 @@ public class RequestController {
 		return "admin/completed_requests";
 	}
 	
+	@RequestMapping(value = "/requests/consultant/accepted")
+	public String getConsultantLandingPage( @ModelAttribute ConsultationRequest conReq,
+			Model model, @CookieValue(value = "session", defaultValue = "none") String session)
+			throws UnauthorizedException {
+		Account user = authServ.authenticateRequestForRole(session, Role.CONSULTANT);
+
+		
+		model.addAttribute("username", user.getUsername());
+		model.addAttribute("name", user.getName());
+		List<ConsultationRequest> acceptedRequests = conServ.findByStatusAndConsultant(
+																		ConsultationStatus.ACCEPTED,
+																		user);
+		model.addAttribute("completedRequestsList", acceptedRequests);
+		return "shared-between-consultant-and-admin/accepted_requests";
+	}
 	
 	
 	@ExceptionHandler(UnauthorizedException.class)
