@@ -39,7 +39,7 @@ public class ConsultationRequest {
 
 	@Column
 	private String language;
-	@Column
+	@Column(columnDefinition = "TEXT")
 	private String comments;
 	@Enumerated(EnumType.STRING)
 	private ConsultationStatus status;
