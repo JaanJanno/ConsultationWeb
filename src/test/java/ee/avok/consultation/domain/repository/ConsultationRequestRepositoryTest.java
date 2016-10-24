@@ -2,6 +2,8 @@ package ee.avok.consultation.domain.repository;
 
 import static org.junit.Assert.assertEquals;
 
+import java.util.Date;
+
 import javax.transaction.Transactional;
 
 import org.junit.Before;
@@ -28,12 +30,37 @@ public class ConsultationRequestRepositoryTest {
 	ConsultationRequestRepository conReqRepo;
 
 	@Before
-	public void setup(){
+	public void setup() {
 		conReqRepo.deleteAll();
+
+		ConsultationRequest con1 = new ConsultationRequest();
+		con1.setReceivedDate(new Date());
+		ConsultationRequest con2 = new ConsultationRequest();
+		con2.setReceivedDate(new Date());
+		con2.setAcceptedDate(new Date());
+		con2.setScheduledDate(new Date());
+		con2.setCompletedDate(new Date());
+		conReqRepo.save(con1);
+		conReqRepo.save(con2);
 	}
+
 	@Test
-	public void createAndSave() {
-		conReqRepo.save(new ConsultationRequest());
-		assertEquals(1, conReqRepo.count());
+	public void countAllReceived() {
+		assertEquals(2, conReqRepo.countAllReceived());
+	}
+
+	@Test
+	public void countAllAccepted() {
+		assertEquals(1, conReqRepo.countAllAccepted());
+	}
+
+	@Test
+	public void countAllScheduled() {
+		assertEquals(1, conReqRepo.countAllScheduled());
+	}
+
+	@Test
+	public void countAllCompleted() {
+		assertEquals(1, conReqRepo.countAllCompleted());
 	}
 }

@@ -10,7 +10,7 @@ import ee.avok.consultation.domain.model.ConsultationStatus;
 
 public interface ConsultationService {
 
-	void createConsultationREST(ConsultationRequest conReq);
+	void createConsultation(ConsultationRequest conReq);
 
 	void createConsultation(ConsultationRequest conReq, MultipartFile file);
 

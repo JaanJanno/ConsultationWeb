@@ -25,7 +25,7 @@ public class ConsultationServiceImpl implements ConsultationService {
 	UploadRepository upRepo;
 
 	@Override
-	public void createConsultationREST(ConsultationRequest conReq) {
+	public void createConsultation(ConsultationRequest conReq) {
 
 		conReq.setStatus(ConsultationStatus.RECEIVED);
 		if (conReq.getUpload() != null)

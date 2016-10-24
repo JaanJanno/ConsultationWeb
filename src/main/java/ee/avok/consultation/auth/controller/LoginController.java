@@ -1,17 +1,16 @@
 package ee.avok.consultation.auth.controller;
 
+import javax.servlet.http.HttpServletResponse;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-
-import javax.servlet.http.HttpServletResponse;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import ee.avok.consultation.auth.domain.model.Account;
 import ee.avok.consultation.auth.domain.model.UnauthorizedException;
@@ -48,11 +47,6 @@ public class LoginController {
 		authServ.endSession(session);
 		return "redirect:" + "/login";
 	}
-	
-	
-	
-	
-	
 
 	@ExceptionHandler(UnauthorizedException.class)
 	public String handleNotFound(Exception exc) {

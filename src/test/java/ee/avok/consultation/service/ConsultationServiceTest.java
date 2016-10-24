@@ -21,7 +21,6 @@ import ee.avok.consultation.auth.domain.repository.AccountRepository;
 import ee.avok.consultation.domain.model.ConsultationRequest;
 import ee.avok.consultation.domain.model.ConsultationStatus;
 
-
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringApplicationConfiguration(classes = ConsultationWebApplication.class)
 @ActiveProfiles("test")
@@ -38,7 +37,7 @@ public class ConsultationServiceTest {
 		ConsultationRequest req = new ConsultationRequest();
 		req.setName("Bla Bla");
 		req.setEmail("bla@bla.bla");
-		conServ.createConsultationREST(req);
+		conServ.createConsultation(req);
 		assertEquals(ConsultationStatus.RECEIVED, req.getStatus());
 	}
 
@@ -52,7 +51,7 @@ public class ConsultationServiceTest {
 		ConsultationRequest req = new ConsultationRequest();
 		req.setName("Bla Bla");
 		req.setEmail("bla@bla.bla");
-		conServ.createConsultationREST(req); // Should be normal createConsultation
+		conServ.createConsultation(req); // Should be normal createConsultation
 		assertEquals(ConsultationStatus.RECEIVED, req.getStatus());
 
 		conServ.setAccepted(req.getId(), user);

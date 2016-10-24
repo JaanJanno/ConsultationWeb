@@ -1,7 +1,5 @@
 package ee.avok.consultation.controller;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,8 +11,6 @@ import ee.avok.consultation.auth.domain.model.Account;
 import ee.avok.consultation.auth.domain.model.Role;
 import ee.avok.consultation.auth.domain.model.UnauthorizedException;
 import ee.avok.consultation.auth.service.AuthService;
-import ee.avok.consultation.domain.model.ConsultationRequest;
-import ee.avok.consultation.domain.model.ConsultationStatus;
 import ee.avok.consultation.dto.AccountDTO;
 import ee.avok.consultation.service.AccountService;
 
