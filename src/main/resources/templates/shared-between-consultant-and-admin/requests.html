@@ -59,20 +59,16 @@
 											<td th:text="${consultation.textType}"></td>
 											<td th:text="${consultation.language}"></td>
 											<!--  td th:text="${consultation.file}"></td-->
-											<td>
-												<form style='float: left; padding: 5px; height: 0px' th:object="${consultation}"
-													th:method="post" th:action="@{/requests/detail/{id}(id=${consultation.id})}">
-
-													<button class="btn btn-default btn-xs" type="submit">Detail</button>
-												</form>
-											</td>
+											<td><a th:href="@{/requests/detail/{id}(id=${consultation.id})}"><button
+														type="button" class="btn btn-default btn-xs" value="primary">Details</button></a></td>
 											<td><a th:href="${consultation.generateUploadUrl()}"
 												th:if="${consultation.hasFile()}"> <span class="glyphicon glyphicon-download-alt"></span>
 													Download
 											</a></td>
 											<td>
-												<form style='float: left; padding: 5px; height: 0px' id="request-form" th:object="${consultation}"
-													th:method="post" th:action="@{/requests/{id}(id=${consultation.id})}">
+												<form style='float: left; padding: 5px; height: 0px' id="request-form"
+													th:object="${consultation}" th:method="post"
+													th:action="@{/requests/{id}(id=${consultation.id})}">
 
 													<button class="btn btn-default btn-xs" type="submit">Accept</button>
 												</form>

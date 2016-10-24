@@ -95,7 +95,7 @@ public class RequestController {
 		return "shared-between-consultant-and-admin/requests";
 	}
 
-	@RequestMapping(method = RequestMethod.POST, value = "/requests/detail/{id}")
+	@RequestMapping(method = RequestMethod.GET, value = "/requests/detail/{id}")
 	public String ConsultationRequestDetail(@PathVariable int id, @ModelAttribute ConsultationRequest conReq,
 			Model model, @CookieValue(value = "session", defaultValue = "none") String session)
 			throws UnauthorizedException {
