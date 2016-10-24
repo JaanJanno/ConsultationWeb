@@ -16,9 +16,11 @@ import javax.persistence.TemporalType;
 
 import ee.avok.consultation.auth.domain.model.Account;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 @Entity
 @Data
+@EqualsAndHashCode(exclude = "previous")
 public class ConsultationRequest {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -65,6 +67,11 @@ public class ConsultationRequest {
 	@Column
 	private String meetingPlace;
 
+	@OneToOne(optional = true)
+	private ConsultationRequest previous;
+	@OneToOne(mappedBy = "previous")
+	private ConsultationRequest next;
+
 	public String generateUploadUrl() {
 		return "/uploads/" + Integer.toString(upload.getId()) + "/" + upload.getFilename();
 	}
@@ -72,4 +79,12 @@ public class ConsultationRequest {
 	public boolean hasFile() {
 		return this.upload != null;
 	}
+
+	public ConsultationRequest() {
+	}
+
+	public ConsultationRequest(int id) {
+		this.id = id;
+	}
+
 }

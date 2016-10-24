@@ -27,4 +27,12 @@ public class Account {
 	private Role role;
 	@Column
 	private String password;
+
+	public Account() {
+	}
+
+	public Account(int id) {
+		this.id = id;
+	}
+
 }

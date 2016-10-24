@@ -1,19 +1,5 @@
 [
 	{
-		"_class": "ee.avok.consultation.domain.model.ConsultationRequest",
-		"id": 1,
-		"name": "Salman",
-		"email": "salmanlashkarara@gmail.com",
-		"textType": "Article",
-		"programme": "Software engineering",
-		"department": "Math and CS",
-		"language": "English",
-		"comments": "bla bla",
-		"degree": "1st year Bachelor's",
-		"status": "RECEIVED",
-		"receivedDate":"2016-10-21T13:49:28.243Z"
-	},
-	{
 		"_class": "ee.avok.consultation.auth.domain.model.Account",
 		"id": 1,
 		"username": "testy",
@@ -24,17 +10,8 @@
 	},
 	{
 		"_class": "ee.avok.consultation.domain.model.ConsultationRequest",
-		"id": 2,
+		"id": 1,
 		"name": "Salman",
-		"consultant":{
-						"_class": "ee.avok.consultation.auth.domain.model.Account",
-						"id": 1,
-						"username": "testy",
-						"name": "Testy Mc'Testface",
-						"email": "testy@testface.ee",
-						"role": "CONSULTANT",
-						"password": "testy"
-					},
 		"email": "salmanlashkarara@gmail.com",
 		"textType": "Article",
 		"programme": "Software engineering",
@@ -43,21 +20,33 @@
 		"comments": "bla bla",
 		"degree": "1st year Bachelor's",
 		"status": "COMPLETED",
-		"receivedDate":"2016-10-21T13:49:28.243Z"
+		"receivedDate": "2016-10-21T13:49:28.243Z",
+		"acceptedDate": "2016-10-21T14:28:28.243Z",
+		"scheduledDate": "2016-10-22T10:04:28.243Z",
+		"meetingPlace": "J. Liivi 2",
+		"meetingDate": "2016-10-22T16:00:00.000Z",
+		"completedDate": "2016-10-22T20:31:34.003Z",
+		"consultant": 1
+	},
+	{
+		"_class": "ee.avok.consultation.domain.model.ConsultationRequest",
+		"id": 2,
+		"name": "Salman",
+		"email": "salmanlashkarara@gmail.com",
+		"textType": "Article",
+		"programme": "Software engineering",
+		"department": "Math and CS",
+		"language": "English",
+		"comments": "bla bla",
+		"degree": "1st year Bachelor's",
+		"status": "RECEIVED",
+		"receivedDate": "2016-10-21T13:49:28.243Z",
+		"previous": 1
 	},
 	{
 		"_class": "ee.avok.consultation.domain.model.ConsultationRequest",
 		"id": 3,
 		"name": "Salman",
-		"consultant":{
-						"_class": "ee.avok.consultation.auth.domain.model.Account",
-						"id": 1,
-						"username": "testy",
-						"name": "Testy Mc'Testface",
-						"email": "testy@testface.ee",
-						"role": "CONSULTANT",
-						"password": "testy"
-					},
 		"email": "salmanlashkarara@gmail.com",
 		"textType": "Article",
 		"programme": "Software engineering",
@@ -66,7 +55,8 @@
 		"comments": "bla bla",
 		"degree": "1st year Bachelor's",
 		"status": "ACCEPTED",
-		"receivedDate":"2016-10-21T13:49:28.243Z"
+		"receivedDate": "2016-10-21T13:49:28.243Z",
+		"acceptedDate": "2016-10-21T14:28:28.243Z",
+		"consultant": 1
 	}
-	
 ]

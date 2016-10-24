@@ -154,13 +154,13 @@ $(document).ready(function(){
 					    <tbody>
 					      <tr>					      
 					        <td> 
-					        	<a href="">
+					        	<a th:href="@{/requests/detail/{id}(id=${consultation.previous.id})}" th:if="${consultation.getPrevious()}">
 									<strong>Previous</strong>
 								</a>
 					        </td>
 					      
 					        <td> 
-					        	<a href="" >
+					        	<a th:href="@{/requests/detail/{id}(id=${consultation.next.id})}" th:if="${consultation.getNext()}">
 									<strong>Next</strong>
 								</a>		        
 					         </td>
