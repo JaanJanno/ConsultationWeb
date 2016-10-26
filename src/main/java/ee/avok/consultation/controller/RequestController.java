@@ -54,12 +54,12 @@ public class RequestController {
 	}
 
 	/**
-	 * Returns the default requests view of requests with status RECEIVED
+	 * Returns the default requests view of requests with status received
 	 */
 	@RequestMapping("/requests")
 	public String requestsDefault(Model model, @CookieValue(value = "session", defaultValue = "none") String session)
 			throws UnauthorizedException {
-		return requestsWithStatus(model, session, ConsultationStatus.RECEIVED);
+		return requestsWithStatus(model, session, "received");
 	}
 
 	@RequestMapping(method = RequestMethod.POST, value = "/requests/{id}")
@@ -68,12 +68,12 @@ public class RequestController {
 		Account user = authServ.authenticateRequestForRole(session, Role.CONSULTANT);
 		LOG.info("Consultation request with id {}, set as Accepted, user {}", id, user.getUsername());
 		conServ.setAccepted(id, user);
-		return "redirect:" + "/requests/ACCEPTED";
+		return "redirect:" + "/requests/accepted";
 	}
 
 	@RequestMapping(value = "/requests/{status}", method = RequestMethod.GET)
 	public String requestsWithStatus(Model model, @CookieValue(value = "session", defaultValue = "none") String session,
-			@PathVariable ConsultationStatus status) throws UnauthorizedException {
+			@PathVariable String status) throws UnauthorizedException {
 		Account user = authServ.authenticateAndAddToModel(model, session, Role.CONSULTANT);
 
 		List<ConsultationRequest> conReqs = conServ.findByStatusAndConsultant(status, user);
@@ -83,7 +83,7 @@ public class RequestController {
 
 		String page = "";
 		switch (status) {
-		case ACCEPTED:
+		case "accepted":
 			page = "shared-between-consultant-and-admin/accepted_requests";
 			break;
 
@@ -108,7 +108,7 @@ public class RequestController {
 	@RequestMapping(value = "/requests/admin/{status}")
 	public String getCompletedRequestsList(Model model,
 			@CookieValue(value = "session", defaultValue = "none") String session,
-			@PathVariable ConsultationStatus status) throws UnauthorizedException {
+			@PathVariable String status) throws UnauthorizedException {
 		authServ.authenticateAndAddToModel(model, session, Role.ADMINISTRATOR);
 
 		// TODO only working status is COMPLETED. Disable others if not needed
@@ -117,7 +117,7 @@ public class RequestController {
 		LOG.info("Admin view for requests. Displayed: {}, status {}", completedRequests.size(), status);
 		String page = "";
 		switch (status) {
-		case COMPLETED:
+		case "completed":
 			page = "admin/completed_requests";
 			break;
 

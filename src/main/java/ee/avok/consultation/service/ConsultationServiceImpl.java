@@ -43,6 +43,12 @@ public class ConsultationServiceImpl implements ConsultationService {
 		else
 			return conReqRepo.findByStatus(status);
 	}
+	
+	@Override
+	public List<ConsultationRequest> findByStatus(String status) {
+		ConsultationStatus st = ConsultationStatus.valueOf(status.toUpperCase());
+		return findByStatus(st);
+	}
 
 	@Override
 	public List<ConsultationRequest> findByStatusAndConsultant(ConsultationStatus status, Account consultant) {
@@ -50,6 +56,12 @@ public class ConsultationServiceImpl implements ConsultationService {
 			return conReqRepo.findByStatus(status);
 		else
 			return conReqRepo.findByStatusAndConsultant(status, consultant);
+	}
+	
+	@Override
+	public List<ConsultationRequest> findByStatusAndConsultant(String status, Account consultant) {
+		ConsultationStatus st = ConsultationStatus.valueOf(status.toUpperCase());
+		return findByStatusAndConsultant(st, consultant);
 	}
 
 	@Override
@@ -112,5 +124,9 @@ public class ConsultationServiceImpl implements ConsultationService {
 				r -> dtos.add(new CompletedDTO(r.getId(), r.getName(), r.getConsultant().getName(), false, false)));
 		return dtos;
 	}
+
+
+
+
 
 }

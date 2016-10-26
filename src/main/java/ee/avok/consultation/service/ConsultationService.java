@@ -17,7 +17,11 @@ public interface ConsultationService {
 
 	List<ConsultationRequest> findByStatus(ConsultationStatus status);
 
+	List<ConsultationRequest> findByStatus(String status);
+
 	List<ConsultationRequest> findByStatusAndConsultant(ConsultationStatus status, Account consultant);
+
+	List<ConsultationRequest> findByStatusAndConsultant(String status, Account consultant);
 
 	/**
 	 * Generates a list of {@link CompletedDTO} to show in the admin completed
