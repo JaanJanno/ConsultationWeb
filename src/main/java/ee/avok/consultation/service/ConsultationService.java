@@ -25,6 +25,15 @@ public interface ConsultationService {
 	 */
 	List<CompletedDTO> findCompleted();
 
+	/**
+	 * Generates a list of {@link CompletedDTO} to show in the consultant
+	 * completed requests view.
+	 * 
+	 * @param consultant
+	 *            Consultant to find by.
+	 */
+	List<CompletedDTO> findCompleted(Account consultant);
+
 	List<ConsultationRequest> findAll();
 
 	ConsultationRequest findOne(int id);

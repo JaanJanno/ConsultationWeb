@@ -39,50 +39,45 @@ public class ConsultationServiceTest {
 	@Autowired
 	ConsultationRequestRepository conReqRepo;
 
+	private Account user;
+	private ConsultationRequest req;
+
 	@Before
 	public void setup() {
 		conReqRepo.deleteAll();
 		accountRepo.deleteAll();
+
+		user = new Account();
+		user.setUsername("kalevipoeg");
+		user.setName("kalevipoeg");
+		user.setRole(Role.CONSULTANT);
+		accountRepo.save(user);
+
+		req = new ConsultationRequest();
+		req.setName("Bla Bla");
+		req.setEmail("bla@bla.bla");
+
 	}
 
 	@Test
 	public void createAndHasStatusReceived() {
-		ConsultationRequest req = new ConsultationRequest();
-		req.setName("Bla Bla");
-		req.setEmail("bla@bla.bla");
 		conServ.createConsultation(req);
 		assertEquals(ConsultationStatus.RECEIVED, req.getStatus());
 	}
 
 	@Test
 	public void changeStatus() {
-		Account user = new Account();
-		user.setUsername("kalevipoeg");
-		user.setRole(Role.CONSULTANT);
-		accountRepo.save(user);
-
-		ConsultationRequest req = new ConsultationRequest();
-		req.setName("Bla Bla");
-		req.setEmail("bla@bla.bla");
 		conServ.createConsultation(req); // Should be normal createConsultation
 		assertEquals(ConsultationStatus.RECEIVED, req.getStatus());
 
 		conServ.setAccepted(req.getId(), user);
 
 		assertEquals(ConsultationStatus.ACCEPTED, conServ.findOne(req.getId()).getStatus());
-		assertEquals("kalevipoeg", conServ.findOne(req.getId()).getConsultant().getUsername());
+		assertEquals(user.getUsername(), conServ.findOne(req.getId()).getConsultant().getUsername());
 	}
 
 	@Test
-	public void completedDTOs() {
-		Account user = new Account();
-		user.setName("kalevipoeg");
-		user.setRole(Role.CONSULTANT);
-		accountRepo.save(user);
-
-		ConsultationRequest req = new ConsultationRequest();
-		req.setName("Bla Bla");
-		req.setEmail("bla@bla.bla");
+	public void completedDTOsAdmin() {
 		req.setStatus(ConsultationStatus.COMPLETED);
 		req.setConsultant(user);
 		conReqRepo.save(req);
@@ -93,8 +88,27 @@ public class ConsultationServiceTest {
 
 		CompletedDTO dto = dtos.get(0);
 		assertEquals(req.getId(), dto.getId());
-		assertEquals("Bla Bla", dto.getName());
-		assertEquals("kalevipoeg", dto.getConsultantName());
+		assertEquals(req.getName(), dto.getName());
+		assertEquals(user.getName(), dto.getConsultantName());
+		// TODO add feedback and check their existence
+		assertEquals(false, dto.isConsultantFeedback());
+		assertEquals(false, dto.isStudentFeedback());
+	}
+
+	@Test
+	public void completedDTOsConsultant() {
+		req.setStatus(ConsultationStatus.COMPLETED);
+		req.setConsultant(user);
+		conReqRepo.save(req);
+
+		List<CompletedDTO> dtos = conServ.findCompleted(user);
+
+		assertEquals(1, dtos.size());
+
+		CompletedDTO dto = dtos.get(0);
+		assertEquals(req.getId(), dto.getId());
+		assertEquals(req.getName(), dto.getName());
+		assertEquals(user.getName(), dto.getConsultantName());
 		// TODO add feedback and check their existence
 		assertEquals(false, dto.isConsultantFeedback());
 		assertEquals(false, dto.isStudentFeedback());

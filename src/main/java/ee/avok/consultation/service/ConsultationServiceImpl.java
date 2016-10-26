@@ -96,6 +96,16 @@ public class ConsultationServiceImpl implements ConsultationService {
 	@Override
 	public List<CompletedDTO> findCompleted() {
 		List<ConsultationRequest> reqs = findByStatus(ConsultationStatus.COMPLETED);
+		return createCompletedDTO(reqs);
+	}
+
+	@Override
+	public List<CompletedDTO> findCompleted(Account consultant) {
+		List<ConsultationRequest> reqs = findByStatusAndConsultant(ConsultationStatus.COMPLETED,consultant);
+		return createCompletedDTO(reqs);
+	}
+	
+	private List<CompletedDTO> createCompletedDTO(List<ConsultationRequest> reqs) {
 		List<CompletedDTO> dtos = new ArrayList<>();
 		// TODO check if feedback exists
 		reqs.forEach(
