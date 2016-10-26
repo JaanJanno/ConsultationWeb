@@ -22,6 +22,7 @@ import ee.avok.consultation.auth.domain.model.UnauthorizedException;
 import ee.avok.consultation.auth.service.AuthService;
 import ee.avok.consultation.domain.model.ConsultationRequest;
 import ee.avok.consultation.domain.model.ConsultationStatus;
+import ee.avok.consultation.dto.CompletedDTO;
 import ee.avok.consultation.dto.FeedBackDTO;
 import ee.avok.consultation.dto.PostConsultationForm;
 import ee.avok.consultation.service.ConsultationService;
@@ -133,7 +134,8 @@ public class RequestController {
 
 		model.addAttribute("username", user.getUsername());
 		model.addAttribute("name", user.getName());
-		List<ConsultationRequest> completedRequests = conServ.findByStatus(status);
+		// TODO only working status is COMPLETED. Disable others if not needed
+		List<CompletedDTO> completedRequests = conServ.findCompleted();
 		model.addAttribute("completedRequestsList", completedRequests);
 		LOG.info("Admin view for requests. Displayed: {}, status {}", completedRequests.size(), status);
 		String page = "";
