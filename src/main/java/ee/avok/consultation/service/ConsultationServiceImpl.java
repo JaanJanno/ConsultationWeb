@@ -1,6 +1,7 @@
 package ee.avok.consultation.service;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -14,6 +15,7 @@ import ee.avok.consultation.domain.model.ConsultationStatus;
 import ee.avok.consultation.domain.model.Upload;
 import ee.avok.consultation.domain.repository.ConsultationRequestRepository;
 import ee.avok.consultation.domain.repository.UploadRepository;
+import ee.avok.consultation.dto.CompletedDTO;
 
 @Service
 public class ConsultationServiceImpl implements ConsultationService {
@@ -89,6 +91,16 @@ public class ConsultationServiceImpl implements ConsultationService {
 		conReq.setConsultant(consultant);
 		conReqRepo.save(conReq);
 
+	}
+
+	@Override
+	public List<CompletedDTO> findCompleted() {
+		List<ConsultationRequest> reqs = findByStatus(ConsultationStatus.COMPLETED);
+		List<CompletedDTO> dtos = new ArrayList<>();
+		// TODO check if feedback exists
+		reqs.forEach(
+				r -> dtos.add(new CompletedDTO(r.getId(), r.getName(), r.getConsultant().getName(), false, false)));
+		return dtos;
 	}
 
 }

@@ -7,6 +7,7 @@ import org.springframework.web.multipart.MultipartFile;
 import ee.avok.consultation.auth.domain.model.Account;
 import ee.avok.consultation.domain.model.ConsultationRequest;
 import ee.avok.consultation.domain.model.ConsultationStatus;
+import ee.avok.consultation.dto.CompletedDTO;
 
 public interface ConsultationService {
 
@@ -17,6 +18,12 @@ public interface ConsultationService {
 	List<ConsultationRequest> findByStatus(ConsultationStatus status);
 
 	List<ConsultationRequest> findByStatusAndConsultant(ConsultationStatus status, Account consultant);
+
+	/**
+	 * Generates a list of {@link CompletedDTO} to show in the admin completed
+	 * requests view.
+	 */
+	List<CompletedDTO> findCompleted();
 
 	List<ConsultationRequest> findAll();
 
