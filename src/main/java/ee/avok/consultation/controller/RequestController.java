@@ -21,7 +21,6 @@ import ee.avok.consultation.auth.domain.model.Role;
 import ee.avok.consultation.auth.domain.model.UnauthorizedException;
 import ee.avok.consultation.auth.service.AuthService;
 import ee.avok.consultation.domain.model.ConsultationRequest;
-import ee.avok.consultation.domain.model.ConsultationStatus;
 import ee.avok.consultation.dto.CompletedDTO;
 import ee.avok.consultation.service.ConsultationService;
 
@@ -33,6 +32,10 @@ public class RequestController {
 	ConsultationService conServ;
 	@Autowired
 	AuthService authServ;
+
+	/*
+	 * Request creation
+	 */
 
 	@RequestMapping(value = "/request", method = RequestMethod.GET)
 	public String createConsultation(Model model) {
@@ -53,14 +56,59 @@ public class RequestController {
 
 	}
 
+	/*
+	 * Requests by status
+	 */
+
 	/**
 	 * Returns the default requests view of requests with status received
 	 */
 	@RequestMapping("/requests")
 	public String requestsDefault(Model model, @CookieValue(value = "session", defaultValue = "none") String session)
 			throws UnauthorizedException {
-		return requestsWithStatus(model, session, "received");
+		return requestsReceived(model, session);
 	}
+
+	@RequestMapping(value = "/requests/received", method = RequestMethod.GET)
+	public String requestsReceived(Model model, @CookieValue(value = "session", defaultValue = "none") String session)
+			throws UnauthorizedException {
+		authServ.authenticateAndAddToModel(model, session, Role.CONSULTANT);
+
+		List<ConsultationRequest> conReqs = conServ.findByStatus("received");
+
+		LOG.info("Requests size: {}, status {}", conReqs.size(), "received");
+		model.addAttribute("consultations", conReqs);
+		return "shared-between-consultant-and-admin/requests";
+	}
+
+	@RequestMapping(value = "/requests/accepted", method = RequestMethod.GET)
+	public String requestsAccepted(Model model, @CookieValue(value = "session", defaultValue = "none") String session)
+			throws UnauthorizedException {
+		Account user = authServ.authenticateAndAddToModel(model, session, Role.CONSULTANT);
+
+		List<ConsultationRequest> conReqs = conServ.findByStatusAndConsultant("accepted", user);
+		LOG.info("Requests size: {}, status {}", conReqs.size(), "accepted");
+
+		model.addAttribute("consultations", conReqs);
+		return "shared-between-consultant-and-admin/accepted_requests";
+	}
+
+	@RequestMapping(value = "/requests/completed", method = RequestMethod.GET)
+	public String requestsCompleted(Model model, @CookieValue(value = "session", defaultValue = "none") String session)
+			throws UnauthorizedException {
+		Account user = authServ.authenticateAndAddToModel(model, session, Role.CONSULTANT);
+
+		List<CompletedDTO> conReqs = conServ.findCompleted(user);
+		LOG.info("Requests size: {}, status {}", conReqs.size(), "completed");
+
+		model.addAttribute("consultations", conReqs);
+		// TODO probably move from admin to shared
+		return "admin/completed_requests";
+	}
+
+	/*
+	 * Requests modification
+	 */
 
 	@RequestMapping(method = RequestMethod.POST, value = "/requests/{id}")
 	public String setConsultationAccepted(@CookieValue(value = "session", defaultValue = "none") String session,
@@ -69,29 +117,6 @@ public class RequestController {
 		LOG.info("Consultation request with id {}, set as Accepted, user {}", id, user.getUsername());
 		conServ.setAccepted(id, user);
 		return "redirect:" + "/requests/accepted";
-	}
-
-	@RequestMapping(value = "/requests/{status}", method = RequestMethod.GET)
-	public String requestsWithStatus(Model model, @CookieValue(value = "session", defaultValue = "none") String session,
-			@PathVariable String status) throws UnauthorizedException {
-		Account user = authServ.authenticateAndAddToModel(model, session, Role.CONSULTANT);
-
-		List<ConsultationRequest> conReqs = conServ.findByStatusAndConsultant(status, user);
-
-		LOG.info("Requests size: {}, status {}", conReqs.size(), status);
-		model.addAttribute("consultations", conReqs);
-
-		String page = "";
-		switch (status) {
-		case "accepted":
-			page = "shared-between-consultant-and-admin/accepted_requests";
-			break;
-
-		default:
-			page = "shared-between-consultant-and-admin/requests";
-			break;
-		}
-		return page;
 	}
 
 	@RequestMapping(method = RequestMethod.GET, value = "/requests/detail/{id}")
@@ -105,27 +130,21 @@ public class RequestController {
 		return "shared-between-consultant-and-admin/detail";
 	}
 
-	@RequestMapping(value = "/requests/admin/{status}")
+	/*
+	 * ADMIN
+	 */
+
+	@RequestMapping(value = "/requests/admin/completed")
 	public String getCompletedRequestsList(Model model,
-			@CookieValue(value = "session", defaultValue = "none") String session,
-			@PathVariable String status) throws UnauthorizedException {
+			@CookieValue(value = "session", defaultValue = "none") String session)
+			throws UnauthorizedException {
 		authServ.authenticateAndAddToModel(model, session, Role.ADMINISTRATOR);
 
-		// TODO only working status is COMPLETED. Disable others if not needed
 		List<CompletedDTO> completedRequests = conServ.findCompleted();
-		model.addAttribute("completedRequestsList", completedRequests);
-		LOG.info("Admin view for requests. Displayed: {}, status {}", completedRequests.size(), status);
-		String page = "";
-		switch (status) {
-		case "completed":
-			page = "admin/completed_requests";
-			break;
-
-		default:
-			// TODO view something here
-			break;
-		}
-		return page;
+		
+		LOG.info("Admin view for requests. Displayed: {}, status completed", completedRequests.size());
+		model.addAttribute("consultations", completedRequests);
+		return "admin/completed_requests";
 	}
 
 	@ExceptionHandler(UnauthorizedException.class)
