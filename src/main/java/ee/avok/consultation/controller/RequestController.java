@@ -82,13 +82,12 @@ public class RequestController {
 	@RequestMapping(value = "/requests/{status}", method = RequestMethod.GET)
 	public String requestsWithStatus(Model model, @CookieValue(value = "session", defaultValue = "none") String session,
 			@PathVariable ConsultationStatus status) throws UnauthorizedException {
-		Account user = authServ.authenticateRequestForRole(session, Role.CONSULTANT);
+		Account user = authenticateAndAddToModel(model, session, Role.CONSULTANT);
 
 		List<ConsultationRequest> conReqs = conServ.findByStatusAndConsultant(status, user);
+
 		LOG.info("Requests size: {}, status {}", conReqs.size(), status);
 		model.addAttribute("consultations", conReqs);
-		model.addAttribute("username", user.getUsername());
-		model.addAttribute("name", user.getName());
 
 		String page = "";
 		switch (status) {
@@ -107,22 +106,19 @@ public class RequestController {
 	public String ConsultationRequestDetail(@PathVariable int id, @ModelAttribute ConsultationRequest conReq,
 			Model model, @CookieValue(value = "session", defaultValue = "none") String session)
 			throws UnauthorizedException {
-		Account user = authServ.authenticateRequestForRole(session, Role.CONSULTANT);
+		authenticateAndAddToModel(model, session, Role.CONSULTANT);
 
 		LOG.info("Consultation request with id {} is sent to show the detail", id);
 		model.addAttribute("consultation", conServ.findOne(id));
-		model.addAttribute("username", user.getUsername());
-		model.addAttribute("name", user.getName());
 		return "shared-between-consultant-and-admin/detail";
 	}
 
 	@RequestMapping(value = "/report")
 	public String createConsultationReportForm(Model model,
 			@CookieValue(value = "session", defaultValue = "none") String session) throws UnauthorizedException {
-		Account user = authServ.authenticateRequestForRole(session, Role.CONSULTANT);
+		authenticateAndAddToModel(model, session, Role.CONSULTANT);
+
 		model.addAttribute("postConsultationReport", new PostConsultationForm());
-		model.addAttribute("username", user.getUsername());
-		model.addAttribute("name", user.getName());
 		return "shared-between-consultant-and-admin/post_consultation_form";
 	}
 
@@ -130,10 +126,8 @@ public class RequestController {
 	public String getCompletedRequestsList(Model model,
 			@CookieValue(value = "session", defaultValue = "none") String session,
 			@PathVariable ConsultationStatus status) throws UnauthorizedException {
-		Account user = authServ.authenticateRequestForRole(session, Role.ADMINISTRATOR);
+		authenticateAndAddToModel(model, session, Role.ADMINISTRATOR);
 
-		model.addAttribute("username", user.getUsername());
-		model.addAttribute("name", user.getName());
 		// TODO only working status is COMPLETED. Disable others if not needed
 		List<CompletedDTO> completedRequests = conServ.findCompleted();
 		model.addAttribute("completedRequestsList", completedRequests);
@@ -154,6 +148,30 @@ public class RequestController {
 	@ExceptionHandler(UnauthorizedException.class)
 	public String handleNotFound(Exception exc) {
 		return "redirect:" + "/";
+	}
+
+	/**
+	 * Authenticates and adds {@link Account#getName()} and
+	 * {@link Account#getUsername()} to {@link Model}. Can be moved to some
+	 * login controller if needed.
+	 * 
+	 * @param model
+	 *            Spring model
+	 * @param session
+	 *            cookie
+	 * @param role
+	 *            {@link Role} to authenticate with
+	 * @return Authenticated account
+	 * @throws UnauthorizedException
+	 */
+	private Account authenticateAndAddToModel(Model model,
+			@CookieValue(value = "session", defaultValue = "none") String session, Role role)
+			throws UnauthorizedException {
+		Account user = authServ.authenticateRequestForRole(session, role);
+
+		model.addAttribute("username", user.getUsername());
+		model.addAttribute("name", user.getName());
+		return user;
 	}
 
 }
