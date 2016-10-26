@@ -22,10 +22,14 @@ The web server is able to use a local in-memory database, a local Postgres datab
 ### Test credentials
 
 The following can be used to log in to the application for testing purposes.
-
+#### User with role consultant
 **Username:** testy
 
 **Password:** testy
+#### User with role administrator
+**Username:** admin
+
+**Password:** admin
 
 #### Necessary
 * Maven. Good setup guide here http://www.mkyong.com/maven/how-to-install-maven-in-windows/. On Linux follow http://iambusychangingtheworld.blogspot.com/2014/04/install-and-configure-java-and-maven-in.html. On Mac use Google.
