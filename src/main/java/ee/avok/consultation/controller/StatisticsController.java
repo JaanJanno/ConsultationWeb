@@ -28,14 +28,12 @@ public class StatisticsController {
 	@RequestMapping("/statistics")
 	public String statisticsPage(Model model, @CookieValue(value = "session", defaultValue = "none") String session)
 			throws UnauthorizedException {
-		Account user = authServ.authenticateRequestForRole(session, Role.ADMINISTRATOR);
+		Account user = authServ.authenticateAndAddToModel(model, session, Role.ADMINISTRATOR);
 
 		LOG.info("Statistics page for admin: {}", user.getId());
 		StatisticsDTO stats = statServ.getStatistics("all");
 
 		model.addAttribute("stats", stats);
-		model.addAttribute("username", user.getUsername());
-		model.addAttribute("name", user.getName());
 		// TODO a proper HTML template path
 		return "statistics";
 	}

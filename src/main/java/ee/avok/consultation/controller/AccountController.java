@@ -26,9 +26,8 @@ public class AccountController {
 	@RequestMapping(path = "/account/edit")
 	public String ManagingAccounts(@CookieValue(value = "session", defaultValue = "none") String session, Model model)
 			throws UnauthorizedException {
-		Account user = authServ.authenticateRequestForRole(session, Role.CONSULTANT);
-		model.addAttribute("username", user.getUsername());
-		model.addAttribute("name", user.getName());
+		Account user = authServ.authenticateAndAddToModel(model, session, Role.CONSULTANT);
+
 		model.addAttribute("user", new AccountDTO(user.getId()));
 		return "admin/manage_account";
 		

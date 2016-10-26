@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.CookieValue;
 
 import ee.avok.consultation.auth.domain.model.Account;
 import ee.avok.consultation.auth.domain.model.Role;
@@ -73,6 +75,30 @@ public class AuthService {
 		if (sessionMap.containsKey(session)) {
 			sessionMap.remove(session);
 		}
+	}
+	
+	/**
+	 * Authenticates and adds {@link Account#getName()} and
+	 * {@link Account#getUsername()} to {@link Model}. Can be moved to some
+	 * login controller if needed.
+	 * 
+	 * @param model
+	 *            Spring model
+	 * @param session
+	 *            cookie
+	 * @param role
+	 *            {@link Role} to authenticate with
+	 * @return Authenticated account
+	 * @throws UnauthorizedException
+	 */
+	public Account authenticateAndAddToModel(Model model,
+			@CookieValue(value = "session", defaultValue = "none") String session, Role role)
+			throws UnauthorizedException {
+		Account user = authenticateRequestForRole(session, role);
+
+		model.addAttribute("username", user.getUsername());
+		model.addAttribute("name", user.getName());
+		return user;
 	}
 
 }
