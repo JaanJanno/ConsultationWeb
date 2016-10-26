@@ -50,20 +50,15 @@
 										</tr>
 									</thead>
 									<tbody>
-										<tr class="table-row" th:each="consultation : ${completedRequestsList}">
+										<tr class="table-row" th:each="consultation : ${consultations}">
 											<td th:text="${consultation.id}"></td>
 											<td th:text="${consultation.name}"></td>
-											<td th:text="${consultation.getConsultant().getName()}"></td>
+											<td th:text="${consultation.consultantName}"></td>
 											<td></td>
 											<td></td>
 											
-											<td>
-												<form style='float: left; padding: 5px; height: 0px' th:object="${consultation}"
-													th:method="post" th:action="@{/requests/detail/{id}(id=${consultation.id})}">
-
-													<button class="btn btn-default btn-xs" type="submit">Detail</button>
-												</form>
-											</td>
+											<td><a th:href="@{/requests/detail/{id}(id=${consultation.id})}"><button
+														type="button" class="btn btn-default btn-xs" value="primary">Details</button></a></td>
 										
 								
 										</tr>
