@@ -64,7 +64,7 @@ public class AuthService {
 		}
 
 		if (role == user.getRole()) {
-			return user;		
+			return user;
 		} else {
 			throw new UnauthorizedException("Unauthorized account.");
 		}
@@ -76,11 +76,11 @@ public class AuthService {
 			sessionMap.remove(session);
 		}
 	}
-	
+
 	/**
 	 * Authenticates and adds {@link Account#getName()} and
-	 * {@link Account#getUsername()} to {@link Model}. Can be moved to some
-	 * login controller if needed.
+	 * {@link Account#getUsername()}, {@link Account#getRole()#toString()} to
+	 * {@link Model}. Can be moved to some login controller if needed.
 	 * 
 	 * @param model
 	 *            Spring model
@@ -98,7 +98,7 @@ public class AuthService {
 
 		model.addAttribute("username", user.getUsername());
 		model.addAttribute("name", user.getName());
-		model.addAttribute("role", user.getRole());
+		model.addAttribute("role", user.getRole().toString());
 		return user;
 	}
 
