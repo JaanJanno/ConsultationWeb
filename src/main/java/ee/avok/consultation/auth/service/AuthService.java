@@ -98,6 +98,7 @@ public class AuthService {
 
 		model.addAttribute("username", user.getUsername());
 		model.addAttribute("name", user.getName());
+		model.addAttribute("role", user.getRole());
 		return user;
 	}
 
