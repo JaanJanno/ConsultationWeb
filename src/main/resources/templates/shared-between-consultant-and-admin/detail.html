@@ -88,14 +88,14 @@ $(document).ready(function(){
 				    <div class="panel-body">				                  
 		                  <div th:replace="fragments/detail/request_detail_consultant_feedback :: request-detail-consultant-feedback"></div>	
 					</div>	  
-				</div>
-				<div class="panel panel-default">
+				
+				<div class="panel panel-default" th:if="${(consultation.getNext()!=null) or (consultation.getPrevious()!=null)} ">
 				    <div class="panel-body">				                  
 		                  <div th:replace="fragments/detail/request_detail_links_to_prvious_or_next_consultation :: request_detail_links_to_prvious_or_next_consultation"></div>	
 					</div>	  
 				</div>				
 				
-			
+				</div>
 			</div>
 		</div>
 	</div>

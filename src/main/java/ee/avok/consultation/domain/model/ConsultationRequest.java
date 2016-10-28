@@ -86,8 +86,6 @@ public class ConsultationRequest {
 	public ConsultationRequest(int id) {
 		this.id = id;
 	}
-	public String getStatusInString(){
-		return status.toString();
-	}
+	
 				
 }
