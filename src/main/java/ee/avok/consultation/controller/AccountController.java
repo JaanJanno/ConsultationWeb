@@ -24,7 +24,7 @@ public class AccountController {
 	AccountService accountService;
 
 	@RequestMapping(path = "/account/edit")
-	public String ManagingAccounts(@CookieValue(value = "session", defaultValue = "none") String session, Model model)
+	public String editAccount(@CookieValue(value = "session", defaultValue = "none") String session, Model model)
 			throws UnauthorizedException {
 		Account user = authServ.authenticateAndAddToModel(model, session, Role.CONSULTANT);
 
@@ -34,7 +34,9 @@ public class AccountController {
 	}
 
 	@RequestMapping(path = "/accounts/manage")
-	public String editAccounts(Model model) {
+	public String manageAccounts(Model model, @CookieValue(value = "session", defaultValue = "none") String session) throws UnauthorizedException {
+		authServ.authenticateAndAddToModel(model, session, Role.ADMINISTRATOR);
+		
 		model.addAttribute("accounts", accountService.getAllConsultants());
 		return "admin/deactive_accounts";
 	}
