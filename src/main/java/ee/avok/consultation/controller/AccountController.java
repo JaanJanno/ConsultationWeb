@@ -29,7 +29,7 @@ public class AccountController {
 		Account user = authServ.authenticateAndAddToModel(model, session, Role.CONSULTANT);
 
 		model.addAttribute("user", new AccountDTO(user.getId()));
-		return "admin/manage_account";
+		return "general/manage_account";
 		
 	}
 

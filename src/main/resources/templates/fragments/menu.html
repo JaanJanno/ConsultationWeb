@@ -13,15 +13,22 @@
 				</li>
 				<li class="ripple"><a href="/requests" th:href="@{/requests}"><span class="fa-home fa"></span>
 						Incoming requests </a></li>
-				<li class="ripple"><a href="/request" th:href="@{/request}"> <span
-						class="fa-check-square fa"></span> Create request
-				</a></li>
-				<li class="ripple"><a href="/" th:href="@{/}"> <span class="fa-cubes fa"></span> Page 2
-				</a></li>
-				<li class="ripple"><a href="/" th:href="@{/}"> <span class="fa-sitemap fa"></span> Page
-						3
-				</a></li>
-				<li class="ripple"><a href="/" th:href="@{/}"><span class="fa-car fa"></span> Page 4 </a></li>
+				<li class="ripple">
+						<a href="/request" th:href="@{/request}"> 
+						<span	class="fa-check-square fa"></span> Create request </a>
+				</li>
+				
+				<li class="ripple">
+						<a href="/" th:href="@{/accounts/manage}" th:if="${role}==ADMINISTRATOR"> <span class="fa-check-square fa"></span> Manage Accounts</a>
+				</li>
+				<li class="ripple">
+						<a href="/" th:href="@{/requests/completed}" th:if="${role}==ADMINISTRATOR"> <span class="fa-check-square fa"></span> Completed Requests</a>
+				</li>
+				
+				<li class="ripple">
+						<a href="/" th:href="@{/statistics}" th:if="${role}==ADMINISTRATOR"> <span class="fa-check-square fa"></span> Statistics</a>
+				</li>
+
 				<li class="ripple"><a class="tree-toggle nav-header"> <span class="fa fa-info"></span>
 						Requests by status <span class="fa-angle-right fa right-arrow text-right"></span>
 				</a>
