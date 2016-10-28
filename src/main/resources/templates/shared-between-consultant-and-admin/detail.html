@@ -4,7 +4,7 @@
 
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-<title>Index page</title>
+<title>Detail Page</title>
 
 <object th:replace="fragments/util :: standardCSS"></object>
 <script>
@@ -33,149 +33,73 @@ $(document).ready(function(){
 			<div class="panel box-shadow-none content-header">
 				<div class="panel-body">
 					<div class="col-md-12">
-						<h3 class="animated fadeInLeft">Index page</h3>
-						<p class="animated fadeInDown">
+						<h3 class="animated fadeInLeft">Detail Request</h3>
+						<!--p class="animated fadeInDown">
 							Detail Request <span class="fa-angle-right fa"></span> 
-						</p>
+						</p-->
 					</div>
 				</div>
 			</div>
 
-			<div class="col-md-12" style="padding: 20px;">
-				<div class="col-md-12 card-wrap padding-0">				
-					<table class="table table-hover">
-					    <thead>
-					      <tr>
-					        <th>Fullname</th>
-					        <th>Email</th>
-					        <th>Programme</th>
-					        <th>Degree</th>
-					        <th>Text type</th>
-					        <th>Department</th>
-					        <th>Language</th>
-					        <th>Download</th>
-					        <th>Accept</th>
-					      </tr>
-					    </thead>
-					    <tbody>
-					      <tr>
-					        <td> <label th:text="${consultation.name}"></label> </td>
-					      
-					        <td> <label th:text="${consultation.email}"></label> </td>
-					      
-					        <td> <label th:text="${consultation.programme}"></label> </td>
-					      
-					        <td> <label th:text="${consultation.degree}"></label> </td>
-					      
-					        <td> <label th:text="${consultation.textType}"></label> </td>
-					        
-					        <td> <label th:text="${consultation.department}"></label> </td>
-					        <td> <label th:text="${consultation.language}"></label> </td>
-					        <td> 
-					        	<a th:href="${consultation.generateUploadUrl()}" th:if="${consultation.hasFile()}">
-									<span class="glyphicon glyphicon-download-alt"></span> Download
-								</a>
-					         </td>
-					         <td>
-					         		 <form   id="request-form" th:object="${p}" th:method="post" th:action="@{/requests/{id}(id=${consultation.id})}">
-					                	<button class="btn btn-primary" type="submit">Accept</button>
-					                </form>
-					         </td>
-					      </tr>
-					    </tbody>
-					  </table>
-					  <div class="row">
-                            <div class="col-sm-1">
-                                <label for="name"><strong>Comment:</strong></label>
-                            </div>
-                            <div class="col-sm-10">    
-                                <label for="name" th:utext="${consultation.comments}"></label>
-                            </div>
-                    </div>
-                    <hr/>
-					<table class="table table-hover">
-					    <thead>
-					      <tr>
-					      	<th>Consultant Name</th>
-					        <th>Consultant Feedback</th>
-					        <th>Student Feedback</th>
-					        <th>Request Date</th>
-					        <th>Acceptance Date</th>
-					        <th>Schedule Date</th>
-					        <th>Meeting Date</th>
-					        <th>Completed Date</th>
-					        <th>Meeting Place</th>
-					      </tr>
-					    </thead>
-					    <tbody>
-					      <tr>
-					      	<td> 
-					        	<label th:href="${consultation.getConsultant().getUsername()}" th:if="${consultation.getConsultant()}"></label>
-					        </td>
-					      
-					      
-					        <td> 
-					        	<a href="">
-									
-								</a>
-					        </td>
-					      
-					        <td> 
-					        	<a href="" >
-								
-								</a>		        
-					         </td>
-					      
-					        <td> <label th:text="${consultation.receivedDate}" th:if="${consultation.getReceivedDate()}"></label> </td>
-					      
-					        <td> <label th:text="${consultation.acceptedDate}" th:if="${consultation.getAcceptedDate()}"></label> </td>
-					      
-					        <td> <label th:text="${consultation.scheduledDate}" th:if="${consultation.getScheduledDate()}"></label> </td>
-					        
-					        <td> <label th:text="${consultation.meetingDate}" th:if="${consultation.getMeetingDate()}"></label> </td>
-					        <td> <label th:text="${consultation.completedDate}" th:if="${consultation.getCompletedDate()}"></label> </td>
-					        <td> 
-					        	<label th:text="${consultation.meetingPlace}" th:if="${consultation.getMeetingPlace()}"></label>
-					        </td>
-					         
-					      </tr>
-					    </tbody>
-					  </table>
-				</div>
-				<div>
-					<hr/>
-					<table class="table table-hover">
-					    <thead>
-					      <tr>
-					        <th>Previous Consultation</th>
-					        <th>Next Consultation</th>
-					      </tr>
-					    </thead>
-					    <tbody>
-					      <tr>					      
-					        <td> 
-					        	<a th:href="@{/requests/detail/{id}(id=${consultation.previous.id})}" th:if="${consultation.getPrevious()}">
-									<strong>Previous</strong>
-								</a>
-					        </td>
-					      
-					        <td> 
-					        	<a th:href="@{/requests/detail/{id}(id=${consultation.next.id})}" th:if="${consultation.getNext()}">
-									<strong>Next</strong>
-								</a>		        
-					         </td>
-					         
-					      </tr>
-					    </tbody>
-					  </table>
+			<div class="container">			
+				 <div class="panel panel-default">
+				  		<div class="panel-heading">
+				  			<strong>Request Info:</strong>
+				  		</div>
+				    	<div class="panel-body">
+								<div th:replace="fragments/detail/request_detail_info :: request_detail_info"></div>		
+						</div>	  
 					
+				 </div>
 				
+				<div class="panel panel-default">
+				<div class="panel-heading">
+					<strong>Comment On Request:</strong>
 				</div>
+				    <div class="panel-body">				                  
+		                  <div class="col-sm-10">    
+		                      <label for="name" th:utext="${consultation.comments}"></label>
+		                  </div>
+					</div>	  
+				</div>
+					
+				<div class="panel panel-default">
+				<div class="panel-heading">
+					<strong>Request Related Dates:</strong>
+				</div>
+				    <div class="panel-body">
+						<div th:replace="fragments/detail/request_detail_date :: request_detail_date"></div>	
+					</div>	  
+				</div>		
+				
+				<div class="panel panel-default">
+				<div class="panel-heading">
+					<strong>Student Feedback:</strong>
+				</div>
+				    <div class="panel-body">				                  
+		                  <div th:replace="fragments/detail/request_detail_student_feedback :: request-detail-student-feedback"></div>	
+					</div>	  
+				</div>			
+				
+				<div class="panel panel-default">
+				<div class="panel-heading">
+						<strong>Student Feedback:</strong>
+				</div>
+				    <div class="panel-body">				                  
+		                  <div th:replace="fragments/detail/request_detail_consultant_feedback :: request-detail-consultant-feedback"></div>	
+					</div>	  
+				</div>
+				<div class="panel panel-default">
+				    <div class="panel-body">				                  
+		                  <div th:replace="fragments/detail/request_detail_links_to_prvious_or_next_consultation :: request_detail_links_to_prvious_or_next_consultation"></div>	
+					</div>	  
+				</div>				
+				
+			
 			</div>
 		</div>
-		<!-- end: content -->
-
 	</div>
+	
 
 	<!-- start: Mobile -->
 	<div id="mimin-mobile" class="reverse" th:include="fragments/menu :: mobileMenu"></div>

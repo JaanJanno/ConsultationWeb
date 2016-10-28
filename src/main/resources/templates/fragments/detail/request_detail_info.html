@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+</head>
+	<body>
+		<table  th:fragment="request_detail_info" class="table table-hover">
+			    <thead>
+			      <tr>
+			        <th>Fullname</th>
+			        <th>Email</th>
+			        <th>Programme</th>
+			        <th>Degree</th>
+			        <th>Text type</th>
+			        <th>Department</th>
+			        <th>Language</th>
+			        <th>Download</th>
+			        <th>Status</th>
+			      </tr>
+			    </thead>
+			    <tbody>
+			      <tr>
+			        <td> <label th:text="${consultation.name}"></label> </td>
+			      
+			        <td> <label th:text="${consultation.email}"></label> </td>
+			      
+			        <td> <label th:text="${consultation.programme}"></label> </td>
+			      
+			        <td> <label th:text="${consultation.degree}"></label> </td>
+			      
+			        <td> <label th:text="${consultation.textType}"></label> </td>
+			        
+			        <td> <label th:text="${consultation.department}"></label> </td>
+			        <td> <label th:text="${consultation.language}"></label> </td>
+			        <td> 
+			        	<a th:href="${consultation.generateUploadUrl()}" th:if="${consultation.hasFile()}">
+							<span class="glyphicon glyphicon-download-alt"></span> Download
+						</a>
+			         </td>
+			         <td>
+							 <form   id="request-form" th:if="${consultation.getStatus().toString()}==RECEIVED" th:object="${p}" th:method="post" th:action="@{/requests/{id}(id=${consultation.id})}">
+			                	<button class="btn btn-primary" type="submit">Accept</button>
+			                </form>
+			                
+			                
+							<span th:if="${consultation.getStatus().toString()}!=RECEIVED" th:text="${consultation.getStatus()}"></span>
+			         </td>
+			      </tr>
+			    </tbody>
+		</table>
+	</body>
+</html>

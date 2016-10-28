@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+</head>
+<body>
+	<div th:fragment="request_detail_links_to_prvious_or_next_consultation">
+		<div class="col-md-12 nav-wrapper">
+					  <div class="row">
+						  <div class="col-sm-6">
+						  			<a class="col-sm-4 control-label text-left" th:href="@{/requests/detail/{id}(id=${consultation.previous.id})}" th:if="${consultation.getPrevious()}">
+										<strong>Previous Session</strong>
+									</a>
+						  </div>
+						  <div class="col-sm-6"> 
+						        	<a class="col-sm-4 control-label text-right w3-right" style="float: right;"  th:href="@{/requests/detail/{id}(id=${consultation.next.id})}" th:if="${consultation.getNext()}">
+										<strong>Next Session</strong>
+									</a>
+						</div>
+					</div>	
+			
+		</div>
+	</div>
+
+</body>
+</html>
+
+
+
