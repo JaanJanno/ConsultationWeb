@@ -11,6 +11,7 @@ public interface StatisticsService {
 	 * @param time
 	 *            Options are today, week, month, all
 	 * @return {@link StatisticsDTO}
+	 * 
 	 */
 	StatisticsDTO getStatistics(String time);
 

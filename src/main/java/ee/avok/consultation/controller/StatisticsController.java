@@ -26,7 +26,7 @@ public class StatisticsController {
 	AuthService authServ;
 
 	@RequestMapping("/statistics")
-	public String statisticsPage(Model model, @CookieValue(value = "session", defaultValue = "none") String session)
+	public String statisticsPage(Model model  , @CookieValue(value = "session", defaultValue = "none") String session)
 			throws UnauthorizedException {
 		Account user = authServ.authenticateAndAddToModel(model, session, Role.ADMINISTRATOR);
 
@@ -35,7 +35,7 @@ public class StatisticsController {
 
 		model.addAttribute("stats", stats);
 		// TODO a proper HTML template path
-		return "statistics";
+		return "admin/statistics";
 	}
 
 	@ExceptionHandler(UnauthorizedException.class)

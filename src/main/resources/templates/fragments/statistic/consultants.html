@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+</head>
+<body>
+	<div th:fragment="consultants">
+			<div class="col-md-12 padding-0">                        
+	           	<div class="form-group">
+				<label for="consultants" class="col-sm-2 control-label text-right">Consultants</label>
+				<div class="col-sm-6">
+					<select class="select2-A form-control" id="consultants"  th:required="required">
+						<option value="A">A</option>
+						<option value="B">B</option>
+						<option value="C">C</option>
+						<option value="D">D</option>
+						<option value="E">E</option>
+					</select>
+				</div>
+			</div> 
+       </div>
+	</div>
+</body>
+</html>

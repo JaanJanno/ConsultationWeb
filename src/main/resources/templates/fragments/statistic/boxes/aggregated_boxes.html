@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+</head>
+<body>
+	<div th:fragment="aggregated_boxes">
+		<div class="col-md-12 padding-0">                        
+            <div class="col-md-3">
+                <div th:replace="fragments/statistic/boxes/incoming_request_box :: incoming_request_box"></div>	
+            </div>
+            <div class="col-md-3">
+           		     <div th:replace="fragments/statistic/boxes/accepted_request_box :: accepted_request_box"></div>	
+            </div>
+            <div class="col-md-3">
+           		     <div th:replace="fragments/statistic/boxes/scheduled_request_box :: scheduled_request_box"></div>	
+            </div>
+            <div class="col-md-3">
+           		     <div th:replace="fragments/statistic/boxes/completed_request_box :: completed_request_box"></div>	
+            </div>
+       </div>
+	</div>
+</body>
+</html>
