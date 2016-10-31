@@ -54,8 +54,10 @@
 											<td th:text="${consultation.id}"></td>
 											<td th:text="${consultation.name}"></td>
 											<td th:text="${consultation.consultantName}"></td>
-											<td></td>
-											<td></td>
+											<td th:if="${consultation.studentFeedback}" th:text="Yes">Yes</td>
+											<td th:if="${!consultation.studentFeedback}" th:text="No">No</td>
+											<td th:if="${consultation.consultantFeedback}" th:text="Yes">Yes</td>
+											<td th:if="${!consultation.consultantFeedback}" th:text="No">No</td>
 											
 											<td><a th:href="@{/requests/detail/{id}(id=${consultation.id})}"><button
 														type="button" class="btn btn-default btn-xs" value="primary">Details</button></a></td>
