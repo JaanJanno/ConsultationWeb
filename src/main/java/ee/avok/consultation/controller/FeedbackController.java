@@ -40,7 +40,7 @@ public class FeedbackController {
 		feedServ.verifyStudentFeedbackUID(id, uid); // Check if UID matches
 													// parameter given in e-mail
 													// for authentication.
-		model.addAttribute("feedback", consServ.getStudentFeedbackFor(id));
+		model.addAttribute("feedback", new StudentFeedback());
 		return "general/feedback";
 	}
 
