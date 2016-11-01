@@ -6,6 +6,6 @@ import ee.avok.consultation.domain.model.Upload;
 
 public interface UploadRepository extends CrudRepository<Upload, Integer> {
 	
-	Upload findById(Integer id);
+	Upload findById(int id);
 
 }

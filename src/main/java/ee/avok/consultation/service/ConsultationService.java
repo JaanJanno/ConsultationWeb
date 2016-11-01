@@ -7,6 +7,7 @@ import org.springframework.web.multipart.MultipartFile;
 import ee.avok.consultation.auth.domain.model.Account;
 import ee.avok.consultation.domain.model.ConsultationRequest;
 import ee.avok.consultation.domain.model.ConsultationStatus;
+import ee.avok.consultation.domain.model.StudentFeedback;
 import ee.avok.consultation.dto.CompletedDTO;
 
 public interface ConsultationService {
@@ -43,5 +44,7 @@ public interface ConsultationService {
 	ConsultationRequest findOne(int id);
 
 	void setAccepted(int id, Account consultant);
+
+	StudentFeedback getStudentFeedbackFor(int id);
 
 }

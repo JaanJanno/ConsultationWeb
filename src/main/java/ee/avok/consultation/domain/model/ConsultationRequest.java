@@ -71,6 +71,9 @@ public class ConsultationRequest {
 	private ConsultationRequest previous;
 	@OneToOne(mappedBy = "previous")
 	private ConsultationRequest next;
+	
+	@OneToOne
+	private StudentFeedback studentFeedback;
 
 	public String generateUploadUrl() {
 		return "/uploads/" + Integer.toString(upload.getId()) + "/" + upload.getFilename();

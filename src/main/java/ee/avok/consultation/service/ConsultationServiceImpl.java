@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,8 +13,10 @@ import org.springframework.web.multipart.MultipartFile;
 import ee.avok.consultation.auth.domain.model.Account;
 import ee.avok.consultation.domain.model.ConsultationRequest;
 import ee.avok.consultation.domain.model.ConsultationStatus;
+import ee.avok.consultation.domain.model.StudentFeedback;
 import ee.avok.consultation.domain.model.Upload;
 import ee.avok.consultation.domain.repository.ConsultationRequestRepository;
+import ee.avok.consultation.domain.repository.StudentFeedbackRepository;
 import ee.avok.consultation.domain.repository.UploadRepository;
 import ee.avok.consultation.dto.CompletedDTO;
 
@@ -25,10 +28,13 @@ public class ConsultationServiceImpl implements ConsultationService {
 
 	@Autowired
 	UploadRepository upRepo;
+	
+	@Autowired
+	StudentFeedbackRepository studentFeedbackRepo;
 
 	@Override
 	public void createConsultation(ConsultationRequest conReq) {
-
+		addStudentFeedbackObject(conReq);
 		conReq.setStatus(ConsultationStatus.RECEIVED);
 		if (conReq.getUpload() != null)
 			upRepo.save(conReq.getUpload());
@@ -76,7 +82,7 @@ public class ConsultationServiceImpl implements ConsultationService {
 
 	@Override
 	public void createConsultation(ConsultationRequest conReq, MultipartFile file) {
-
+		addStudentFeedbackObject(conReq);
 		conReq.setStatus(ConsultationStatus.RECEIVED);
 		conReq.setReceivedDate(new Date());
 
@@ -125,8 +131,16 @@ public class ConsultationServiceImpl implements ConsultationService {
 		return dtos;
 	}
 
+	private void addStudentFeedbackObject(ConsultationRequest req) {
+		StudentFeedback feedback = new StudentFeedback();
+		feedback.setUid(UUID.randomUUID().toString());
+		feedback = studentFeedbackRepo.save(feedback);
+		req.setStudentFeedback(feedback);
+	}
 
-
-
+	@Override
+	public StudentFeedback getStudentFeedbackFor(int id) {
+		return conReqRepo.findOne(id).getStudentFeedback();
+	}
 
 }

@@ -1,5 +1,20 @@
 [
 	{
+		"_class": "ee.avok.consultation.domain.model.StudentFeedback",
+		"id": 1,
+		"uid": "asdfg"
+	},
+	{
+		"_class": "ee.avok.consultation.domain.model.StudentFeedback",
+		"id": 2,
+		"uid": "asdfg"
+	},
+	{
+		"_class": "ee.avok.consultation.domain.model.StudentFeedback",
+		"id": 3,
+		"uid": "asdfg"
+	},
+	{
 		"_class": "ee.avok.consultation.auth.domain.model.Account",
 		"id": 1,
 		"username": "testy",
@@ -37,7 +52,8 @@
 		"meetingPlace": "J. Liivi 2",
 		"meetingDate": "2016-10-22T16:00:00.000Z",
 		"completedDate": "2016-10-22T20:31:34.003Z",
-		"consultant": 1
+		"consultant": 1,
+		"studentFeedback": 1
 	},
 	{
 		"_class": "ee.avok.consultation.domain.model.ConsultationRequest",
@@ -52,7 +68,8 @@
 		"degree": "1st year Bachelor's",
 		"status": "RECEIVED",
 		"receivedDate": "2016-10-21T13:49:28.243Z",
-		"previous": 1
+		"previous": 1,
+		"studentFeedback": 2
 	},
 	{
 		"_class": "ee.avok.consultation.domain.model.ConsultationRequest",
@@ -68,6 +85,8 @@
 		"status": "ACCEPTED",
 		"receivedDate": "2016-10-21T13:49:28.243Z",
 		"acceptedDate": "2016-10-21T14:28:28.243Z",
-		"consultant": 1
+		"consultant": 1,
+		"studentFeedback": 3
 	}
+			
 ]

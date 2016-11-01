@@ -126,6 +126,7 @@ public class RequestController {
 		authServ.authenticateAndAddToModel(model, session, Role.CONSULTANT);
 
 		LOG.info("Consultation request with id {} is sent to show the detail", id);
+		LOG.info("Student feedback uid is {}", conServ.findOne(id).getStudentFeedback().getUid());
 		model.addAttribute("consultation", conServ.findOne(id));
 		return "shared-between-consultant-and-admin/detail";
 	}
