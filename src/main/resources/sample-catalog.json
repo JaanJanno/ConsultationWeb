@@ -6,7 +6,8 @@
 		"name": "Testy Mc'Testface",
 		"email": "testy@testface.ee",
 		"role": "CONSULTANT",
-		"password": "testy"
+		"password": "testy",
+		"active": true
 	},
 		{
 		"_class": "ee.avok.consultation.auth.domain.model.Account",
@@ -15,7 +16,8 @@
 		"name": "Admin Mc'Adminface",
 		"email": "admin@admin.ee",
 		"role": "ADMINISTRATOR",
-		"password": "admin"
+		"password": "admin",
+		"active": true
 	},
 	{
 		"_class": "ee.avok.consultation.domain.model.ConsultationRequest",

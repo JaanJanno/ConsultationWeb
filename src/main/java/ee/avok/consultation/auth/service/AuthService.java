@@ -58,6 +58,10 @@ public class AuthService {
 		}
 
 		Account user = sessionMap.get(session);
+		
+		if (!user.isActive()) {
+			throw new UnauthorizedException("Deactivated account.");
+		}
 
 		if (user.getRole() == Role.ADMINISTRATOR) {
 			return user;

@@ -27,6 +27,8 @@ public class Account {
 	private Role role;
 	@Column
 	private String password;
+	@Column
+	private boolean active;
 
 	public Account() {
 	}

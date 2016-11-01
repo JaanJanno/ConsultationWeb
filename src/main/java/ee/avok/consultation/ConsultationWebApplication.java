@@ -13,15 +13,5 @@ public class ConsultationWebApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(ConsultationWebApplication.class, args);
 	}
-/*
-	@Bean
-	public WebMvcConfigurer corsConfigurer() {
-		return new WebMvcConfigurerAdapter() {
-			@Override
-			public void addCorsMappings(CorsRegistry registry) {
-				registry.addMapping("/**");
-			}
-		};
-	} */
 	
 }
