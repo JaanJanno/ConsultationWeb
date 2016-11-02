@@ -46,8 +46,8 @@ The following can be used to log in to the application for testing purposes.
 4. Server should now be accessible from `localhost:8080`. 
 5. `mvn eclipse:eclipse` will generate the files to import to Eclipse. After that you can `import existing projects`.
 
-*important:
-We have used lombock to generate boilerplate codes like setters and getters and constructors. The below link is the procedure to install and use lombock: https://projectlombok.org/
+##### Important:
+We have used lombok to generate boilerplate codes like setters and getters and constructors. The below link is the procedure to install and use lombok: https://projectlombok.org/
 
 To run the server you only need `mvn spring-boot:run`
 
