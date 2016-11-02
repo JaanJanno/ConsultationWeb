@@ -6,37 +6,42 @@
 	<div th:fragment="request-detail-consultant-feedback">
 		<div class="col-md-12">
 			<div>
-				<label  class="col-sm-4 control-label text-left">Element of discussion</label>
+				<label  class="col-sm-6 control-label text-left">Element of discussion</label>
 				<div class="col-sm-6">
-							<label for="name" class="control-label text-right">Element of discussion</label>
+						<label  class="control-label text-right" th:text="${consultation.getConsultantFeedback().discussionElement}" 
+										th:if="${consultation.getConsultantFeedback().discussionElement!=null}"></label>
 				</div>                     
 			</div>
 						
 			<div class="form-group">
-				<label for="name" class="col-sm-4 control-label text-left">What materials did you work with?</label>
+				<label class="col-sm-6 control-label text-left">What materials did you work with?</label>
 					<div class="col-sm-6">
-							<label  class="control-label text-right">Element of discussion</label>
+						<label  class="control-label text-right" th:text="${consultation.getConsultantFeedback().discussedMaterial}" 
+								th:if="${consultation.getConsultantFeedback().discussedMaterial!=null}"></label>
 					</div>                     
 			</div>
 						
 			<div class="form-group">
-				<label for="name" class="col-sm-4 control-label text-left">What did you cover?</label>
+				<label class="col-sm-6 control-label text-left">What did you cover?</label>
 					<div class="col-sm-6">
-								<label  class="control-label text-right">Element of discussion</label>
+						<label  class="control-label text-right" th:text="${consultation.getConsultantFeedback().coveredIssues}" 
+								th:if="${consultation.getConsultantFeedback().coveredIssues!=null}"></label>
 					</div>                     
 			</div>
 						
 			<div class="form-group">
-				<label for="language" class="col-sm-4 control-label text-left">New consultation?</label>
+				<label class="col-sm-6 control-label text-left">New consultation?</label>
 						<div class="col-sm-6">
-								<label  class="control-label text-right">Element of discussion</label>
+								<label  class="control-label text-right" th:text="${consultation.getConsultantFeedback().suggestedNewConsultation}" 
+								th:if="${consultation.getConsultantFeedback().suggestedNewConsultation!=null}"></label>
 						</div>
 			</div>														
 					
 			<div class="form-group">
-				<label for="language" class="col-sm-4 control-label text-left">Summary</label>
+				<label class="col-sm-6 control-label text-left">Summary</label>
 						<div class="col-sm-6">
-								<label  class="control-label text-right">Element of discussion</label>
+								<label  class="control-label text-right" th:text="${consultation.getConsultantFeedback().summary}" 
+								th:if="${consultation.getConsultantFeedback().summary!=null}"></label>
 						</div>
 			</div>	
 

@@ -7,37 +7,41 @@
 		<div class="col-md-12 nav-wrapper">
 					<div class="col-md-12">
 			<div>
-				<label  class="col-sm-4 control-label text-left">Have you had peer consultation before?</label>
+				<label  class="col-sm-6 control-label text-left">Have you had peer consultation before?</label>
 				<div class="col-sm-6">
-							<label for="name" class="control-label text-right">Element of discussion</label>
+							<label  class="control-label text-right" th:text="Yes" th:if="${consultation.getStudentFeedback().firstConsultation==true}"></label>
+							<label  class="control-label text-right" th:text="No" th:if="${consultation.getStudentFeedback().firstConsultation!=true}"></label>
 				</div>                     
 			</div>
 						
 			<div class="form-group">
-				<label for="name" class="col-sm-4 control-label text-left">Was the consultation useful?</label>
+				<label for="name" class="col-sm-6 control-label text-left">Was the consultation useful?</label>
 					<div class="col-sm-6">
-							<label  class="control-label text-right">Element of discussion</label>
+							<label  class="control-label text-right" th:text="Yes" th:if="${consultation.getStudentFeedback().useful==true}"></label>
+							<label  class="control-label text-right" th:text="No" th:if="${consultation.getStudentFeedback().useful!=true}"></label>
 					</div>                     
 			</div>
 						
 			<div class="form-group">
-				<label for="name" class="col-sm-5 control-label text-left">Did the consultant provide support for what you needed?</label>
+				<label for="name" class="col-sm-6 control-label text-left">Did the consultant provide support for what you needed?</label>
 					<div class="col-sm-6">
-								<label  class="control-label text-right">Element of discussion</label>
+							<label  class="control-label text-right" th:text="Yes" th:if="${consultation.getStudentFeedback().providedSupport==true}"></label>
+							<label  class="control-label text-right" th:text="No" th:if="${consultation.getStudentFeedback().providedSupport!=true}"></label>
 					</div>                     
 			</div>
 						
 			<div class="form-group">
-				<label for="language" class="col-sm-4 control-label text-left">Will you back again?</label>
+				<label for="language" class="col-sm-6 control-label text-left">Will you back again?</label>
 						<div class="col-sm-6">
-								<label  class="control-label text-right">Element of discussion</label>
+							<label  class="control-label text-right" th:text="Yes" th:if="${consultation.getStudentFeedback().comingBack==true}"></label>
+							<label  class="control-label text-right" th:text="No" th:if="${consultation.getStudentFeedback().comingBack!=true}"></label>
 						</div>
 			</div>														
 					
 			<div class="form-group">
-				<label for="language" class="col-sm-4 control-label text-left">Comments:</label>
+				<label for="language" class="col-sm-6 control-label text-left">Comments:</label>
 						<div class="col-sm-6">
-								<label  class="control-label text-right">Element of discussion</label>
+							<label  class="control-label text-left" th:text="${consultation.getStudentFeedback().comments}" th:if="${consultation.getStudentFeedback().comments!=true}"></label>
 						</div>
 			</div>	
 

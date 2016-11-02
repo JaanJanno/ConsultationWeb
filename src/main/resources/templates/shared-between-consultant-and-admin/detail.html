@@ -72,7 +72,7 @@ $(document).ready(function(){
 					</div>	  
 				</div>		
 				
-				<div class="panel panel-default">
+				<div class="panel panel-default" th:if="${consultation.getStudentFeedback()!=null}">
 				<div class="panel-heading">
 					<strong>Student Feedback:</strong>
 				</div>
@@ -81,7 +81,7 @@ $(document).ready(function(){
 					</div>	  
 				</div>			
 				
-				<div class="panel panel-default">
+				<div class="panel panel-default" th:if="${consultation.getConsultantFeedback()!=null}">
 				<div class="panel-heading">
 						<strong>Student Feedback:</strong>
 				</div>
