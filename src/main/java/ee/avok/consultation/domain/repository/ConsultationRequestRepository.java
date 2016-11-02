@@ -26,4 +26,9 @@ public interface ConsultationRequestRepository extends CrudRepository<Consultati
 
 	@Query("select count(*) from ConsultationRequest where completedDate != null")
 	int countAllCompleted();
+
+	List<ConsultationRequest> findByMeetingDateNotNull();
+
+	List<ConsultationRequest> findByConsultantAndMeetingDateNotNull(Account consultant);
+
 }
