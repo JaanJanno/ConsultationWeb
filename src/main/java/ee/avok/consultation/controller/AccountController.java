@@ -6,6 +6,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 import ee.avok.consultation.auth.domain.model.Account;
 import ee.avok.consultation.auth.domain.model.Role;
@@ -23,7 +24,7 @@ public class AccountController {
 	@Autowired
 	AccountService accountService;
 
-	@RequestMapping(path = "/account/edit")
+	@RequestMapping(value = "/account/edit", method = RequestMethod.GET)
 	public String editAccount(@CookieValue(value = "session", defaultValue = "none") String session, Model model)
 			throws UnauthorizedException {
 		Account user = authServ.authenticateAndAddToModel(model, session, Role.CONSULTANT);
@@ -33,7 +34,7 @@ public class AccountController {
 		
 	}
 
-	@RequestMapping(path = "/accounts/manage")
+	@RequestMapping(value = "/accounts/manage", method = RequestMethod.GET)
 	public String manageAccounts(Model model, @CookieValue(value = "session", defaultValue = "none") String session) throws UnauthorizedException {
 		authServ.authenticateAndAddToModel(model, session, Role.ADMINISTRATOR);
 		
