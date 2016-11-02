@@ -6,6 +6,6 @@ import ee.avok.consultation.domain.model.StudentFeedback;
 
 public interface StudentFeedbackRepository extends CrudRepository<StudentFeedback, Integer> {
 	
-	StudentFeedback findById(Integer id);
+	StudentFeedback findById(int id);
 
 }

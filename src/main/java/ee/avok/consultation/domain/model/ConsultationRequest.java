@@ -74,6 +74,8 @@ public class ConsultationRequest {
 	
 	@OneToOne
 	private StudentFeedback studentFeedback;
+	@OneToOne
+	private ConsultantFeedback consultantFeedback;
 
 	public String generateUploadUrl() {
 		return "/uploads/" + Integer.toString(upload.getId()) + "/" + upload.getFilename();

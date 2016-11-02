@@ -3,9 +3,12 @@ package ee.avok.consultation.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import ee.avok.consultation.auth.domain.model.Account;
 import ee.avok.consultation.auth.domain.model.UnauthorizedException;
+import ee.avok.consultation.domain.model.ConsultantFeedback;
 import ee.avok.consultation.domain.model.ConsultationRequest;
 import ee.avok.consultation.domain.model.StudentFeedback;
+import ee.avok.consultation.domain.repository.ConsultantFeedbackRepository;
 import ee.avok.consultation.domain.repository.ConsultationRequestRepository;
 import ee.avok.consultation.domain.repository.StudentFeedbackRepository;
 
@@ -14,6 +17,8 @@ public class FeedbackService {
 
 	@Autowired
 	StudentFeedbackRepository studentFeedbackRepo;
+	@Autowired
+	ConsultantFeedbackRepository consultantFeedbackRepo;
 	@Autowired
 	ConsultationRequestRepository consultationRepo;
 
@@ -33,6 +38,23 @@ public class FeedbackService {
 		feedback.setComingBack(feedbackForm.getComingBack());
 		feedback.setComments(feedbackForm.getComments());
 		studentFeedbackRepo.save(feedback);
+	}
+	
+	public void verifyConsultantFeedbackUser(Account user, Integer id) throws UnauthorizedException {
+		ConsultationRequest req = consultationRepo.findOne(id);
+		if(req.getConsultantFeedback() != null) {
+			throw new UnauthorizedException("Already has feedback.");
+		}
+		if(!req.getConsultant().equals(user)) {
+			throw new UnauthorizedException("Incorrect user.");
+		}
+	}
+	
+	public void submitConsultantFeedback(int id, ConsultantFeedback feedbackForm) {
+		ConsultationRequest req = consultationRepo.findOne(id);
+		feedbackForm = consultantFeedbackRepo.save(feedbackForm);
+		req.setConsultantFeedback(feedbackForm);
+		consultationRepo.save(req);
 	}
 
 }

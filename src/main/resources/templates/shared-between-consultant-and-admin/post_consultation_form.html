@@ -5,8 +5,10 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <title>Consultation Report</title>
 <object th:replace="fragments/util :: standardCSS"></object>
-<link rel="stylesheet" type="text/css" th:href="@{/webjars/summernote/0.8.1/dist/summernote.css}" />
-<link rel="stylesheet" type="text/css" th:href="@{/webjars/select2/4.0.2/dist/css/select2.min.css}" />
+<link rel="stylesheet" type="text/css"
+	th:href="@{/webjars/summernote/0.8.1/dist/summernote.css}" />
+<link rel="stylesheet" type="text/css"
+	th:href="@{/webjars/select2/4.0.2/dist/css/select2.min.css}" />
 </head>
 
 <body id="mimin" class="dashboard">
@@ -27,65 +29,78 @@
 				<div class="panel-body">
 					<div class="col-md-12">
 						<h3 class="animated fadeInLeft">Consultation Report</h3>
-						<p class="animated fadeInDown">
-							Please fill the below form. 
-						</p>
+						<p class="animated fadeInDown">Please fill the below form.</p>
 					</div>
 				</div>
 			</div>
 
 			<div class="col-md-12" style="padding: 20px;">
-				<form  id="reportForm" action="#" th:action="@{/report}" th:object="${postConsultationReport}" method="post" enctype="multipart/form-data"
-					class="form-horizontal" content="text/html; charset=UTF-8">
-						<div class="form-group">
-							<label for="name" class="col-sm-2 control-label text-right">Element of discussion</label>
-							<div class="col-sm-6">
-								<input type="text" class="form-control"   placeholder="Essay, Article, Thesis, etc."
-									th:field="*{discussion}" th:required="required" id="discussion"/>
-							</div>                     
-						</div>
-						
-						<div class="form-group">
-							<label for="name" class="col-sm-2 control-label text-right">What materials did you work with?</label>
-							<div class="col-sm-6">
-								<input type="text" class="form-control"   placeholder="Digital text, Paper text, etc."
-									th:field="*{disscussedMaterial}" th:required="required" id="disscussedMaterial"/>
-							</div>                     
-						</div>
-						
-						<div class="form-group">
-							<label for="name" class="col-sm-2 control-label text-right">What did you cover?</label>
-							<div class="col-sm-6">
-								<input type="text" class="form-control"   placeholder="Propositions, Vowel, etc."
-									th:field="*{coveredIssues}" th:required="required" id="coveredIssues"/>
-							</div>                     
-						</div>
-						
-						<div class="form-group">
-						<label for="language" class="col-sm-2 control-label text-right">New consultation?</label>
+				<form id="reportForm" action="#" th:action="@{#}"
+					th:object="${feedback}" method="post"
+					enctype="multipart/form-data" class="form-horizontal"
+					content="text/html; charset=UTF-8">
+					<div class="form-group">
+						<label for="name" class="col-sm-2 control-label text-right">Element
+							of discussion</label>
 						<div class="col-sm-6">
-								<select class="select2-A form-control" id="language" th:field="*{suggestedNewConsultation}" th:required="required">
-									<option value="Yes, with same consultant">Yes, with same consultant</option>
-									<option value="Yes, with another consultant">Yes, with another consultant</option>
-									<option value="No">No</option>
-								</select>
-							</div>
-						</div>														
-						
-						<div class="form-group">
-							<label for="summary" class="col-sm-2 control-label text-right">Summary:</label>
-							<div class="col-sm-6">
-								<textarea id="summernote" th:field="*{summary}" class="summernote "></textarea>
-							</div>
+							<input type="text" class="form-control"
+								placeholder="Essay, Article, Thesis, etc."
+								th:field="*{discussionElement}" th:required="required" id="discussion" />
 						</div>
-					
+					</div>
+
+					<div class="form-group">
+						<label for="name" class="col-sm-2 control-label text-right">What
+							materials did you work with?</label>
+						<div class="col-sm-6">
+							<input type="text" class="form-control"
+								placeholder="Digital text, Paper text, etc."
+								th:field="*{discussedMaterial}" th:required="required"
+								id="disscussedMaterial" />
+						</div>
+					</div>
+
+					<div class="form-group">
+						<label for="name" class="col-sm-2 control-label text-right">What
+							did you cover?</label>
+						<div class="col-sm-6">
+							<input type="text" class="form-control"
+								placeholder="Propositions, Vowel, etc."
+								th:field="*{coveredIssues}" th:required="required"
+								id="coveredIssues" />
+						</div>
+					</div>
+
+					<div class="form-group">
+						<label for="summary" class="col-sm-2 control-label text-right">Summary:</label>
+						<div class="col-sm-6">
+							<textarea id="summernote" th:field="*{summary}"
+								class="summernote "></textarea>
+						</div>
+					</div>
+
+					<div class="form-group">
+						<label for="language" class="col-sm-2 control-label text-right">New
+							consultation?</label>
+						<div class="col-sm-6">
+							<select class="select2-A form-control" id="language"
+								th:field="*{suggestedNewConsultation}" th:required="required">
+								<option value="WITH_ME">Yes, with me</option>
+								<option value="WITH_NEW">Yes, with
+									new consultant</option>
+								<option value="NO">No</option>
+							</select>
+						</div>
+					</div>
+
 					<div class="form-group">
 						<div class="col-sm-offset-2 col-sm-10">
-							<input id="submitForm" type="submit" value="Submit Report" class="btn btn-primary" />
+							<input id="submitForm" type="submit" value="Submit Report"
+								class="btn btn-primary" />
 						</div>
 					</div>
 				</form>
-			
+
 			</div>
 		</div>
 		<!-- end: content -->
@@ -94,8 +109,10 @@
 
 
 	<!-- start: Mobile -->
-	<div id="mimin-mobile" class="reverse" th:include="fragments/menu :: mobileMenu"></div>
-	<button id="mimin-mobile-menu-opener" class="animated rubberBand btn btn-circle btn-danger">
+	<div id="mimin-mobile" class="reverse"
+		th:include="fragments/menu :: mobileMenu"></div>
+	<button id="mimin-mobile-menu-opener"
+		class="animated rubberBand btn btn-circle btn-danger">
 		<span class="fa fa-bars"></span>
 	</button>
 	<!-- end: Mobile -->
@@ -106,18 +123,18 @@
 	<script th:src="@{/webjars/select2/4.0.2/dist/js/select2.full.min.js}"></script>
 
 	<script th:inline="javascript">
-	$(document).ready(function() {
-		$('#summernote').summernote({
-			height : 300, // set editor height
-			minHeight : 300
-		// set minimum height of editor
+		$(document).ready(function() {
+			$('#summernote').summernote({
+				height : 300, // set editor height
+				minHeight : 300
+			// set minimum height of editor
+			});
+
+			$('#reportForm').submit(function() {
+				alert("Thanks for your report.");
+			});
+
 		});
-		
-		$('#reportForm').submit(function(){
-	        alert("Thanks for your report.");
-	    });	
-	
-	});		
 	</script>
 </body>
 </html>

@@ -11,11 +11,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import ee.avok.consultation.auth.domain.model.Account;
 import ee.avok.consultation.auth.domain.model.Role;
 import ee.avok.consultation.auth.domain.model.UnauthorizedException;
 import ee.avok.consultation.auth.service.AuthService;
+import ee.avok.consultation.domain.model.ConsultantFeedback;
 import ee.avok.consultation.domain.model.StudentFeedback;
-import ee.avok.consultation.dto.PostConsultationForm;
 import ee.avok.consultation.service.ConsultationService;
 import ee.avok.consultation.service.FeedbackService;
 
@@ -55,17 +56,28 @@ public class FeedbackController {
 
 	}
 
-	@RequestMapping(value = "/report")
-	public String createConsultationReportForm(Model model,
+	@RequestMapping(value = "/requests/{id}/consultantfeedback")
+	public String consultantFeedbackForm(Model model, @PathVariable int id,
 			@CookieValue(value = "session", defaultValue = "none") String session) throws UnauthorizedException {
-		authServ.authenticateAndAddToModel(model, session, Role.CONSULTANT);
-
-		model.addAttribute("postConsultationReport", new PostConsultationForm());
+		Account user = authServ.authenticateAndAddToModel(model, session, Role.CONSULTANT);
+		feedServ.verifyConsultantFeedbackUser(user, id);
+		model.addAttribute("feedback", new ConsultantFeedback());
 		return "shared-between-consultant-and-admin/post_consultation_form";
+	}
+
+	@RequestMapping(value = "/requests/{id}/consultantfeedback", method = RequestMethod.POST)
+	public String submitConsultantFeedbackForm(@ModelAttribute ConsultantFeedback feedback, Model model,
+			@PathVariable int id, @CookieValue(value = "session", defaultValue = "none") String session) throws UnauthorizedException {
+		Account user = authServ.authenticateAndAddToModel(model, session, Role.CONSULTANT);
+		feedServ.verifyConsultantFeedbackUser(user, id);
+		feedServ.submitConsultantFeedback(id, feedback);
+		return "redirect:" + "/requests/completed";
+
 	}
 
 	@ExceptionHandler(UnauthorizedException.class)
 	public String handleNotFound(Exception exc) {
 		return "redirect:" + "/";
 	}
+	
 }

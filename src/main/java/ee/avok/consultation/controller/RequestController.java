@@ -119,8 +119,12 @@ public class RequestController {
 		LOG.info("Consultation request with id {} is sent to show the detail", id);
 		LOG.info("Student feedback uid is {}", conServ.findOne(id).getStudentFeedback().getUid());
 		model.addAttribute("consultation", conServ.findOne(id));
-		model.addAttribute("feedback", conServ.getStudentFeedbackFor(id));
-		LOG.info("Feedback is {}", conServ.findOne(id).getStudentFeedback().toString());
+		model.addAttribute("studentfeedback", conServ.getStudentFeedbackFor(id));
+		model.addAttribute("consultantfeedback", conServ.getConsultantFeedbackFor(id));
+		LOG.info("Student feedback is {}", conServ.findOne(id).getStudentFeedback().toString());
+		if(conServ.findOne(id).getConsultantFeedback() != null)
+			LOG.info("Consultant feedback is {}", conServ.findOne(id).getConsultantFeedback().toString());
+		
 		return "shared-between-consultant-and-admin/detail";
 	}
 

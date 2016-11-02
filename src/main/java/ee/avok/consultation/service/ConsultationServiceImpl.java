@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import ee.avok.consultation.auth.domain.model.Account;
+import ee.avok.consultation.domain.model.ConsultantFeedback;
 import ee.avok.consultation.domain.model.ConsultationRequest;
 import ee.avok.consultation.domain.model.ConsultationStatus;
 import ee.avok.consultation.domain.model.StudentFeedback;
@@ -141,6 +142,11 @@ public class ConsultationServiceImpl implements ConsultationService {
 	@Override
 	public StudentFeedback getStudentFeedbackFor(int id) {
 		return conReqRepo.findOne(id).getStudentFeedback();
+	}
+
+	@Override
+	public ConsultantFeedback getConsultantFeedbackFor(int id) {
+		return conReqRepo.findOne(id).getConsultantFeedback();
 	}
 
 }
