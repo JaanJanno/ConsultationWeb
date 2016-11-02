@@ -60,16 +60,7 @@ public class RequestController {
 	 * Requests by status
 	 */
 
-	/**
-	 * Returns the default requests view of requests with status received
-	 */
-	@RequestMapping("/requests")
-	public String requestsDefault(Model model, @CookieValue(value = "session", defaultValue = "none") String session)
-			throws UnauthorizedException {
-		return requestsReceived(model, session);
-	}
-
-	@RequestMapping(value = "/requests/received", method = RequestMethod.GET)
+	@RequestMapping(value = { "/requests", "/requests/received" }, method = RequestMethod.GET)
 	public String requestsReceived(Model model, @CookieValue(value = "session", defaultValue = "none") String session)
 			throws UnauthorizedException {
 		authServ.authenticateAndAddToModel(model, session, Role.CONSULTANT);
@@ -139,12 +130,11 @@ public class RequestController {
 
 	@RequestMapping(value = "/requests/admin/completed")
 	public String getCompletedRequestsList(Model model,
-			@CookieValue(value = "session", defaultValue = "none") String session)
-			throws UnauthorizedException {
+			@CookieValue(value = "session", defaultValue = "none") String session) throws UnauthorizedException {
 		authServ.authenticateAndAddToModel(model, session, Role.ADMINISTRATOR);
 
 		List<CompletedDTO> completedRequests = conServ.findCompleted();
-		
+
 		LOG.info("Admin view for requests. Displayed: {}, status completed", completedRequests.size());
 		model.addAttribute("consultations", completedRequests);
 		return "admin/completed_requests";
