@@ -1,5 +1,8 @@
 package ee.avok.consultation.service;
 
+import java.util.List;
+
+import ee.avok.consultation.auth.domain.model.Account;
 import ee.avok.consultation.domain.model.ConsultationRequest;
 import ee.avok.consultation.dto.StatisticsDTO;
 
@@ -22,4 +25,20 @@ public interface StatisticsService {
 	 * @return {@link StatisticsDTO}
 	 */
 	StatisticsDTO statsAll();
+
+	/**
+	 * Finds all {@link ConsultationRequest} where the meeting date has been
+	 * set.
+	 * 
+	 */
+	List<CalendarDTO> getAllMeetings();
+
+	/**
+	 * Finds all {@link ConsultationRequest} where the meeting date has been set
+	 * for a certain user.
+	 * 
+	 * @param userId
+	 *            {@link Account#getId()}
+	 */
+	List<CalendarDTO> getMeetings(int userId);
 }

@@ -92,6 +92,6 @@ public class ConsultationRequestRepositoryTest {
 
 	@Test
 	public void findByConsultantAndMeetingDateNotNull() {
-		assertEquals(1, conReqRepo.findByConsultantAndMeetingDateNotNull(consultant).size());
+		assertEquals(1, conReqRepo.findByConsultantIdAndMeetingDateNotNull(consultant.getId()).size());
 	}
 }

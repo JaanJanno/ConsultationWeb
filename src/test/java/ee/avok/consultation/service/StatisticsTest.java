@@ -3,6 +3,7 @@ package ee.avok.consultation.service;
 import static org.junit.Assert.assertEquals;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.transaction.Transactional;
 
@@ -18,6 +19,8 @@ import org.springframework.test.context.support.DependencyInjectionTestExecution
 import org.springframework.test.context.transaction.TransactionalTestExecutionListener;
 
 import ee.avok.consultation.ConsultationWebApplication;
+import ee.avok.consultation.auth.domain.model.Account;
+import ee.avok.consultation.auth.domain.repository.AccountRepository;
 import ee.avok.consultation.domain.model.ConsultationRequest;
 import ee.avok.consultation.domain.repository.ConsultationRequestRepository;
 import ee.avok.consultation.dto.StatisticsDTO;
@@ -32,17 +35,31 @@ public class StatisticsTest {
 	ConsultationRequestRepository conReqRepo;
 	@Autowired
 	StatisticsService statServ;
+	@Autowired
+	AccountRepository accountRepo;
+
+	ConsultationRequest con1;
+	ConsultationRequest con2;
+	private Date meetingDate;
 
 	@Before
 	public void setup() {
 		conReqRepo.deleteAll();
 
-		ConsultationRequest con1 = new ConsultationRequest();
+		Account consultant = new Account();
+		accountRepo.save(consultant);
+
+		con1 = new ConsultationRequest();
 		con1.setReceivedDate(new Date());
-		ConsultationRequest con2 = new ConsultationRequest();
+		con2 = new ConsultationRequest();
 		con2.setReceivedDate(new Date());
 		con2.setAcceptedDate(new Date());
 		con2.setScheduledDate(new Date());
+		con2.setConsultant(consultant);
+
+		meetingDate = new Date();
+		con2.setMeetingDate(meetingDate);
+		con2.setMeetingPlace("Tartu");
 		conReqRepo.save(con1);
 		conReqRepo.save(con2);
 	}
@@ -63,6 +80,30 @@ public class StatisticsTest {
 		assertEquals(1, stats.getAccepted());
 		assertEquals(1, stats.getScheduled());
 		assertEquals(0, stats.getCompleted());
+	}
+
+	@Test
+	public void getAllMeetings() {
+		List<CalendarDTO> events = statServ.getAllMeetings();
+		assertEquals(1, events.size());
+
+		CalendarDTO ev = events.get(0);
+		assertEquals(con2.getId(), ev.getId());
+		assertEquals(con2.getMeetingDate(), ev.getDate());
+		assertEquals("/requests/detail/" + con2.getId(), ev.getUrl());
+
+	}
+
+	@Test
+	public void getMeetingsForConsultant() {
+		List<CalendarDTO> events = statServ.getMeetings(con2.getConsultant().getId());
+		assertEquals(1, events.size());
+
+		CalendarDTO ev = events.get(0);
+		assertEquals(con2.getId(), ev.getId());
+		assertEquals(con2.getMeetingDate(), ev.getDate());
+		assertEquals("/requests/detail/" + con2.getId(), ev.getUrl());
+
 	}
 
 }

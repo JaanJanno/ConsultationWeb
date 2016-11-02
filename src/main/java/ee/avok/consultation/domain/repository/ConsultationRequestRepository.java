@@ -29,6 +29,6 @@ public interface ConsultationRequestRepository extends CrudRepository<Consultati
 
 	List<ConsultationRequest> findByMeetingDateNotNull();
 
-	List<ConsultationRequest> findByConsultantAndMeetingDateNotNull(Account consultant);
+	List<ConsultationRequest> findByConsultantIdAndMeetingDateNotNull(int consultantId);
 
 }
