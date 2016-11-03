@@ -110,4 +110,9 @@ public class AuthService {
 		return user;
 	}
 
+	public boolean checkPassword(int userId, String password) {
+		Account user = accountRepo.findById(userId);
+		return user.getPassword().equals(password);
+	}
+
 }
