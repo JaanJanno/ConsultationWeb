@@ -8,13 +8,13 @@
 		<div class="panel box-v4">
 			<div class="panel-heading bg-white border-none">
 				<h4>
-					<span class="icon-notebook icons"></span> Meetings
+					 Meetings
 				</h4>
 			</div>
 			<div class="panel-body padding-0">
 				<div class="col-md-12 col-xs-12 col-md-12 padding-0 box-v4-alert">
-					<h2>Showing meetings for consultant</h2>
-					REPLACE WITH DROPDOWN
+					<h5 style="padding: 20px;">Showing meetings for consultant</h5>
+					<div th:replace="fragments/statistic/consultants :: consultants" style="padding: 20px;"></div>
 				</div>
 				<div class="calendar" id="calendar"></div>
 			</div>

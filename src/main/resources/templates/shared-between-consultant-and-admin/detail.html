@@ -41,10 +41,13 @@ $(document).ready(function(){
 				</div>
 			</div>
 
-			<div class="container">			
-				 <div class="panel panel-default">
+			<div class="col-md-12" style="padding: 20px;">
+				<div class="col-md-12 padding-0">
+					<div class="col-md-12 padding-0">
+						<div class="panel-body">
+								 <div class="panel panel-default">
 				  		<div class="panel-heading">
-				  			<strong>Request Info:</strong>
+				  			<strong>Request Info</strong>
 				  		</div>
 				    	<div class="panel-body">
 								<div th:replace="fragments/detail/request_detail_info :: request_detail_info"></div>		
@@ -54,7 +57,7 @@ $(document).ready(function(){
 				
 				<div class="panel panel-default">
 				<div class="panel-heading">
-					<strong>Comment On Request:</strong>
+					<strong>Comment On Request</strong>
 				</div>
 				    <div class="panel-body">				                  
 		                  <div class="col-sm-10">    
@@ -65,7 +68,7 @@ $(document).ready(function(){
 					
 				<div class="panel panel-default">
 				<div class="panel-heading">
-					<strong>Request Related Dates:</strong>
+					<strong>Request Related Dates</strong>
 				</div>
 				    <div class="panel-body">
 						<div th:replace="fragments/detail/request_detail_date :: request_detail_date"></div>	
@@ -74,7 +77,7 @@ $(document).ready(function(){
 				
 				<div class="panel panel-default" th:if="${consultation.getStudentFeedback()!=null}">
 				<div class="panel-heading">
-					<strong>Student Feedback:</strong>
+					<strong>Student Feedback</strong>
 				</div>
 				    <div class="panel-body">				                  
 		                  <div th:replace="fragments/detail/request_detail_student_feedback :: request-detail-student-feedback"></div>	
@@ -83,25 +86,31 @@ $(document).ready(function(){
 				
 				<div class="panel panel-default" th:if="${consultation.getConsultantFeedback()!=null}">
 				<div class="panel-heading">
-						<strong>Student Feedback:</strong>
+						<strong>Student Feedback</strong>
 				</div>
 				    <div class="panel-body">				                  
 		                  <div th:replace="fragments/detail/request_detail_consultant_feedback :: request-detail-consultant-feedback">
 		                  </div>	
 					</div>	  				
 				</div>
-				<div class="panel panel-default">
-				
+				<!--div class="panel panel-default">
+				</div-->
 				<div class="panel panel-default" th:if="${(consultation.getNext()!=null) or (consultation.getPrevious()!=null)} ">
 				    <div class="panel-body">				                  
 		                  <div th:replace="fragments/detail/request_detail_links_to_prvious_or_next_consultation :: request_detail_links_to_prvious_or_next_consultation"></div>	
 					</div>	  
 				</div>				
-				
+								
+						
+						</div>
+					</div>
 				</div>
+			</div>					
+								
 				
 				
-			</div>
+				
+			
 		</div>
 	</div>
 	
