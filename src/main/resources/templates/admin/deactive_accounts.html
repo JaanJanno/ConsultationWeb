@@ -58,9 +58,21 @@
 						                <td th:text="${account.name}"></td>
 						                <td th:text="${account.email}"></td>					              
 						                <td>
-							                <form style='float:left; padding:5px; height:0px' th:object="${account}" th:method="post" th:action="@{/account/deactive/{id}(id=${account.id})}">
+							                <form style='float:left; padding:5px; height:0px' th:object="${account}" th:method="post" 
+							                		th:action="@{/accounts/{id}/deactivate (id=${account.id})}"
+							                		th:if="${account.active}">
 							                   
-							                	<button class="btn btn-default btn-xs" type="submit">Deactive</button>
+							                	<button class=" btn-xs  glyphicon glyphicon-remove button-logout" type="submit">
+							                		Deactive
+							                	</button>
+							                </form>
+							                <form style='float:left; padding:5px; height:0px' th:object="${account}" th:method="post" 
+									                th:if="${!account.active}"
+									                th:action="@{/accounts/{id}/activate (id=${account.id})}">
+							                   
+							                	<button class=" btn-xs glyphicon glyphicon-ok button-logout" type="submit">
+							                		 Active
+							                	</button>
 							                </form>
 						                </td>
 						            </tr>
