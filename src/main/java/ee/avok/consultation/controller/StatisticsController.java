@@ -34,6 +34,7 @@ public class StatisticsController {
 		StatisticsDTO stats = statServ.getStatistics("all");
 
 		model.addAttribute("stats", stats);
+		model.addAttribute("events", statServ.getAllMeetings());
 		// TODO a proper HTML template path
 		return "admin/statistics";
 	}
