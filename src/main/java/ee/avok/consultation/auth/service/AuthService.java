@@ -33,6 +33,10 @@ public class AuthService {
 		if (user == null) {
 			throw new UnauthorizedException("Invalid username.");
 		}
+		
+		if (!user.isActive()) {
+			throw new UnauthorizedException("User account is deactivated.");
+		}
 
 		if (!user.getPassword().equals(password)) {
 			throw new UnauthorizedException("Invalid password.");

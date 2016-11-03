@@ -13,10 +13,22 @@ import ee.avok.consultation.auth.domain.repository.AccountRepository;
 public class AccountService {
 
 	@Autowired
-	AccountRepository AccountRepo;
+	AccountRepository accountRepo;
 
 	public List<Account> getAllConsultants() {
-		return AccountRepo.findByRole(Role.CONSULTANT);
+		return accountRepo.findByRole(Role.CONSULTANT);
+	}
+
+	public void deactivate(int id) {
+		Account user = accountRepo.findById(id);
+		user.setActive(false);
+		accountRepo.save(user);
+	}
+
+	public void activate(int id) {
+		Account user = accountRepo.findById(id);
+		user.setActive(true);
+		accountRepo.save(user);
 	}
 
 }

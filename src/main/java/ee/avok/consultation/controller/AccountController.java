@@ -5,6 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -31,15 +32,34 @@ public class AccountController {
 
 		model.addAttribute("user", new AccountDTO(user.getId()));
 		return "general/manage_account";
-		
+
 	}
 
 	@RequestMapping(value = "/accounts/manage", method = RequestMethod.GET)
-	public String manageAccounts(Model model, @CookieValue(value = "session", defaultValue = "none") String session) throws UnauthorizedException {
+	public String manageAccounts(Model model, @CookieValue(value = "session", defaultValue = "none") String session)
+			throws UnauthorizedException {
 		authServ.authenticateAndAddToModel(model, session, Role.ADMINISTRATOR);
-		
+
 		model.addAttribute("accounts", accountService.getAllConsultants());
 		return "admin/deactive_accounts";
+	}
+
+	@RequestMapping(value = "/accounts/{id}/deactivate", method = RequestMethod.POST)
+	public String deactivateAccount(@PathVariable int id,
+			@CookieValue(value = "session", defaultValue = "none") String session, Model model)
+					throws UnauthorizedException {
+		authServ.authenticateRequestForRole(session, Role.ADMINISTRATOR);
+		accountService.deactivate(id);
+		return "redirect:" + "/accounts/manage";
+	}
+	
+	@RequestMapping(value = "/accounts/{id}/activate", method = RequestMethod.POST)
+	public String activateAccount(@PathVariable int id,
+			@CookieValue(value = "session", defaultValue = "none") String session, Model model)
+					throws UnauthorizedException {
+		authServ.authenticateRequestForRole(session, Role.ADMINISTRATOR);
+		accountService.activate(id);
+		return "redirect:" + "/accounts/manage";
 	}
 
 	@ExceptionHandler(UnauthorizedException.class)
