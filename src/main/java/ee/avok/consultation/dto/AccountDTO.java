@@ -12,4 +12,9 @@ public class AccountDTO {
 	String email;
 	String oldPassword;
 	String newPassword;
+	
+	public AccountDTO() {
+		super();
+	}
+	
 }
