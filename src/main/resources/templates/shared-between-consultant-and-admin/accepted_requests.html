@@ -25,9 +25,9 @@
 			<div class="panel box-shadow-none content-header">
 				<div class="panel-body">
 					<div class="col-md-12">
-						<h3 class="animated fadeInLeft">Requests page</h3>
+						<h3 class="animated fadeInLeft">Accepted Requests</h3>
 						<p class="animated fadeInDown">
-							Requests page <span class="fa-angle-right fa"></span> Requests page
+							You can find the accepted requests in the below table. 
 						</p>
 					</div>
 				</div>
@@ -67,13 +67,14 @@
 												th:if="${consultation.hasFile()}"> <span class="glyphicon glyphicon-download-alt"></span>
 													Download
 											</a></td>
-											<td>
+											
 												<form style='float: left; padding: 5px; height: 0px' id="request-form" th:object="${consultation}"
 													th:method="post" th:action="@{/requests/{id}(id=${consultation.id})}">
-
-													<button class="btn btn-default btn-xs" type="submit">Set Date</button>
+													<td>
+														<button class="btn btn-primary" type="submit">Set Date</button>
+													</td>	
 												</form>
-											</td>
+											
 										</tr>
 									</tbody>
 								</table>

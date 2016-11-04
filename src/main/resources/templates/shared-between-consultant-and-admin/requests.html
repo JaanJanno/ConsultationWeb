@@ -68,14 +68,15 @@
 												th:if="${consultation.hasFile()}"> <span class="glyphicon glyphicon-download-alt"></span>
 													Download
 											</a></td>
-											<td>
+											
 												<form style='float: left; padding: 5px; height: 0px' id="request-form"
 													th:object="${consultation}" th:method="post"
 													th:action="@{/requests/{id}(id=${consultation.id})}">
-
-													<button class="btn btn-default btn-xs" type="submit">Accept</button>
+											<td>
+													<button class="btn btn-primary" type="submit">Accept</button>
+											</td>	
 												</form>
-											</td>
+											
 										</tr>
 									</tbody>
 								</table>
