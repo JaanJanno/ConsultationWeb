@@ -114,4 +114,13 @@ public class ConsultationServiceTest {
 		assertEquals(false, dto.isStudentFeedback());
 	}
 
+	@Test
+	public void createConsultation() {
+		conServ.createConsultation(req);
+
+		ConsultationRequest r = conServ.findOne(req.getId());
+		assertEquals(req.getName(), r.getName());
+		assertEquals(ConsultationStatus.RECEIVED, r.getStatus());
+	}
+
 }

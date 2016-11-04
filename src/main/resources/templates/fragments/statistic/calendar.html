@@ -1,4 +1,3 @@
-
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
 </head>
@@ -7,14 +6,12 @@
 	<div class="col-md-12" th:fragment="calendar">
 		<div class="panel box-v4">
 			<div class="panel-heading bg-white border-none">
-				<h4>
-					 Meetings
-				</h4>
+				<h4>Meetings</h4>
 			</div>
 			<div class="panel-body padding-0">
 				<div class="col-md-12 col-xs-12 col-md-12 padding-0 box-v4-alert">
-					<h5 style="padding: 20px;">Showing meetings for consultant</h5>
-					<div th:replace="fragments/statistic/consultants :: consultants" style="padding: 20px;"></div>
+					<h5>Showing meetings for consultant</h5>
+					<div th:replace="fragments/statistic/consultants :: consultants"></div>
 				</div>
 				<div class="calendar" id="calendar"></div>
 			</div>
