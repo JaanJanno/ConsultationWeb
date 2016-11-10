@@ -13,21 +13,23 @@
 				</li>
 				<li class="ripple"><a href="/requests" th:href="@{/requests}"><span class="fa-home fa"></span>
 						Incoming requests </a></li>
-				<li class="ripple">
-						<a href="/request" th:href="@{/request}"> 
-						<span	class="fa-check-square fa"></span> Create request </a>
-				</li>
-				
-				<li class="ripple">
-						<a href="/" th:href="@{/accounts/manage}" th:if="${role}==ADMINISTRATOR"> <span class="fa-check-square fa"></span> Manage Accounts</a>
-				</li>
-				<li class="ripple">
-						<a href="/" th:href="@{/requests/completed}" th:if="${role}==ADMINISTRATOR"> <span class="fa-check-square fa"></span> Completed Requests</a>
-				</li>
-				
-				<li class="ripple">
-						<a href="/" th:href="@{/statistics}" th:if="${role}==ADMINISTRATOR"> <span class="fa-check-square fa"></span> Statistics</a>
-				</li>
+				<li class="ripple"><a href="/request" th:href="@{/request}"> <span
+						class="fa-check-square fa"></span> Create request
+				</a></li>
+
+				<li class="ripple"><a href="/" th:href="@{/accounts/manage}" th:if="${role}==ADMINISTRATOR">
+						<span class="fa-users fa"></span> Manage Accounts
+				</a></li>
+				<li class="ripple"><a href="/" th:href="@{/requests/completed}"
+					th:if="${role}==ADMINISTRATOR"> <span class="fa-check-square fa"></span> Completed Requests
+				</a></li>
+
+				<li class="ripple"><a href="/" th:href="@{/statistics}" th:if="${role}==ADMINISTRATOR">
+						<span class="fa-line-chart fa"></span> Statistics
+				</a></li>
+				<li class="ripple"><a href="/" th:href="@{/materials}"> <span class="fa-file-word-o fa"></span>
+						Materials
+				</a></li>
 
 				<li class="ripple"><a class="tree-toggle nav-header"> <span class="fa fa-info"></span>
 						Requests by status <span class="fa-angle-right fa right-arrow text-right"></span>
@@ -37,7 +39,6 @@
 						<li><a th:href="@{/requests/accepted}">Accepted</a></li>
 						<li><a th:href="@{/requests/scheduled}">Scheduled</a></li>
 						<li><a th:href="@{/requests/completed}">Completed</a></li>
-						<li><a th:href="@{/requests/closed}">Closed</a></li>
 					</ul></li>
 			</ul>
 		</div>
@@ -63,11 +64,11 @@
 							Requests by status <span class="fa-angle-right fa right-arrow text-right"></span>
 					</a>
 						<ul class="nav nav-list tree" style="display: none;">
-						<li><a th:href="@{/requests/received}">Received</a></li>
-						<li><a th:href="@{/requests/accepted}">Accepted</a></li>
-						<li><a th:href="@{/requests/scheduled}">Scheduled</a></li>
-						<li><a th:href="@{/requests/completed}">Completed</a></li>
-						<li><a th:href="@{/requests/closed}">Closed</a></li>
+							<li><a th:href="@{/requests/received}">Received</a></li>
+							<li><a th:href="@{/requests/accepted}">Accepted</a></li>
+							<li><a th:href="@{/requests/scheduled}">Scheduled</a></li>
+							<li><a th:href="@{/requests/completed}">Completed</a></li>
+							<li><a th:href="@{/requests/closed}">Closed</a></li>
 						</ul></li>
 				</ul>
 			</div>
