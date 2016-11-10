@@ -55,7 +55,7 @@ public class MaterialController {
 			throws UnauthorizedException {
 		authServ.authenticateAndAddToModel(model, session, Role.ADMINISTRATOR);
 		model.addAttribute("material", new Material());
-		return "admin/materials/create";
+		return "admin/materials_create";
 	}
 
 	/**
@@ -86,8 +86,8 @@ public class MaterialController {
 	public String editMaterial(@PathVariable int id, Model model,
 			@CookieValue(value = "session", defaultValue = "none") String session) throws UnauthorizedException {
 		authServ.authenticateAndAddToModel(model, session, Role.ADMINISTRATOR);
-		model.addAttribute("Material", matServ.findOne(id));
-		return "admin/materials/create";
+		model.addAttribute("material", matServ.findOne(id));
+		return "admin/materials_create";
 	}
 
 	/**
