@@ -23,6 +23,7 @@ import ee.avok.consultation.auth.service.AuthService;
 import ee.avok.consultation.domain.model.ConsultationRequest;
 import ee.avok.consultation.dto.CompletedDTO;
 import ee.avok.consultation.service.ConsultationService;
+import ee.avok.consultation.service.StatisticsService;
 
 @Controller
 public class RequestController {
@@ -32,6 +33,8 @@ public class RequestController {
 	ConsultationService conServ;
 	@Autowired
 	AuthService authServ;
+	@Autowired
+	StatisticsService statServ;
 
 	/*
 	 * Request creation
@@ -122,12 +125,27 @@ public class RequestController {
 		model.addAttribute("studentfeedback", conServ.getStudentFeedbackFor(id));
 		model.addAttribute("consultantfeedback", conServ.getConsultantFeedbackFor(id));
 		LOG.info("Student feedback is {}", conServ.findOne(id).getStudentFeedback().toString());
-		if(conServ.findOne(id).getConsultantFeedback() != null)
+		if (conServ.findOne(id).getConsultantFeedback() != null)
 			LOG.info("Consultant feedback is {}", conServ.findOne(id).getConsultantFeedback().toString());
-		
+
 		return "shared-between-consultant-and-admin/detail";
 	}
 
+	/*
+	 * Set meeting page
+	 */
+	@RequestMapping(method = RequestMethod.GET, value = "/requests/{id}/setmeeting")
+	public String setMeetingPage(@PathVariable int id, Model model,
+			@CookieValue(value = "session", defaultValue = "none") String session) throws UnauthorizedException {
+		Account user = authServ.authenticateAndAddToModel(model, session, Role.CONSULTANT);
+
+		LOG.info("Setting meeting for consulatation {}", id);
+
+		model.addAttribute("consultation", conServ.findOne(id));
+		model.addAttribute("events", statServ.getMeetings(user.getId()));
+
+		return "shared-between-consultant-and-admin/setmeeting";
+	}
 	/*
 	 * ADMIN
 	 */
