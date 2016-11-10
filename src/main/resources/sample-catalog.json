@@ -115,6 +115,18 @@
 		"consultant": 1,
 		"studentFeedback": 3,
 		"consultantFeedback":1
+	},
+	{
+		"_class": "ee.avok.consultation.domain.model.Material",
+		"id": 1,
+		"name": "A good link",
+		"link": "http://zombo.com/"
+	},
+	{
+		"_class": "ee.avok.consultation.domain.model.Material",
+		"id": 2,
+		"name": "A bad link",
+		"link": "http://facebook.com/"
 	}
 			
 ]
