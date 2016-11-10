@@ -38,13 +38,16 @@
 						<h4>Materials table</h4>
 					</div>
 					<div class="panel-body">
-						<p>All materials</p>
+						<a th:href="@{'/materials/create'}"><button type="button" class="btn btn-primary"
+								value="primary">New material</button></a>
 						<table class="table">
 							<thead>
 								<tr>
 									<th>ID</th>
 									<th>Name</th>
 									<th>Link</th>
+									<th>Edit</th>
+									<th>Delete</th>
 								</tr>
 							</thead>
 							<tbody>
@@ -52,6 +55,10 @@
 									<td th:text="${m.getId()}">000</td>
 									<td th:text="${m.getName()}">000</td>
 									<td><a th:text="${m.getLink()}" th:href="${m.getLink()}">ipsum</a></td>
+									<td><a th:href="@{'/materials/'+${m.getId()}+'/edit'}"><button type="button"
+												class="btn btn-warning" value="warning">Edit</button></a></td>
+									<td><a th:href="@{'/materials/'+${m.getId()}+'/delete'}"><button type="button"
+												class="btn btn-danger" value="danger">Delete</button></a></td>
 								</tr>
 							</tbody>
 						</table>
