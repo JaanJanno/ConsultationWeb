@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>Statistic page</title>
+<object th:replace="fragments/util :: standardCSS"></object>
+
+</head>
+
+<body id="mimin" class="dashboard">
+	<!-- start: Header -->
+	<div th:replace="fragments/header :: header"></div>
+	<!-- end: Header -->
+
+	<div class="container-fluid mimin-wrapper">
+
+		<!-- start:Left Menu -->
+		<div th:replace="fragments/menu :: leftMenu"></div>
+		<!-- end: Left Menu -->
+
+
+		<!-- start: content -->
+		<div id="content">
+			<div class="row">
+				
+				<div class="col-md-9" style="padding: 20px;">
+					<div th:replace="fragments/set-meeting/set-meeting-calendar :: calendar"></div>
+				</div>
+				<div class="col-md-3" style="padding: 20px;">
+								<div th:replace="fragments/set-meeting/info :: metting_info"></div>		
+				</div>
+			</div>
+		<!-- end: content -->
+		</div>
+	</div>
+
+	<!-- start: Mobile -->
+	<div id="mimin-mobile" class="reverse" th:include="fragments/menu :: mobileMenu"></div>
+	<button id="mimin-mobile-menu-opener" class="animated rubberBand btn btn-circle btn-danger">
+		<span class="fa fa-bars"></span>
+	</button>
+	<!-- end: Mobile -->
+
+	<!-- start: Javascript -->
+	<div th:replace="fragments/util :: standardJS"></div>
+	<script th:src="@{/webjars/fullcalendar/2.2.5/fullcalendar.min.js}" type="text/javascript"></script>
+	<script type="text/javascript" th:inline="javascript">
+	 	/*<![CDATA[*/   
+		var events = /*[[${events}]]*/;
+	      /*]]>*/
+	
+		$(document).ready(function() {
+			$('#calendar').fullCalendar({
+				header : {
+					left : 'prev,next today',
+					center : 'title',
+					right : 'month,agendaWeek,agendaDay'
+				},
+				firstDay: 1, // Monday because Estonia :D
+				timeFormat: 'H(:mm)', // uppercase H for 24-hour clock
+				events : events
+			})
+		});
+	</script>
+	<!-- end: Javascript -->
+</body>
+</html>

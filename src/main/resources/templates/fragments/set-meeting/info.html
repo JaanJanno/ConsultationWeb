@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+</head>
+	<body>
+		
+		
+	<div class="col-md-12" th:fragment="metting_info">
+		<div class="panel box-v4">
+			<div class="panel-heading bg-white border-none">
+				<h4>Meetings Information</h4>
+			</div>
+			<div class="panel-body padding-0">
+				<div class="col-md-12 col-xs-12 col-md-12 padding-0 box-v4-alert">
+				</div>
+				<div>
+			            <div class="panel-body text-center">	
+			            	<div class="row">
+			            		<div class="col-lg-1">
+			            			<label style="float: left;" class="control-label text-left"><strong>Name:</strong></label>
+			            		</div>
+			            		<div class="col-lg-1">	
+			              			<label class="control-label text-right" style="padding-left: 40px;" th:text="${consultation.name}"></label>
+			              		</div>
+			              	</div>
+			              	<div class="row">
+			              		<div class="col-lg-1">
+			            			<label style="float: left;" class="control-label text-left"><strong>Email:</strong></label>	
+			              		</div>
+			              		<div class="col-lg-1">
+			              			<label style="padding-left: 40px;" th:text="${consultation.email}"></label>   
+			              		</div>
+			              	</div>
+			              	<div class="row" style="padding:5px;">
+			            			<span style="padding-right:40px; float: left;" class="control-label text-left"><strong>Set date:</strong>
+			            			</span>
+			            			<input style="float: right; width: 170px;" th:field="${consultation.meetingDate}" type="date"></input>    		
+			              	</div>
+			              	<div class="row" style="padding-right:5px;">
+			            			<label style="float: left;" class="control-label text-left"><strong>Set Location:</strong></label>
+			              			<input style="float: right;" th:field="${consultation.meetingPlace}"></input>   
+			              	</div>
+			              	<form style='padding: 5px;' id="request-form"
+													th:object="${consultation}" th:method="post"
+													th:action="@{/requests/{id}(id=${consultation.id})}">
+										
+									<button class="btn btn-primary" type="submit">Accept</button>
+												
+							</form>
+			              	
+		
+			            </div>
+				</div>
+		 </div>
+		</div>
+	</div>
+
+
+
+	</body>
+</html>
