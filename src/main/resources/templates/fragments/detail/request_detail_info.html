@@ -44,8 +44,16 @@
 			                <a th:href="@{/requests/{id}/consultantfeedback (id=${consultation.id})}" th:if="${consultation.getStatus().toString()}==SCHEDULED">
 								<button class="btn btn-primary" type="submit">Set feedback</button>
 							</a>
+							
+			                <a th:href="@{/requests/{id}/setmeeting (id=${consultation.id})}" th:if="${consultation.getStatus().toString()=='ACCEPTED'}">
+								<button class="btn btn-primary" type="submit">Set Date</button>
+							</a>
+
 			                
-			                <span th:if="${consultation.getStatus().toString()!='SCHEDULED' and consultation.getStatus().toString()!='RECEIVED'}" th:text="${consultation.getStatus()}"></span>
+			                <span th:if="${consultation.getStatus().toString()!='SCHEDULED' and
+			                 consultation.getStatus().toString()!='RECEIVED' and
+			                  consultation.getStatus().toString()!='ACCEPTED'}"
+			                   th:text="${consultation.getStatus()}"></span>
 							
 			         </td>
 			      </tr>
