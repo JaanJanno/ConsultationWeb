@@ -37,12 +37,16 @@
 						</a>
 			         </td>
 			         <td>
-							 <form   id="request-form" th:if="${consultation.getStatus().toString()}==RECEIVED" th:object="${p}" th:method="post" th:action="@{/requests/{id}(id=${consultation.id})}">
+							<form   id="request-form" th:if="${consultation.getStatus().toString()}==RECEIVED" th:object="${p}" th:method="post" th:action="@{/requests/{id}(id=${consultation.id})}">
 			                	<button class="btn btn-primary" type="submit">Accept</button>
 			                </form>
 			                
+			                <a th:href="@{/requests/{id}/consultantfeedback (id=${consultation.id})}" th:if="${consultation.getStatus().toString()}==SCHEDULED">
+								<button class="btn btn-primary" type="submit">Set feedback</button>
+							</a>
 			                
-							<span th:if="${consultation.getStatus().toString()}!=RECEIVED" th:text="${consultation.getStatus()}"></span>
+			                <span th:if="${consultation.getStatus().toString()!='SCHEDULED' and consultation.getStatus().toString()!='RECEIVED'}" th:text="${consultation.getStatus()}"></span>
+							
 			         </td>
 			      </tr>
 			    </tbody>
