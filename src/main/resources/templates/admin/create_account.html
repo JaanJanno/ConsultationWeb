@@ -10,20 +10,19 @@
 
 <body id="mimin" class="dashboard">
 	<!-- start: Header -->
-	<div th:replace="fragments/header :: header"></div>
+	<div th:replace="fragments/request-header :: header"></div>
 	<!-- end: Header -->
 
 	<div class="container-fluid mimin-wrapper">
 
 		<!-- start:Left Menu -->
-		<div th:replace="fragments/menu :: leftMenu"></div>
 		<!-- end: Left Menu -->
 
 
 		<!-- start: content -->
 		
-		<div id="content">
-			<div class="panel box-shadow-none content-header">
+		<div style="margin:80px;">
+			<div class="panel">
 				<div class="panel-body">
 					<div class="col-md-12">
 						<h3 class="animated fadeInLeft">Create Account</h3>
@@ -55,7 +54,7 @@
 									      <input type="Email" class="form-control" id="email" placeholder="Enter email"></input>
 									    </div-->
 									    <div class="form-group">
-									      <label for="email">Username:</label>
+									      <label for="username">Username:</label>
 									      <input type="text" class="form-control" placeholder="Enter username"></input>
 									    </div>
 									    <div class="form-group">
