@@ -39,7 +39,13 @@ public class RequestController {
 	/*
 	 * Request creation
 	 */
-
+	@RequestMapping(value = "/response", method = RequestMethod.GET)
+	public String createAccount( Model model)
+			throws UnauthorizedException {
+		return "general/success_failure";
+	}
+	
+	
 	@RequestMapping(value = "/request", method = RequestMethod.GET)
 	public String createConsultation(Model model) {
 		model.addAttribute("consultation", new ConsultationRequest());
