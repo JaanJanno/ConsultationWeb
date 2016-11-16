@@ -38,6 +38,24 @@
 			<div class="col-md-12" style="padding: 20px;">
 				<div class="col-md-12 padding-0">
 					<div class="col-md-12 padding-0">
+							
+						<div class="panel panel-default">
+							  <div class="panel-heading">
+				  				<strong>Add a New Account </strong>
+				  			  </div>						
+							  <div class="panel-body">
+							  		<form class="form-inline" th:object="${account}" th:method="post">
+						                  <div class="row" style="padding-left: 20px;">
+						                  		<div class="form-group">
+											      	 <label for="email">Email:</label>
+											    	 <input type="email" class="form-control" id="email" style="width: 500px;" placeholder="Enter email"></input>
+											    </div>
+						                  		<button class=" btn btn-primary  glyphicon" type="submit">New Account</button>
+						                  </div>
+									</form>
+							  </div>
+						</div>
+					
 						<div class="panel panel-default">
 							<div class="panel-heading">
 				  				<strong>Activation or Deactivation of Accounts </strong>
@@ -57,26 +75,24 @@
 						                <td th:text="${account.id}"></td>
 						                <td th:text="${account.name}"></td>
 						                <td th:text="${account.email}"></td>					              
-					
-							                <form style='float:left; padding:5px; height:0px' th:object="${account}" th:method="post" 
+											<td> 
+							                	<form  th:object="${account}" th:method="post" 
 							                		th:action="@{/accounts/{id}/deactivate (id=${account.id})}"
 							                		th:if="${account.active}">
-							              <td>     
-							                	<button class=" btn btn-danger  glyphicon" type="submit">
-							                		Deactive
-							                	</button>
-							              </td>  
-							                </form>
-							                <form style='float:left; padding:5px; height:0px' th:object="${account}" th:method="post" 
-									                th:if="${!account.active}"
-									                th:action="@{/accounts/{id}/activate (id=${account.id})}">
-							                <td>   
-							                	<button class="btn  btn-success  glyphicon" type="submit">
-							                		 Active
-							                	</button>
-							            	</td>	
-							                </form>
-						                
+							                  
+								                	<button class=" btn btn-danger  glyphicon" type="submit">
+								                		Deactive
+								                	</button>							                
+							                	</form>
+						
+								                <form th:object="${account}" th:method="post"   th:if="${!account.active}"
+										                th:action="@{/accounts/{id}/activate (id=${account.id})}">
+								                   
+								                	<button class="btn  btn-success  glyphicon" type="submit">
+								                		 Active
+								                	</button>
+								                </form>
+						                	</td>
 						            </tr>
 						        </tbody>
 						    </table>

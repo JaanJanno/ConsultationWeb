@@ -30,6 +30,12 @@ public class AccountController {
 
 	@Autowired
 	AccountService accountService;
+	
+	@RequestMapping(value = "/account/create", method = RequestMethod.GET)
+	public String createAccount( Model model)
+			throws UnauthorizedException {
+		return "admin/create_account";
+	}
 
 	@RequestMapping(value = "/account/edit", method = RequestMethod.GET)
 	public String editAccount(@CookieValue(value = "session", defaultValue = "none") String session, Model model)
