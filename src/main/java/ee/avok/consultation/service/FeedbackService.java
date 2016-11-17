@@ -37,6 +37,7 @@ public class FeedbackService {
 		feedback.setProvidedSupport(feedbackForm.getProvidedSupport());
 		feedback.setComingBack(feedbackForm.getComingBack());
 		feedback.setComments(feedbackForm.getComments());
+		feedback.setUid(null);
 		studentFeedbackRepo.save(feedback);
 	}
 	
