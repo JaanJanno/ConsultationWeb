@@ -21,6 +21,7 @@ import ee.avok.consultation.ConsultationWebApplication;
 import ee.avok.consultation.auth.domain.model.Account;
 import ee.avok.consultation.auth.domain.model.Role;
 import ee.avok.consultation.auth.domain.repository.AccountRepository;
+import ee.avok.consultation.domain.model.ConsultantFeedback;
 import ee.avok.consultation.domain.model.ConsultationRequest;
 import ee.avok.consultation.domain.model.ConsultationStatus;
 import ee.avok.consultation.domain.repository.ConsultationRequestRepository;
@@ -38,6 +39,8 @@ public class ConsultationServiceTest {
 	AccountRepository accountRepo;
 	@Autowired
 	ConsultationRequestRepository conReqRepo;
+	@Autowired
+	FeedbackService feedServ;
 
 	private Account user;
 	private ConsultationRequest req;
@@ -80,6 +83,8 @@ public class ConsultationServiceTest {
 	public void completedDTOsAdmin() {
 		req.setStatus(ConsultationStatus.COMPLETED);
 		req.setConsultant(user);
+
+		feedServ.addStudentFeedback(req);
 		conReqRepo.save(req);
 
 		List<CompletedDTO> dtos = conServ.findCompleted();
@@ -99,6 +104,8 @@ public class ConsultationServiceTest {
 	public void completedDTOsConsultant() {
 		req.setStatus(ConsultationStatus.COMPLETED);
 		req.setConsultant(user);
+
+		feedServ.addStudentFeedback(req);
 		conReqRepo.save(req);
 
 		List<CompletedDTO> dtos = conServ.findCompleted(user);
@@ -112,6 +119,51 @@ public class ConsultationServiceTest {
 		// TODO add feedback and check their existence
 		assertEquals(false, dto.isConsultantFeedback());
 		assertEquals(false, dto.isStudentFeedback());
+	}
+
+	@Test
+	public void completedDTOsConsultantHasStudentFeedback() {
+		req.setStatus(ConsultationStatus.COMPLETED);
+		req.setConsultant(user);
+
+		conReqRepo.save(req);
+		feedServ.addStudentFeedback(req);
+		feedServ.submitStudentFeedback(req.getId(), req.getStudentFeedback());
+
+		List<CompletedDTO> dtos = conServ.findCompleted(user);
+
+		assertEquals(1, dtos.size());
+
+		CompletedDTO dto = dtos.get(0);
+		assertEquals(req.getId(), dto.getId());
+		assertEquals(req.getName(), dto.getName());
+		assertEquals(user.getName(), dto.getConsultantName());
+
+		assertEquals(false, dto.isConsultantFeedback());
+		assertEquals(true, dto.isStudentFeedback());
+	}
+	
+	@Test
+	public void completedDTOsHasBothFeedbacks() {
+		req.setStatus(ConsultationStatus.COMPLETED);
+		req.setConsultant(user);
+
+		conReqRepo.save(req);
+		feedServ.submitConsultantFeedback(req.getId(), new ConsultantFeedback());
+		feedServ.addStudentFeedback(req);
+		feedServ.submitStudentFeedback(req.getId(), req.getStudentFeedback());
+
+		List<CompletedDTO> dtos = conServ.findCompleted(user);
+
+		assertEquals(1, dtos.size());
+
+		CompletedDTO dto = dtos.get(0);
+		assertEquals(req.getId(), dto.getId());
+		assertEquals(req.getName(), dto.getName());
+		assertEquals(user.getName(), dto.getConsultantName());
+
+		assertEquals(true, dto.isConsultantFeedback());
+		assertEquals(true, dto.isStudentFeedback());
 	}
 
 	@Test

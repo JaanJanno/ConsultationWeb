@@ -2,6 +2,7 @@ package ee.avok.consultation.service;
 
 import java.time.Instant;
 import java.util.Date;
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -62,6 +63,13 @@ public class FeedbackService {
 		req.setStatus(ConsultationStatus.COMPLETED);
 		req.setCompletedDate(Date.from(Instant.now()));
 		consultationRepo.save(req);
+	}
+	
+	public void addStudentFeedback(ConsultationRequest req) {
+		StudentFeedback feedback = new StudentFeedback();
+		feedback.setUid(UUID.randomUUID().toString());
+		feedback = studentFeedbackRepo.save(feedback);
+		req.setStudentFeedback(feedback);
 	}
 
 }

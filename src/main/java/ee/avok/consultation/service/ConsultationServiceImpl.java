@@ -9,7 +9,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
-import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -22,7 +21,6 @@ import ee.avok.consultation.domain.model.ConsultationStatus;
 import ee.avok.consultation.domain.model.StudentFeedback;
 import ee.avok.consultation.domain.model.Upload;
 import ee.avok.consultation.domain.repository.ConsultationRequestRepository;
-import ee.avok.consultation.domain.repository.StudentFeedbackRepository;
 import ee.avok.consultation.domain.repository.UploadRepository;
 import ee.avok.consultation.dto.CompletedDTO;
 import ee.avok.consultation.dto.SetTimeDTO;
@@ -37,11 +35,11 @@ public class ConsultationServiceImpl implements ConsultationService {
 	UploadRepository upRepo;
 
 	@Autowired
-	StudentFeedbackRepository studentFeedbackRepo;
+	FeedbackService feedServ;
 
 	@Override
 	public void createConsultation(ConsultationRequest conReq) {
-		addStudentFeedbackObject(conReq);
+		feedServ.addStudentFeedback(conReq);
 		conReq.setStatus(ConsultationStatus.RECEIVED);
 		if (conReq.getUpload() != null)
 			upRepo.save(conReq.getUpload());
@@ -89,7 +87,7 @@ public class ConsultationServiceImpl implements ConsultationService {
 
 	@Override
 	public void createConsultation(ConsultationRequest conReq, MultipartFile file) {
-		addStudentFeedbackObject(conReq);
+		feedServ.addStudentFeedback(conReq);
 		conReq.setStatus(ConsultationStatus.RECEIVED);
 		conReq.setReceivedDate(new Date());
 
@@ -132,16 +130,9 @@ public class ConsultationServiceImpl implements ConsultationService {
 
 	private List<CompletedDTO> createCompletedDTO(List<ConsultationRequest> reqs) {
 		List<CompletedDTO> dtos = new ArrayList<>();
-		reqs.forEach(
-				r -> dtos.add(new CompletedDTO(r.getId(), r.getName(), r.getConsultant().getName(), r.hasConsultantFeedback(), r.hasStudentFeedback())));
+		reqs.forEach(r -> dtos.add(new CompletedDTO(r.getId(), r.getName(), r.getConsultant().getName(),
+				r.hasConsultantFeedback(), r.hasStudentFeedback())));
 		return dtos;
-	}
-
-	private void addStudentFeedbackObject(ConsultationRequest req) {
-		StudentFeedback feedback = new StudentFeedback();
-		feedback.setUid(UUID.randomUUID().toString());
-		feedback = studentFeedbackRepo.save(feedback);
-		req.setStudentFeedback(feedback);
 	}
 
 	@Override
