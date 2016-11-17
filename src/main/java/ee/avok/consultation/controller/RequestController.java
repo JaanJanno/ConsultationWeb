@@ -40,12 +40,10 @@ public class RequestController {
 	 * Request creation
 	 */
 	@RequestMapping(value = "/response", method = RequestMethod.GET)
-	public String createAccount( Model model)
-			throws UnauthorizedException {
+	public String createAccount(Model model) throws UnauthorizedException {
 		return "general/success_failure";
 	}
-	
-	
+
 	@RequestMapping(value = "/request", method = RequestMethod.GET)
 	public String createConsultation(Model model) {
 		model.addAttribute("consultation", new ConsultationRequest());
@@ -106,6 +104,17 @@ public class RequestController {
 		return "admin/completed_requests";
 	}
 
+	@RequestMapping(value = "/requests/scheduled", method = RequestMethod.GET)
+	public String requestsScheduled(Model model, @CookieValue(value = "session", defaultValue = "none") String session)
+			throws UnauthorizedException {
+		Account user = authServ.authenticateAndAddToModel(model, session, Role.CONSULTANT);
+
+		List<ConsultationRequest> conReqs = conServ.findByStatusAndConsultant("scheduled", user);
+		LOG.info("Requests size: {}, status {}", conReqs.size(), "scheduled");
+
+		model.addAttribute("consultations", conReqs);
+		return "shared-between-consultant-and-admin/scheduled_requests";
+	}
 	/*
 	 * Requests modification
 	 */

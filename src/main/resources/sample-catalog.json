@@ -117,6 +117,26 @@
 		"consultantFeedback": 1
 	},
 	{
+		"_class": "ee.avok.consultation.domain.model.ConsultationRequest",
+		"id": 4,
+		"name": "Bla",
+		"email": "salmanlashkarara@gmail.com",
+		"textType": "Article",
+		"programme": "Software engineering",
+		"department": "Math and CS",
+		"language": "English",
+		"comments": "bla bla",
+		"degree": "1st year Bachelor's",
+		"status": "SCHEDULED",
+		"receivedDate": "2016-10-21T13:49:28.243Z",
+		"acceptedDate": "2016-10-21T14:28:28.243Z",
+		"scheduledDate": "2016-10-22T10:04:28.243Z",
+		"meetingPlace": "J. Liivi 2",
+		"meetingDate": "2016-11-22T16:00:00.000Z",
+		"consultant": 1,
+		"studentFeedback": 3
+	},
+	{
 		"_class": "ee.avok.consultation.domain.model.Material",
 		"id": 1,
 		"name": "A good link",
