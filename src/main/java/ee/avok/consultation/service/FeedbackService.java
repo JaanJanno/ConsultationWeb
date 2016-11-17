@@ -1,5 +1,8 @@
 package ee.avok.consultation.service;
 
+import java.time.Instant;
+import java.util.Date;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -7,6 +10,7 @@ import ee.avok.consultation.auth.domain.model.Account;
 import ee.avok.consultation.auth.domain.model.UnauthorizedException;
 import ee.avok.consultation.domain.model.ConsultantFeedback;
 import ee.avok.consultation.domain.model.ConsultationRequest;
+import ee.avok.consultation.domain.model.ConsultationStatus;
 import ee.avok.consultation.domain.model.StudentFeedback;
 import ee.avok.consultation.domain.repository.ConsultantFeedbackRepository;
 import ee.avok.consultation.domain.repository.ConsultationRequestRepository;
@@ -55,6 +59,8 @@ public class FeedbackService {
 		ConsultationRequest req = consultationRepo.findOne(id);
 		feedbackForm = consultantFeedbackRepo.save(feedbackForm);
 		req.setConsultantFeedback(feedbackForm);
+		req.setStatus(ConsultationStatus.COMPLETED);
+		req.setCompletedDate(Date.from(Instant.now()));
 		consultationRepo.save(req);
 	}
 

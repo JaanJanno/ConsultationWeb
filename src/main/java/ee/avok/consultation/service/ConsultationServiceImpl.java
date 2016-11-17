@@ -132,9 +132,8 @@ public class ConsultationServiceImpl implements ConsultationService {
 
 	private List<CompletedDTO> createCompletedDTO(List<ConsultationRequest> reqs) {
 		List<CompletedDTO> dtos = new ArrayList<>();
-		// TODO check if feedback exists
 		reqs.forEach(
-				r -> dtos.add(new CompletedDTO(r.getId(), r.getName(), r.getConsultant().getName(), false, false)));
+				r -> dtos.add(new CompletedDTO(r.getId(), r.getName(), r.getConsultant().getName(), r.hasConsultantFeedback(), r.hasStudentFeedback())));
 		return dtos;
 	}
 

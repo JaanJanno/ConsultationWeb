@@ -86,7 +86,7 @@ public class ConsultationRequest {
 	}
 	
 	public boolean hasStudentFeedback() {
-		return studentFeedback.getUid() != null;
+		return studentFeedback.getUid() == null;
 	}
 	
 	public boolean hasConsultantFeedback() {
