@@ -1,9 +1,14 @@
 package ee.avok.consultation.service;
 
 import java.io.IOException;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.Instant;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +25,7 @@ import ee.avok.consultation.domain.repository.ConsultationRequestRepository;
 import ee.avok.consultation.domain.repository.StudentFeedbackRepository;
 import ee.avok.consultation.domain.repository.UploadRepository;
 import ee.avok.consultation.dto.CompletedDTO;
+import ee.avok.consultation.dto.SetTimeDTO;
 
 @Service
 public class ConsultationServiceImpl implements ConsultationService {
@@ -29,7 +35,7 @@ public class ConsultationServiceImpl implements ConsultationService {
 
 	@Autowired
 	UploadRepository upRepo;
-	
+
 	@Autowired
 	StudentFeedbackRepository studentFeedbackRepo;
 
@@ -50,7 +56,7 @@ public class ConsultationServiceImpl implements ConsultationService {
 		else
 			return conReqRepo.findByStatus(status);
 	}
-	
+
 	@Override
 	public List<ConsultationRequest> findByStatus(String status) {
 		ConsultationStatus st = ConsultationStatus.valueOf(status.toUpperCase());
@@ -64,7 +70,7 @@ public class ConsultationServiceImpl implements ConsultationService {
 		else
 			return conReqRepo.findByStatusAndConsultant(status, consultant);
 	}
-	
+
 	@Override
 	public List<ConsultationRequest> findByStatusAndConsultant(String status, Account consultant) {
 		ConsultationStatus st = ConsultationStatus.valueOf(status.toUpperCase());
@@ -120,10 +126,10 @@ public class ConsultationServiceImpl implements ConsultationService {
 
 	@Override
 	public List<CompletedDTO> findCompleted(Account consultant) {
-		List<ConsultationRequest> reqs = findByStatusAndConsultant(ConsultationStatus.COMPLETED,consultant);
+		List<ConsultationRequest> reqs = findByStatusAndConsultant(ConsultationStatus.COMPLETED, consultant);
 		return createCompletedDTO(reqs);
 	}
-	
+
 	private List<CompletedDTO> createCompletedDTO(List<ConsultationRequest> reqs) {
 		List<CompletedDTO> dtos = new ArrayList<>();
 		// TODO check if feedback exists
@@ -147,6 +153,20 @@ public class ConsultationServiceImpl implements ConsultationService {
 	@Override
 	public ConsultantFeedback getConsultantFeedbackFor(int id) {
 		return conReqRepo.findOne(id).getConsultantFeedback();
+	}
+
+	@Override
+	public void setConsultationDate(int id, SetTimeDTO setTime) throws ParseException {
+		ConsultationRequest r = conReqRepo.findOne(id);
+		DateFormat format = new SimpleDateFormat("dd.MM.yyyy HH:mm", Locale.ENGLISH);
+		Date date = format.parse(setTime.getTime());
+
+		r.setScheduledDate(Date.from(Instant.now()));
+		r.setMeetingDate(date);
+		r.setMeetingPlace(setTime.getPlace());
+		r.setStatus(ConsultationStatus.SCHEDULED);
+		conReqRepo.save(r);
+
 	}
 
 }

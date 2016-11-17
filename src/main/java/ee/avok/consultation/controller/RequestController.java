@@ -1,5 +1,6 @@
 package ee.avok.consultation.controller;
 
+import java.text.ParseException;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -22,6 +23,7 @@ import ee.avok.consultation.auth.domain.model.UnauthorizedException;
 import ee.avok.consultation.auth.service.AuthService;
 import ee.avok.consultation.domain.model.ConsultationRequest;
 import ee.avok.consultation.dto.CompletedDTO;
+import ee.avok.consultation.dto.SetTimeDTO;
 import ee.avok.consultation.service.ConsultationService;
 import ee.avok.consultation.service.StatisticsService;
 
@@ -158,9 +160,20 @@ public class RequestController {
 
 		model.addAttribute("consultation", conServ.findOne(id));
 		model.addAttribute("events", statServ.getMeetings(user.getId()));
+		model.addAttribute("setTime", new SetTimeDTO());
 
 		return "shared-between-consultant-and-admin/setmeeting";
 	}
+	
+	@RequestMapping(method = RequestMethod.POST, value = "/requests/{id}/setmeeting")
+	public String postSetMeetingPage(@PathVariable int id, @ModelAttribute SetTimeDTO setTime,
+			@CookieValue(value = "session", defaultValue = "none") String session) throws UnauthorizedException, ParseException {
+		authServ.authenticateRequestForRole(session, Role.CONSULTANT);
+		LOG.info("Set time to {}", setTime.toString());
+		conServ.setConsultationDate(id, setTime);
+		return "redirect:" + "/requests/scheduled";
+	}
+	
 	/*
 	 * ADMIN
 	 */
@@ -179,6 +192,11 @@ public class RequestController {
 
 	@ExceptionHandler(UnauthorizedException.class)
 	public String handleNotFound(Exception exc) {
+		return "redirect:" + "/";
+	}
+	
+	@ExceptionHandler(ParseException.class)
+	public String handleBadDate(Exception exc) {
 		return "redirect:" + "/";
 	}
 

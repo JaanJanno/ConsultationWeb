@@ -1,5 +1,6 @@
 package ee.avok.consultation.service;
 
+import java.text.ParseException;
 import java.util.List;
 
 import org.springframework.web.multipart.MultipartFile;
@@ -10,6 +11,7 @@ import ee.avok.consultation.domain.model.ConsultationRequest;
 import ee.avok.consultation.domain.model.ConsultationStatus;
 import ee.avok.consultation.domain.model.StudentFeedback;
 import ee.avok.consultation.dto.CompletedDTO;
+import ee.avok.consultation.dto.SetTimeDTO;
 
 public interface ConsultationService {
 
@@ -49,5 +51,7 @@ public interface ConsultationService {
 	StudentFeedback getStudentFeedbackFor(int id);
 
 	ConsultantFeedback getConsultantFeedbackFor(int id);
+	
+	void setConsultationDate(int id, SetTimeDTO date) throws ParseException;
 
 }
