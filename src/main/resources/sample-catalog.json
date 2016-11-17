@@ -4,7 +4,7 @@
 		"id": 1,
 		"discussionElement": "Style and construction of well developed writting",
 		"discussedMaterial": "Formal form of writting",
-		"useful":true,
+		"useful": true,
 		"coveredIssues": "Spelling, and format",
 		"suggestedNewConsultation": "WITH_NEW",
 		"summary": "The student has some basic mistakes, and we talked about his mistakes!"
@@ -14,30 +14,30 @@
 		"id": 1,
 		"uid": "asdfg",
 		"firstConsultation": true,
-		"useful":true,
+		"useful": true,
 		"providedSupport": true,
 		"comingBack": true,
-		"comments":"I enjoied the consultation, but it was not enough for me and i most probably come back very soon."
+		"comments": "I enjoied the consultation, but it was not enough for me and i most probably come back very soon."
 	},
 	{
 		"_class": "ee.avok.consultation.domain.model.StudentFeedback",
 		"id": 2,
 		"uid": "asdfg",
 		"firstConsultation": true,
-		"useful":true,
+		"useful": true,
 		"providedSupport": true,
 		"comingBack": true,
-		"comments":"I enjoied the consultation, but it was not enough for me and i most probably come back very soon."
+		"comments": "I enjoied the consultation, but it was not enough for me and i most probably come back very soon."
 	},
 	{
 		"_class": "ee.avok.consultation.domain.model.StudentFeedback",
 		"id": 3,
 		"uid": "asdfg",
 		"firstConsultation": true,
-		"useful":true,
+		"useful": true,
 		"providedSupport": true,
 		"comingBack": true,
-		"comments":"I enjoied the consultation, but I enjoy the website more than the consultation."
+		"comments": "I enjoied the consultation, but I enjoy the website more than the consultation."
 	},
 	{
 		"_class": "ee.avok.consultation.auth.domain.model.Account",
@@ -49,7 +49,7 @@
 		"password": "testy",
 		"active": true
 	},
-		{
+	{
 		"_class": "ee.avok.consultation.auth.domain.model.Account",
 		"id": 2,
 		"username": "admin",
@@ -70,7 +70,7 @@
 		"language": "English",
 		"comments": "bla bla",
 		"degree": "1st year Bachelor's",
-		"status": "SCHEDULED",
+		"status": "COMPLETED",
 		"receivedDate": "2016-10-21T13:49:28.243Z",
 		"acceptedDate": "2016-10-21T14:28:28.243Z",
 		"scheduledDate": "2016-10-22T10:04:28.243Z",
@@ -79,7 +79,7 @@
 		"completedDate": "2016-10-22T20:31:34.003Z",
 		"consultant": 1,
 		"studentFeedback": 1,
-		"consultantFeedback":1
+		"consultantFeedback": 1
 	},
 	{
 		"_class": "ee.avok.consultation.domain.model.ConsultationRequest",
@@ -96,7 +96,7 @@
 		"receivedDate": "2016-10-21T13:49:28.243Z",
 		"previous": 1,
 		"studentFeedback": 2,
-		"consultantFeedback":1
+		"consultantFeedback": 1
 	},
 	{
 		"_class": "ee.avok.consultation.domain.model.ConsultationRequest",
@@ -109,12 +109,12 @@
 		"language": "English",
 		"comments": "bla bla",
 		"degree": "1st year Bachelor's",
-		"status": "SCHEDULED",
+		"status": "ACCEPTED",
 		"receivedDate": "2016-10-21T13:49:28.243Z",
 		"acceptedDate": "2016-10-21T14:28:28.243Z",
 		"consultant": 1,
 		"studentFeedback": 3,
-		"consultantFeedback":1
+		"consultantFeedback": 1
 	},
 	{
 		"_class": "ee.avok.consultation.domain.model.Material",
@@ -128,5 +128,4 @@
 		"name": "A bad link",
 		"link": "http://facebook.com/"
 	}
-			
 ]

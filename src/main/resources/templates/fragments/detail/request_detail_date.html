@@ -2,41 +2,37 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 </head>
-		<body>
-		  <table th:fragment="request_detail_date"  class="table table-hover">
-							    <thead>
-							      <tr>
-							      	<th>Consultant Name</th>
-							        <th>Request Date</th>
-							        <th>Acceptance Date</th>
-							        <th>Schedule Date</th>
-							        <th>Meeting Date</th>
-							        <th>Completed Date</th>
-							        <th>Meeting Place</th>
-							      </tr>
-							    </thead>
-							    <tbody>
-							      <tr>
-							      	<td> 
-							        	<label th:href="${consultation.getConsultant().getUsername()}" th:if="${consultation.getConsultant()}"></label>
-							        </td>
-							      
-							        <td> <label th:text="${consultation.receivedDate}" th:if="${consultation.getReceivedDate()}"></label> </td>
-							      
-							        <td> <label th:text="${consultation.acceptedDate}" th:if="${consultation.getAcceptedDate()}"></label> </td>
-							      
-							        <td> <label th:text="${consultation.scheduledDate}" th:if="${consultation.getScheduledDate()}"></label> </td>
-							        
-							        <td> <label th:text="${consultation.meetingDate}" th:if="${consultation.getMeetingDate()}"></label> </td>
-							        <td> <label th:text="${consultation.completedDate}" th:if="${consultation.getCompletedDate()}"></label> </td>
-							        <td> 
-							        	<label th:text="${consultation.meetingPlace}" th:if="${consultation.getMeetingPlace()}"></label>
-							        </td>
-							         
-							      </tr>
-							    </tbody>
-							  </table>
-							  
-				
-	</body>
+<body>
+	<table th:fragment="request_detail_date" class="table table-hover">
+		<thead>
+			<tr>
+				<th>Consultant Name</th>
+				<th>Request Date</th>
+				<th>Acceptance Date</th>
+				<th>Schedule Date</th>
+				<th>Meeting Date</th>
+				<th>Completed Date</th>
+				<th>Meeting Place</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td><label th:text="${consultation.getConsultant().getName()}"
+					th:if="${consultation.getConsultant()}"></label></td>
+				<td><label th:text="${consultation.receivedDate}" th:if="${consultation.getReceivedDate()}"></label>
+				</td>
+				<td><label th:text="${consultation.acceptedDate}" th:if="${consultation.getAcceptedDate()}"></label>
+				</td>
+				<td><label th:text="${consultation.scheduledDate}"
+					th:if="${consultation.getScheduledDate()}"></label></td>
+				<td><label th:text="${consultation.meetingDate}" th:if="${consultation.getMeetingDate()}"></label>
+				</td>
+				<td><label th:text="${consultation.completedDate}"
+					th:if="${consultation.getCompletedDate()}"></label></td>
+				<td><label th:text="${consultation.meetingPlace}" th:if="${consultation.getMeetingPlace()}"></label>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+</body>
 </html>
