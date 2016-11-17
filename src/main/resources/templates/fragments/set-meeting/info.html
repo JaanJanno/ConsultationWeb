@@ -1,13 +1,16 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-material-datetimepicker/2.7.1/css/bootstrap-material-datetimepicker.min.css"
+			th:href="@{/webjars/bootstrap-datetimepicker/6aa746736b/css/datetimepicker.css}" rel="stylesheet" media="screen" />
+		
 </head>
 	<body>
 		
 		
 	<div class="col-md-12" th:fragment="metting_info">
-		<div class="panel box-v4">
-			<div class="panel-heading bg-white border-none">
+		<div class="panel panel-default">
+			<div class="panel-heading">
 				<h4>Meetings Information</h4>
 			</div>
 			<div class="panel-body padding-0">
@@ -31,14 +34,21 @@
 			              			<label style="padding-left: 40px;" th:text="${consultation.email}"></label>   
 			              		</div>
 			              	</div>
-			              	<div class="row" style="padding:5px;">
-			            			<span style="padding-right:40px; float: left;" class="control-label text-left"><strong>Set date:</strong>
-			            			</span>
-			            			<input style="float: right; width: 170px;" th:field="${consultation.meetingDate}" type="date"></input>    		
-			              	</div>
+			              	
+			              	<!--div class="row" style="padding:5px;">
+			              		<div class="col-lg-12">
+				              		<div class="form-group form-animate-text">
+			                          <input type="text" class="form-text datetime" th:field="${consultation.meetingDate}" th:required="required">
+			                          </input>
+			                          <span class="bar"></span>
+			                          <label><span class="fa fa-calendar"></span> Date Time Picker</label>
+			                        </div>
+			                     </div>
+			              	</div-->
+			              	
 			              	<div class="row" style="padding-right:5px;">
 			            			<label style="float: left;" class="control-label text-left"><strong>Set Location:</strong></label>
-			              			<input style="float: right;" th:field="${consultation.meetingPlace}"></input>   
+			              			<input style="float: right; width: 75%;" th:field="${consultation.meetingPlace}"></input>   
 			              	</div>
 			              	<form style='padding: 5px;' id="request-form"
 													th:object="${consultation}" th:method="post"
@@ -54,7 +64,17 @@
 		 </div>
 		</div>
 	</div>
-
+<script type="text/javascript">
+  $(document).ready(function(){
+	  $('.dateAnimate').bootstrapMaterialDatePicker({ weekStart : 0, time: false,animation:true});
+	    $('.date').bootstrapMaterialDatePicker({ weekStart : 0, time: false});
+	    $('.time').bootstrapMaterialDatePicker({ date: false,format:'HH:mm',animation:true});
+	    $('.datetime').bootstrapMaterialDatePicker({ format : 'dddd DD MMMM YYYY - HH:mm',animation:true});
+	    $('.date-fr').bootstrapMaterialDatePicker({ format : 'DD/MM/YYYY HH:mm', lang : 'fr', weekStart : 1, cancelText : 'ANNULER'});
+	    $('.min-date').bootstrapMaterialDatePicker({ format : 'DD/MM/YYYY HH:mm', minDate : new Date() });
+	 
+  })
+</script>
 
 
 	</body>

@@ -22,13 +22,24 @@
 
 		<!-- start: content -->
 		<div id="content">
+			<div class="panel box-shadow-none content-header">
+				<div class="panel-body">
+					<div class="col-md-12">
+						<h3 class="animated fadeInLeft">Set Meeting</h3>
+						<p class="animated fadeInDown">
+							You can find all your meetings and set new ones here.<span class="fa-angle-right fa"></span> 
+						</p>
+					</div>
+				</div>
+			</div>
+		
 			<div class="row">
 				
-				<div class="col-md-9" style="padding: 20px;">
+				<div class="col-md-7" style="margin-top: 20px; margin-left: 20px;">
 					<div th:replace="fragments/set-meeting/set-meeting-calendar :: calendar"></div>
 				</div>
-				<div class="col-md-3" style="padding: 20px;">
-								<div th:replace="fragments/set-meeting/info :: metting_info"></div>		
+				<div class="col-md-4" style="margin-top: 20px;">
+					<div th:replace="fragments/set-meeting/info :: metting_info"></div>		
 				</div>
 			</div>
 		<!-- end: content -->
