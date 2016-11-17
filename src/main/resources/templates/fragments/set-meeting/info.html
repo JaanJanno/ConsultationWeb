@@ -1,81 +1,73 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-material-datetimepicker/2.7.1/css/bootstrap-material-datetimepicker.min.css"
-			th:href="@{/webjars/bootstrap-datetimepicker/6aa746736b/css/datetimepicker.css}" rel="stylesheet" media="screen" />
-		
+<link
+	href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-material-datetimepicker/2.7.1/css/bootstrap-material-datetimepicker.min.css"
+	th:href="@{/webjars/bootstrap-datetimepicker/6aa746736b/css/datetimepicker.css}" rel="stylesheet"
+	media="screen" />
+
 </head>
-	<body>
-		
-		
-	<div class="col-md-12" th:fragment="metting_info">
-		<div class="panel panel-default">
-			<div class="panel-heading">
-				<h4>Meetings Information</h4>
+<body>
+
+	<div class="panel form-element-padding" th:fragment="metting_info">
+		<div class="panel-heading">
+			<h4>Consultation info</h4>
+		</div>
+		<div class="panel-body" style="padding-bottom: 30px;">
+			<div class="col-md-12">
+				<div class="form-group">
+					<label class="col-sm-2 control-label text-right">Name</label>
+					<div class="col-sm-10">
+						<input type="text" class="form-control" disabled="" th:value="${consultation.name}" />
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-sm-2 control-label text-right">Email</label>
+					<div class="col-sm-10">
+						<input type="text" class="form-control" disabled="" th:value="${consultation.email}" />
+					</div>
+				</div>
+
+
 			</div>
-			<div class="panel-body padding-0">
-				<div class="col-md-12 col-xs-12 col-md-12 padding-0 box-v4-alert">
-				</div>
-				<div>
-			            <div class="panel-body text-center">	
-			            	<div class="row">
-			            		<div class="col-lg-1">
-			            			<label style="float: left;" class="control-label text-left"><strong>Name:</strong></label>
-			            		</div>
-			            		<div class="col-lg-1">	
-			              			<label class="control-label text-right" style="padding-left: 40px;" th:text="${consultation.name}"></label>
-			              		</div>
-			              	</div>
-			              	<div class="row">
-			              		<div class="col-lg-1">
-			            			<label style="float: left;" class="control-label text-left"><strong>Email:</strong></label>	
-			              		</div>
-			              		<div class="col-lg-1">
-			              			<label style="padding-left: 40px;" th:text="${consultation.email}"></label>   
-			              		</div>
-			              	</div>
-			              	
-			              	<!--div class="row" style="padding:5px;">
-			              		<div class="col-lg-12">
-				              		<div class="form-group form-animate-text">
-			                          <input type="text" class="form-text datetime" th:field="${consultation.meetingDate}" th:required="required">
-			                          </input>
-			                          <span class="bar"></span>
-			                          <label><span class="fa fa-calendar"></span> Date Time Picker</label>
-			                        </div>
-			                     </div>
-			              	</div-->
-			              	
-			              	<div class="row" style="padding-right:5px;">
-			            			<label style="float: left;" class="control-label text-left"><strong>Set Location:</strong></label>
-			              			<input style="float: right; width: 75%;" th:field="${consultation.meetingPlace}"></input>   
-			              	</div>
-			              	<form style='padding: 5px;' id="request-form"
-													th:object="${consultation}" th:method="post"
-													th:action="@{/requests/{id}(id=${consultation.id})}">
-										
-									<button class="btn btn-primary" type="submit">Accept</button>
-												
-							</form>
-			              	
-		
-			            </div>
-				</div>
-		 </div>
 		</div>
 	</div>
-<script type="text/javascript">
-  $(document).ready(function(){
-	  $('.dateAnimate').bootstrapMaterialDatePicker({ weekStart : 0, time: false,animation:true});
-	    $('.date').bootstrapMaterialDatePicker({ weekStart : 0, time: false});
-	    $('.time').bootstrapMaterialDatePicker({ date: false,format:'HH:mm',animation:true});
-	    $('.datetime').bootstrapMaterialDatePicker({ format : 'dddd DD MMMM YYYY - HH:mm',animation:true});
-	    $('.date-fr').bootstrapMaterialDatePicker({ format : 'DD/MM/YYYY HH:mm', lang : 'fr', weekStart : 1, cancelText : 'ANNULER'});
-	    $('.min-date').bootstrapMaterialDatePicker({ format : 'DD/MM/YYYY HH:mm', minDate : new Date() });
-	 
-  })
-</script>
 
 
-	</body>
+	<script type="text/javascript">
+		$(document).ready(function() {
+			$('.dateAnimate').bootstrapMaterialDatePicker({
+				weekStart : 0,
+				time : false,
+				animation : true
+			});
+			$('.date').bootstrapMaterialDatePicker({
+				weekStart : 0,
+				time : false
+			});
+			$('.time').bootstrapMaterialDatePicker({
+				date : false,
+				format : 'HH:mm',
+				animation : true
+			});
+			$('.datetime').bootstrapMaterialDatePicker({
+				format : 'dddd DD MMMM YYYY - HH:mm',
+				animation : true
+			});
+			$('.date-fr').bootstrapMaterialDatePicker({
+				format : 'DD/MM/YYYY HH:mm',
+				lang : 'fr',
+				weekStart : 1,
+				cancelText : 'ANNULER'
+			});
+			$('.min-date').bootstrapMaterialDatePicker({
+				format : 'DD/MM/YYYY HH:mm',
+				minDate : new Date()
+			});
+
+		})
+	</script>
+
+
+</body>
 </html>
