@@ -84,6 +84,14 @@ public class ConsultationRequest {
 	public boolean hasFile() {
 		return this.upload != null;
 	}
+	
+	public boolean hasStudentFeedback() {
+		return studentFeedback.getUid() != null;
+	}
+	
+	public boolean hasConsultantFeedback() {
+		return consultantFeedback != null;
+	}
 
 	public ConsultationRequest() {
 	}
