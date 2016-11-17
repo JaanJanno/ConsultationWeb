@@ -1,14 +1,8 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-<link
-	href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-material-datetimepicker/2.7.1/css/bootstrap-material-datetimepicker.min.css"
-	th:href="@{/webjars/bootstrap-datetimepicker/6aa746736b/css/datetimepicker.css}" rel="stylesheet"
-	media="screen" />
-
 </head>
 <body>
-
 	<div class="panel form-element-padding" th:fragment="metting_info">
 		<div class="panel-heading">
 			<h4>Consultation info</h4>
@@ -27,47 +21,23 @@
 						<input type="text" class="form-control" disabled="" th:value="${consultation.email}" />
 					</div>
 				</div>
-
-
+				<div class="form-group">
+					<label class="col-sm-2 control-label text-right">Meeting place</label>
+					<div class="col-sm-10">
+						<input type="text" class="form-control" />
+					</div>
+				</div>
+				<div class="form-group form-animate-text">
+					<input type="text" class="form-text datetime" required="" /> <span class="bar"></span> <label><span
+						class="fa fa-calendar"></span> Date Time Picker</label>
+				</div>
+				<div class="form-group">
+					<div class="col-sm-offset-2 col-sm-10">
+						<input type="submit" value="Set meeting" class="btn btn-primary" />
+					</div>
+				</div>
 			</div>
 		</div>
 	</div>
-
-
-	<script type="text/javascript">
-		$(document).ready(function() {
-			$('.dateAnimate').bootstrapMaterialDatePicker({
-				weekStart : 0,
-				time : false,
-				animation : true
-			});
-			$('.date').bootstrapMaterialDatePicker({
-				weekStart : 0,
-				time : false
-			});
-			$('.time').bootstrapMaterialDatePicker({
-				date : false,
-				format : 'HH:mm',
-				animation : true
-			});
-			$('.datetime').bootstrapMaterialDatePicker({
-				format : 'dddd DD MMMM YYYY - HH:mm',
-				animation : true
-			});
-			$('.date-fr').bootstrapMaterialDatePicker({
-				format : 'DD/MM/YYYY HH:mm',
-				lang : 'fr',
-				weekStart : 1,
-				cancelText : 'ANNULER'
-			});
-			$('.min-date').bootstrapMaterialDatePicker({
-				format : 'DD/MM/YYYY HH:mm',
-				minDate : new Date()
-			});
-
-		})
-	</script>
-
-
 </body>
 </html>
