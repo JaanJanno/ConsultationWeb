@@ -23,6 +23,7 @@ import ee.avok.consultation.auth.domain.model.Account;
 import ee.avok.consultation.auth.domain.repository.AccountRepository;
 import ee.avok.consultation.domain.model.ConsultationRequest;
 import ee.avok.consultation.domain.repository.ConsultationRequestRepository;
+import ee.avok.consultation.dto.CalendarDTO;
 import ee.avok.consultation.dto.StatisticsDTO;
 
 @RunWith(SpringJUnit4ClassRunner.class)

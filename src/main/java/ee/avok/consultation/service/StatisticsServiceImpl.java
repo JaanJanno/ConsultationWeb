@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import ee.avok.consultation.domain.model.ConsultationRequest;
 import ee.avok.consultation.domain.repository.ConsultationRequestRepository;
+import ee.avok.consultation.dto.CalendarDTO;
 import ee.avok.consultation.dto.StatisticsDTO;
 
 @Service

@@ -1,4 +1,4 @@
-package ee.avok.consultation.service;
+package ee.avok.consultation.dto;
 
 import java.util.Date;
 
