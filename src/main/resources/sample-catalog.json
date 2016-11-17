@@ -12,7 +12,6 @@
 	{
 		"_class": "ee.avok.consultation.domain.model.StudentFeedback",
 		"id": 1,
-		"uid": "asdfg",
 		"firstConsultation": true,
 		"useful": true,
 		"providedSupport": true,
@@ -22,22 +21,17 @@
 	{
 		"_class": "ee.avok.consultation.domain.model.StudentFeedback",
 		"id": 2,
-		"uid": "asdfg",
-		"firstConsultation": true,
-		"useful": true,
-		"providedSupport": true,
-		"comingBack": true,
-		"comments": "I enjoied the consultation, but it was not enough for me and i most probably come back very soon."
+		"uid": "asdfg"
 	},
 	{
 		"_class": "ee.avok.consultation.domain.model.StudentFeedback",
 		"id": 3,
-		"uid": "asdfg",
-		"firstConsultation": true,
-		"useful": true,
-		"providedSupport": true,
-		"comingBack": true,
-		"comments": "I enjoied the consultation, but I enjoy the website more than the consultation."
+		"uid": "asdfg"
+	},
+	{
+		"_class": "ee.avok.consultation.domain.model.StudentFeedback",
+		"id": 4,
+		"uid": "asdfg"
 	},
 	{
 		"_class": "ee.avok.consultation.auth.domain.model.Account",
@@ -132,7 +126,7 @@
 		"meetingPlace": "J. Liivi 2",
 		"meetingDate": "2016-11-22T16:00:00.000Z",
 		"consultant": 1,
-		"studentFeedback": 3
+		"studentFeedback": 4
 	},
 	{
 		"_class": "ee.avok.consultation.domain.model.Material",
