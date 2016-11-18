@@ -21,16 +21,15 @@
 
 
 		<!-- start: content -->
-		
+
 		<div id="content">
 			<div class="panel box-shadow-none content-header">
 				<div class="panel-body">
 					<div class="col-md-12">
-						<h3 class="animated fadeInLeft">Accounts Activation</h3>
-						
-						<p class="animated fadeInDown">
-							Change the activation status of accounts from below table.
-						</p>
+						<h3 class="animated fadeInLeft">Account management</h3>
+
+						<p class="animated fadeInDown">Create new accounts and change the status of existing
+							accounts</p>
 					</div>
 				</div>
 			</div>
@@ -38,66 +37,70 @@
 			<div class="col-md-12" style="padding: 20px;">
 				<div class="col-md-12 padding-0">
 					<div class="col-md-12 padding-0">
-							
-						<div class="panel panel-default">
-							  <div class="panel-heading">
-				  				<strong>Add a New Account </strong>
-				  			  </div>						
-							  <div class="panel-body">
-							  		<form class="form-inline" th:object="${account}" th:method="post">
-						                  <div class="row" style="padding-left: 20px;">
-						                  		<div class="form-group">
-											      	 <label for="email">Email:</label>
-											    	 <input type="email" class="form-control" id="email" style="width: 500px;" placeholder="Enter email"></input>
-											    </div>
-						                  		<button class=" btn btn-primary  glyphicon" type="submit">New Account</button>
-						                  </div>
-									</form>
-							  </div>
-						</div>
-					
+
 						<div class="panel panel-default">
 							<div class="panel-heading">
-				  				<strong>Activation or Deactivation of Accounts </strong>
-				  			</div>						
-						  <div class="panel-body">
-						    <table class="table table-bordered table-striped">
-						        <thead>
-						            <tr>
-						                <th>ID</th>
-						                <th>Email</th>
-						                <th>Username</th>
-						                <th>Detail</th>
-						            </tr>
-						        </thead>
-						        <tbody>
-						            <tr class="table-row" th:each="account : ${accounts}">
-						                <td th:text="${account.id}"></td>
-						                <td th:text="${account.name}"></td>
-						                <td th:text="${account.email}"></td>					              
-											<td> 
-							                	<form  th:object="${account}" th:method="post" 
-							                		th:action="@{/accounts/{id}/deactivate (id=${account.id})}"
-							                		th:if="${account.active}">
-							                  
-								                	<button class=" btn btn-danger  glyphicon" type="submit">
-								                		Deactive
-								                	</button>							                
-							                	</form>
-						
-								                <form th:object="${account}" th:method="post"   th:if="${!account.active}"
-										                th:action="@{/accounts/{id}/activate (id=${account.id})}">
-								                   
-								                	<button class="btn  btn-success  glyphicon" type="submit">
-								                		 Active
-								                	</button>
-								                </form>
-						                	</td>
-						            </tr>
-						        </tbody>
-						    </table>
-						    </div>
-						</div>	
+								<strong>Add a new account </strong>
+							</div>
+							<div class="panel-body" style="padding-bottom: 30px;">
+								<div class="col-md-12">
+									<form class="form-horizontal" th:object="${account}" th:method="post">
+
+										<div class="form-group">
+											<label class="col-sm-2 control-label text-right" for="email">Email</label>
+											<div class="col-sm-10">
+												<input type="email" class="form-control" id="email" placeholder="testy@ut.ee" />
+											</div>
+										</div>
+
+										<div class="form-group">
+											<div class="col-sm-offset-2 col-sm-10">
+												<input type="submit" value="Send email to account" class="btn btn-primary" />
+											</div>
+										</div>
+
+									</form>
+								</div>
+							</div>
+						</div>
+
+						<div class="panel panel-default">
+							<div class="panel-heading">
+								<strong>Activation or deactivation of accounts </strong>
+							</div>
+							<div class="panel-body">
+								<table class="table table-bordered table-striped">
+									<thead>
+										<tr>
+											<th>ID</th>
+											<th>Name</th>
+											<th>Email</th>
+											<th>Detail</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr class="table-row" th:each="account : ${accounts}">
+											<td th:text="${account.id}"></td>
+											<td th:text="${account.name}"></td>
+											<td th:text="${account.email}"></td>
+											<td>
+												<form th:object="${account}" th:method="post"
+													th:action="@{/accounts/{id}/deactivate (id=${account.id})}" th:if="${account.active}">
+
+													<button class=" btn btn-danger" type="submit">Deactivate</button>
+												</form>
+
+												<form th:object="${account}" th:method="post" th:if="${!account.active}"
+													th:action="@{/accounts/{id}/activate (id=${account.id})}">
+
+													<button class="btn  btn-success" type="submit">Activate</button>
+												</form>
+											</td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+						</div>
 					</div>
 
 				</div>
