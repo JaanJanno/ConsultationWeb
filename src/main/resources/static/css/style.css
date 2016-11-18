@@ -6569,3 +6569,8 @@ ul li a:focus {
     .validateTips { border: 1px solid transparent; padding: 0.3em; }
   */
 }
+
+.dtp td {
+	border: none !important;
+	padding: 0.5em 0.3em !important;
+}
