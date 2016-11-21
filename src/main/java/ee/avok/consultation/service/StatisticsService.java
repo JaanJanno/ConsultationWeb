@@ -1,9 +1,11 @@
 package ee.avok.consultation.service;
 
+import java.util.Date;
 import java.util.List;
 
 import ee.avok.consultation.auth.domain.model.Account;
 import ee.avok.consultation.domain.model.ConsultationRequest;
+import ee.avok.consultation.domain.model.ConsultationStatus;
 import ee.avok.consultation.dto.CalendarDTO;
 import ee.avok.consultation.dto.StatisticsDTO;
 
@@ -42,4 +44,12 @@ public interface StatisticsService {
 	 *            {@link Account#getId()}
 	 */
 	List<CalendarDTO> getMeetings(int userId);
+	/*
+	 * 
+	 *Find all records based on date 
+	 * 
+	 * 
+	 * 
+	 */
+	 int countRequestByStatusAndPeriod(ConsultationStatus status,String Period );
 }

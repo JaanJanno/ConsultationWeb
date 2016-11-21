@@ -4,10 +4,12 @@ import java.util.List;
 
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
+import org.springframework.stereotype.Repository;
 
 import ee.avok.consultation.auth.domain.model.Account;
 import ee.avok.consultation.domain.model.ConsultationRequest;
 import ee.avok.consultation.domain.model.ConsultationStatus;
+
 
 public interface ConsultationRequestRepository extends CrudRepository<ConsultationRequest, Integer> {
 
@@ -15,6 +17,8 @@ public interface ConsultationRequestRepository extends CrudRepository<Consultati
 
 	List<ConsultationRequest> findByStatusAndConsultant(ConsultationStatus status, Account consultant);
 
+	
+	
 	@Query("select count(*) from ConsultationRequest where receivedDate != null")
 	int countAllReceived();
 
