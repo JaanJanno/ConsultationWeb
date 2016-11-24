@@ -1,5 +1,6 @@
 package ee.avok.consultation.domain.repository;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.Query;
@@ -18,6 +19,18 @@ public interface ConsultationRequestRepository extends CrudRepository<Consultati
 
 	List<ConsultationRequest> findByStatusAndConsultant(ConsultationStatus status, Account consultant);
 
+	@Query("select count(*) from ConsultationRequest where receivedDate >=?1")
+	int countReceivedByDate(String todayDate);
+	
+	@Query("select count(*) from ConsultationRequest where acceptedDate >=?1")
+	int countAcceptedByDate(Date date);
+	
+	@Query("select count(*) from ConsultationRequest where scheduledDate >=?1")
+	int countScheduledByDate(Date date);
+	
+	@Query("select count(*) from ConsultationRequest where completedDate >=?1")
+	int countCompletedByDate(Date date);
+
 	@Query("select count(*) from ConsultationRequest where receivedDate != null")
 	int countAllReceived();
 
@@ -33,5 +46,8 @@ public interface ConsultationRequestRepository extends CrudRepository<Consultati
 	List<ConsultationRequest> findByMeetingDateNotNull();
 
 	List<ConsultationRequest> findByConsultantIdAndMeetingDateNotNull(int consultantId);
+	
+	@Query("select count(*) from ConsultationRequest where receivedDate >=?1")
+	int countReceivedByDate(Date time);
 
 }
