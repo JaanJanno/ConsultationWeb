@@ -2,6 +2,7 @@ package ee.avok.consultation.service;
 
 import static org.junit.Assert.assertEquals;
 
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -48,21 +49,21 @@ public class StatisticsTest {
 	@Test
 	public void statsAll() {
 		StatisticsDTO stats = statServ.statsAll();
-		assertEquals(14, stats.getReceived());
-		assertEquals(11, stats.getAccepted());
-		assertEquals(8, stats.getScheduled());
-		assertEquals(5, stats.getCompleted()); 
+		assertEquals(18, stats.getReceived());
+		assertEquals(15, stats.getAccepted());
+		assertEquals(11, stats.getScheduled());
+		assertEquals(6, stats.getCompleted()); 
 	}
 
 	@Test
 	public void getAllStats() {
 		StatisticsDTO stats = statServ.getStatistics("all");
-		assertEquals(14, stats.getReceived());
-		assertEquals(11, stats.getAccepted());
-		assertEquals(8, stats.getScheduled());
-		assertEquals(5, stats.getCompleted());
+		assertEquals(18, stats.getReceived());
+		assertEquals(15, stats.getAccepted());
+		assertEquals(11, stats.getScheduled());
+		assertEquals(6, stats.getCompleted());
 	}
-	/*
+/*	
 	@Test
 	public void getAllMeetings() {
 		List<CalendarDTO> events = statServ.getAllMeetings();
@@ -89,38 +90,61 @@ public class StatisticsTest {
 	}
 */
 	@Test
-	public void findByStatusTest(){
-		int recievedRequests=statServ.findRequestsByStatus(status.RECEIVED).size();
-		assertEquals(3, recievedRequests);	
+	public void findRequestByDateTest(){
+		Calendar c = Calendar.getInstance();
+		c.set(Calendar.HOUR_OF_DAY, 0);
+		c.set(Calendar.MINUTE, 0);
+		c.set(Calendar.SECOND, 0);
+		c.set(Calendar.MILLISECOND, 0);
+		 StatisticsDTO recievedRequests = statServ.findRequestByDate(c.getTime());
+		assertEquals(6, recievedRequests.getReceived());
+		assertEquals(3, recievedRequests.getAccepted());
+		assertEquals(2, recievedRequests.getScheduled());
+		assertEquals(1, recievedRequests.getCompleted());
 	}
 	
-/*	@Test
-	public void findRequestsByPeriodDailyTest(){
-		StatisticsDTO statistic = statServ.findRequestByPeriod("Daily");
-		assertEquals(3, statistic.getReceived());
-		assertEquals(1, statistic.getAccepted());
-		assertEquals(1, statistic.getScheduled());
-		assertEquals(1, statistic.getCompleted());
-	}*/
 	@Test
-	public void findRequestsByPeriodWeeklyTest(){
-		StatisticsDTO statistic = statServ.findRequestByPeriod("Weekly");
-		assertEquals(3, statistic.getReceived());
-		assertEquals(2, statistic.getAccepted());
-		assertEquals(3, statistic.getScheduled());
+	public void countReceivedByDateTest(){
+		Calendar c = Calendar.getInstance();
+		c.set(Calendar.HOUR_OF_DAY, 0);
+		c.set(Calendar.MINUTE, 0);
+		c.set(Calendar.SECOND, 0);
+		c.set(Calendar.MILLISECOND, 0);
+		int count=conReqRepo.countReceivedByDate(c.getTime());
+		assertEquals(6, count);
+		
+		
+	}
+	
+	@Test
+	public void getStatistics_Daily_Test(){
+		StatisticsDTO statistic = statServ.getStatistics("Daily");
+		assertEquals(6, statistic.getReceived());
+		assertEquals(3, statistic.getAccepted());
+		assertEquals(2, statistic.getScheduled());
 		assertEquals(1, statistic.getCompleted());
 	}
+
 	@Test
-	public void findRequestsByPeriodMonthlyTest(){
-		StatisticsDTO statistic = statServ.findRequestByPeriod("Monthly");
-		assertEquals(3, statistic.getReceived());
-		assertEquals(3, statistic.getAccepted());
+	public void findRequestsByPeriod_Weekly_Test(){
+		StatisticsDTO statistic = statServ.getStatistics("Weekly");
+		assertEquals(6, statistic.getReceived());
+		assertEquals(6, statistic.getAccepted());
 		assertEquals(4, statistic.getScheduled());
+		assertEquals(1, statistic.getCompleted());
+	}
+	
+	@Test
+	public void findRequestsByPeriod_Monthly_Test(){
+		StatisticsDTO statistic = statServ.getStatistics("Monthly");
+		assertEquals(10, statistic.getReceived());
+		assertEquals(11, statistic.getAccepted());
+		assertEquals(8, statistic.getScheduled());
 		assertEquals(4, statistic.getCompleted());
 	}
 	@Test
 	public void findRequestsByPeriodTotalTest(){
-		StatisticsDTO statistic = statServ.findRequestByPeriod("Total");
+		StatisticsDTO statistic = statServ.getStatistics("all");
 		assertEquals(18, statistic.getReceived());
 		assertEquals(15, statistic.getAccepted());
 		assertEquals(11, statistic.getScheduled());
@@ -130,7 +154,7 @@ public class StatisticsTest {
 	@Test
 	public void setdataShouldbeLoadedTest(){
 		long count=conReqRepo.count();
-		assertEquals(14, count);
+		assertEquals(18, count);
 	}
 
 }

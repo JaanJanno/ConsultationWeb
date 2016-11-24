@@ -50,11 +50,17 @@ public interface StatisticsService {
 	  *  
 	  * 
 	  */
-	 List<ConsultationRequest> findRequestsByStatus(ConsultationStatus status);
+	// List<ConsultationRequest> findRequestsByStatus(ConsultationStatus status);
 	 /*
 	  * Period = Today || Weekly || Monthly || Total
 	  * 
 	  */
-	StatisticsDTO findRequestByPeriod(String string);
+//	StatisticsDTO findRequestByPeriod(String string);
+	/*
+	  * Period = Today || Weekly || Monthly || Total
+	  * 
+	  */
+	StatisticsDTO findRequestByDate(Date date);
+	
 	 
 }
