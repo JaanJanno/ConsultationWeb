@@ -67,7 +67,6 @@ public class RequestController {
 		ra.addFlashAttribute("message", "consultation.success");
 		ra.addFlashAttribute("type", "success");
 		return "redirect:/";
-
 	}
 
 	/*

@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import ee.avok.consultation.auth.domain.model.Account;
 import ee.avok.consultation.auth.domain.model.Role;
@@ -47,12 +48,15 @@ public class FeedbackController {
 
 	@RequestMapping(value = "/requests/{id}/studentfeedback", method = RequestMethod.POST)
 	public String submitStudentFeedbackForm(@ModelAttribute StudentFeedback feedback, Model model, @PathVariable int id,
-			@RequestParam("uid") String uid) throws UnauthorizedException {
+			@RequestParam("uid") String uid, RedirectAttributes ra) throws UnauthorizedException {
 		feedServ.verifyStudentFeedbackUID(id, uid); // Check if UID matches
 													// parameter given in e-mail
 													// for authentication.
 		feedServ.submitStudentFeedback(id, feedback);
-		return "redirect:" + "/";
+		
+		ra.addFlashAttribute("message", "student.feedback.success");
+		ra.addFlashAttribute("type", "success");
+		return "redirect:/";
 
 	}
 
