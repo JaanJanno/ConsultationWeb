@@ -24,6 +24,7 @@ import ee.avok.consultation.auth.domain.repository.AccountRepository;
 import ee.avok.consultation.domain.model.ConsultantFeedback;
 import ee.avok.consultation.domain.model.ConsultationRequest;
 import ee.avok.consultation.domain.model.ConsultationStatus;
+import ee.avok.consultation.domain.model.NewConsultationOption;
 import ee.avok.consultation.domain.repository.ConsultationRequestRepository;
 import ee.avok.consultation.dto.CompletedDTO;
 
@@ -142,14 +143,17 @@ public class ConsultationServiceTest {
 		assertEquals(false, dto.isConsultantFeedback());
 		assertEquals(true, dto.isStudentFeedback());
 	}
-	
+
 	@Test
 	public void completedDTOsHasBothFeedbacks() {
 		req.setStatus(ConsultationStatus.COMPLETED);
 		req.setConsultant(user);
 
 		conReqRepo.save(req);
-		feedServ.submitConsultantFeedback(req.getId(), new ConsultantFeedback());
+		ConsultantFeedback f = new ConsultantFeedback();
+		f.setSuggestedNewConsultation(NewConsultationOption.WITH_ME);
+
+		feedServ.submitConsultantFeedback(req.getId(), f);
 		feedServ.addStudentFeedback(req);
 		feedServ.submitStudentFeedback(req.getId(), req.getStudentFeedback());
 

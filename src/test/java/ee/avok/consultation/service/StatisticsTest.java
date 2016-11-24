@@ -3,31 +3,20 @@ package ee.avok.consultation.service;
 import static org.junit.Assert.assertEquals;
 
 import java.util.Calendar;
-import java.util.Date;
-import java.util.List;
 
-import javax.transaction.Transactional;
-
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.SpringApplicationConfiguration;
 import org.springframework.test.annotation.DirtiesContext;
-import org.springframework.test.context.ActiveProfiles;
-import org.springframework.test.context.TestExecutionListeners;
+import org.springframework.test.annotation.DirtiesContext.ClassMode;
 import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.springframework.test.context.support.DependencyInjectionTestExecutionListener;
-import org.springframework.test.context.transaction.TransactionalTestExecutionListener;
-import org.springframework.test.annotation.DirtiesContext.ClassMode;
+
 import ee.avok.consultation.ConsultationWebApplication;
-import ee.avok.consultation.auth.domain.model.Account;
 import ee.avok.consultation.auth.domain.repository.AccountRepository;
-import ee.avok.consultation.domain.model.ConsultationRequest;
 import ee.avok.consultation.domain.model.ConsultationStatus;
 import ee.avok.consultation.domain.repository.ConsultationRequestRepository;
-import ee.avok.consultation.dto.CalendarDTO;
 import ee.avok.consultation.dto.StatisticsDTO;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -117,8 +106,8 @@ public class StatisticsTest {
 	}
 	
 	@Test
-	public void getStatistics_Daily_Test(){
-		StatisticsDTO statistic = statServ.getStatistics("Daily");
+	public void getStatisticsToday(){
+		StatisticsDTO statistic = statServ.getStatistics("today");
 		assertEquals(6, statistic.getReceived());
 		assertEquals(3, statistic.getAccepted());
 		assertEquals(2, statistic.getScheduled());
@@ -126,8 +115,8 @@ public class StatisticsTest {
 	}
 
 	@Test
-	public void findRequestsByPeriod_Weekly_Test(){
-		StatisticsDTO statistic = statServ.getStatistics("Weekly");
+	public void getStatisticsWeek(){
+		StatisticsDTO statistic = statServ.getStatistics("week");
 		assertEquals(6, statistic.getReceived());
 		assertEquals(6, statistic.getAccepted());
 		assertEquals(4, statistic.getScheduled());
@@ -135,8 +124,8 @@ public class StatisticsTest {
 	}
 	
 	@Test
-	public void findRequestsByPeriod_Monthly_Test(){
-		StatisticsDTO statistic = statServ.getStatistics("Monthly");
+	public void getStatisticsMonth(){
+		StatisticsDTO statistic = statServ.getStatistics("month");
 		assertEquals(10, statistic.getReceived());
 		assertEquals(11, statistic.getAccepted());
 		assertEquals(8, statistic.getScheduled());

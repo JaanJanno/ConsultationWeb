@@ -23,7 +23,7 @@ import ee.avok.consultation.service.AccountService;
 @Controller
 public class AccountController {
 	
-	private static Logger LOG = LoggerFactory.getLogger(RequestController.class);
+	private static Logger LOG = LoggerFactory.getLogger(AccountController.class);
 
 	@Autowired
 	AuthService authServ;

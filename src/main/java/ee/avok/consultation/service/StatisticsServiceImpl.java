@@ -1,11 +1,12 @@
 package ee.avok.consultation.service;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,51 +19,53 @@ import ee.avok.consultation.dto.StatisticsDTO;
 @Service
 public class StatisticsServiceImpl implements StatisticsService {
 
+	private static Logger LOG = LoggerFactory.getLogger(StatisticsServiceImpl.class);
+
 	@Autowired
 	ConsultationRequestRepository conReqRepo;
 	ConsultationStatus status;
 
 	@Override
 	public StatisticsDTO getStatistics(String time) {
-		StatisticsDTO stats = new StatisticsDTO();
+		StatisticsDTO stats;
 		Calendar c = Calendar.getInstance();
 		c.set(Calendar.HOUR_OF_DAY, 0);
 		c.set(Calendar.MINUTE, 0);
 		c.set(Calendar.SECOND, 0);
 		c.set(Calendar.MILLISECOND, 0);
 		switch (time) {
-			case "all":
-				System.out.println("All records are counted" );
-				return statsAll(stats);
-			case "Daily":
-				Date todayDate =c.getTime();
-				System.out.println("Date of today is: "+todayDate);
-				return findRequestByDate(todayDate);
-								
-			case "Weekly":
-				System.out.println("Weekly");
-				c.set(Calendar.DAY_OF_WEEK, Calendar.MONDAY);
-				Date lastMondayDate =c.getTime();
-				System.out.println("Date of lastMondayDate is: "+lastMondayDate);
-				return findRequestByDate(lastMondayDate);
-				
-			case "Monthly":
-				c.set(Calendar.DAY_OF_MONTH, 1);
-				Date lastMonthDate =c.getTime();
-				System.out.println("Monthly");
-				System.out.println("Date of lastMonthDate is: "+lastMonthDate);
-				return findRequestByDate(lastMonthDate);
-	
+		case "all":
+			LOG.info("All records are counted");
+			stats = statsAll();
+			break;
+		case "today":
+			Date todayDate = c.getTime();
+			LOG.info("Date of today is: " + todayDate);
+			stats = findRequestByDate(todayDate);
+			break;
+		case "week":
+			c.set(Calendar.DAY_OF_WEEK, Calendar.MONDAY);
+			Date lastMondayDate = c.getTime();
+			LOG.info("Date of lastMondayDate is: " + lastMondayDate);
+			stats = findRequestByDate(lastMondayDate);
+			break;
+		case "month":
+			c.set(Calendar.DAY_OF_MONTH, 1);
+			Date lastMonthDate = c.getTime();
+			LOG.info("Date of lastMonthDate is: " + lastMonthDate);
+			stats = findRequestByDate(lastMonthDate);
+			break;
+		default:
+			LOG.info("Time value {} unrecongized, returning all", time);
+			stats = statsAll();
+			break;
 		}
 		return stats;
 	}
 
 	@Override
 	public StatisticsDTO statsAll() {
-		return statsAll(new StatisticsDTO());  //why do u pass an empty object?
-	}
-
-	private StatisticsDTO statsAll(StatisticsDTO stats) { 
+		StatisticsDTO stats = new StatisticsDTO();
 		stats.setReceived(conReqRepo.countAllReceived());
 		stats.setAccepted(conReqRepo.countAllAccepted());
 		stats.setScheduled(conReqRepo.countAllScheduled());
@@ -97,14 +100,12 @@ public class StatisticsServiceImpl implements StatisticsService {
 		return events;
 	}
 
-
 	@Override
 	public StatisticsDTO findRequestByDate(Date Date) {
-		
-		int recivedRequest= conReqRepo.countReceivedByDate(Date);
-		int acceptedRequest= conReqRepo.countAcceptedByDate(Date);
-		int scheduledRequest= conReqRepo.countScheduledByDate(Date);
-		int completedRequest= conReqRepo.countCompletedByDate(Date);
-		return new StatisticsDTO(recivedRequest,acceptedRequest,scheduledRequest,completedRequest);
+		int recivedRequest = conReqRepo.countReceivedByDate(Date);
+		int acceptedRequest = conReqRepo.countAcceptedByDate(Date);
+		int scheduledRequest = conReqRepo.countScheduledByDate(Date);
+		int completedRequest = conReqRepo.countCompletedByDate(Date);
+		return new StatisticsDTO(recivedRequest, acceptedRequest, scheduledRequest, completedRequest);
 	}
 }

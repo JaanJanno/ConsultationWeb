@@ -5,7 +5,6 @@ import java.util.List;
 
 import ee.avok.consultation.auth.domain.model.Account;
 import ee.avok.consultation.domain.model.ConsultationRequest;
-import ee.avok.consultation.domain.model.ConsultationStatus;
 import ee.avok.consultation.dto.CalendarDTO;
 import ee.avok.consultation.dto.StatisticsDTO;
 
@@ -45,21 +44,12 @@ public interface StatisticsService {
 	 */
 	List<CalendarDTO> getMeetings(int userId);
 
-	 /**
-	  * 
-	  *  
-	  * 
-	  */
-	// List<ConsultationRequest> findRequestsByStatus(ConsultationStatus status);
-	 /*
-	  * Period = Today || Weekly || Monthly || Total
-	  * 
-	  */
-//	StatisticsDTO findRequestByPeriod(String string);
-	/*
-	  * Period = Today || Weekly || Monthly || Total
-	  * 
-	  */
+	/**
+	 * Generates statistics about all {@link ConsultationRequest}. Counts from date to current date.
+	 *  
+	 * @param date {@link Date} to count from.
+	 * @return {@link StatisticsDTO} dto
+	 */
 	StatisticsDTO findRequestByDate(Date date);
 	
 	 
