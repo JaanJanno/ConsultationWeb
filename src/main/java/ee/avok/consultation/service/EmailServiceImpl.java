@@ -1,7 +1,5 @@
 package ee.avok.consultation.service;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.env.Environment;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.stereotype.Service;
@@ -11,10 +9,9 @@ import ee.avok.consultation.domain.model.ConsultationRequest;
 @Service
 public class EmailServiceImpl implements EmailService {
 
-	@Autowired
-	Environment env;
-
 	private static final JavaMailSenderImpl sender;
+
+	private static String baseUrl = "localhost:8080";
 
 	static {
 		sender = new JavaMailSenderImpl();
@@ -29,7 +26,7 @@ public class EmailServiceImpl implements EmailService {
 
 	@Override
 	public void sendFeedbackRequest(ConsultationRequest req) {
-		String url = req.generateFeedbackUrl(env);
+		String url = req.generateFeedbackUrl(baseUrl);
 		send("AVOK consultation feedback", url, req.getEmail());
 	}
 
@@ -40,6 +37,10 @@ public class EmailServiceImpl implements EmailService {
 		message.setText(text);
 		message.setSubject(subject);
 		sender.send(message);
+	}
+	
+	public static void setBaseUrl(String url) {
+		baseUrl = url;
 	}
 
 }

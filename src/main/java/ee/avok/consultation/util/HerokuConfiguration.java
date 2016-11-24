@@ -9,6 +9,9 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 
+import ee.avok.consultation.service.EmailService;
+import ee.avok.consultation.service.EmailServiceImpl;
+
 /**
  * Configuration for Heroku. <br>
  * Retrieves connection details from System Enviroment variable. The variable
@@ -29,6 +32,7 @@ public class HerokuConfiguration {
 
 	@Bean
 	public DataSource dataSource() {
+		EmailServiceImpl.setBaseUrl("avok.herokuapp.com");
 		String databaseUrl = System.getenv("DATABASE_URL");
 		// LOG.info("Using Heroku configuration with variable: " + databaseUrl);
 
