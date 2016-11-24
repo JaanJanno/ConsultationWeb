@@ -44,12 +44,17 @@ public interface StatisticsService {
 	 *            {@link Account#getId()}
 	 */
 	List<CalendarDTO> getMeetings(int userId);
-	/*
-	 * 
-	 *Find all records based on date 
-	 * 
-	 * 
-	 * 
-	 */
-	 int countRequestByStatusAndPeriod(ConsultationStatus status,String Period );
+
+	 /**
+	  * 
+	  *  
+	  * 
+	  */
+	 List<ConsultationRequest> findRequestsByStatus(ConsultationStatus status);
+	 /*
+	  * Period = Today || Weekly || Monthly || Total
+	  * 
+	  */
+	StatisticsDTO findRequestByPeriod(String string);
+	 
 }

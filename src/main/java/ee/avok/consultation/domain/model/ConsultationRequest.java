@@ -43,6 +43,8 @@ public class ConsultationRequest {
 	private String language;
 	@Column(columnDefinition = "TEXT")
 	private String comments;
+
+	//@OneToOne
 	@Enumerated(EnumType.STRING)
 	private ConsultationStatus status;
 

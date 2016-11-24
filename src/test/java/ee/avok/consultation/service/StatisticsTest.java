@@ -87,14 +87,46 @@ public class StatisticsTest {
 		assertEquals("/requests/detail/" + con2.getId(), ev.getUrl());
 
 	}
-
-	@Test
-	public void countRequestByStatusAndPeriodTest(){
-		int count=statServ.countRequestByStatusAndPeriod(status.RECEIVED, "Daily");
-		assertEquals(1, count);
-			
-	} 
 */
+	@Test
+	public void findByStatusTest(){
+		int recievedRequests=statServ.findRequestsByStatus(status.RECEIVED).size();
+		assertEquals(3, recievedRequests);	
+	}
+	
+/*	@Test
+	public void findRequestsByPeriodDailyTest(){
+		StatisticsDTO statistic = statServ.findRequestByPeriod("Daily");
+		assertEquals(3, statistic.getReceived());
+		assertEquals(1, statistic.getAccepted());
+		assertEquals(1, statistic.getScheduled());
+		assertEquals(1, statistic.getCompleted());
+	}*/
+	@Test
+	public void findRequestsByPeriodWeeklyTest(){
+		StatisticsDTO statistic = statServ.findRequestByPeriod("Weekly");
+		assertEquals(3, statistic.getReceived());
+		assertEquals(2, statistic.getAccepted());
+		assertEquals(3, statistic.getScheduled());
+		assertEquals(1, statistic.getCompleted());
+	}
+	@Test
+	public void findRequestsByPeriodMonthlyTest(){
+		StatisticsDTO statistic = statServ.findRequestByPeriod("Monthly");
+		assertEquals(3, statistic.getReceived());
+		assertEquals(3, statistic.getAccepted());
+		assertEquals(4, statistic.getScheduled());
+		assertEquals(4, statistic.getCompleted());
+	}
+	@Test
+	public void findRequestsByPeriodTotalTest(){
+		StatisticsDTO statistic = statServ.findRequestByPeriod("Total");
+		assertEquals(18, statistic.getReceived());
+		assertEquals(15, statistic.getAccepted());
+		assertEquals(11, statistic.getScheduled());
+		assertEquals(6, statistic.getCompleted());
+	}
+
 	@Test
 	public void setdataShouldbeLoadedTest(){
 		long count=conReqRepo.count();

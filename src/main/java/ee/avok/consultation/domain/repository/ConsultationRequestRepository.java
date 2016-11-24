@@ -12,13 +12,12 @@ import ee.avok.consultation.domain.model.ConsultationStatus;
 
 
 public interface ConsultationRequestRepository extends CrudRepository<ConsultationRequest, Integer> {
+	
 
 	List<ConsultationRequest> findByStatus(ConsultationStatus status);
 
 	List<ConsultationRequest> findByStatusAndConsultant(ConsultationStatus status, Account consultant);
 
-	
-	
 	@Query("select count(*) from ConsultationRequest where receivedDate != null")
 	int countAllReceived();
 
