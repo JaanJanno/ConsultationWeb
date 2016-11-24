@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import ee.avok.consultation.auth.domain.model.Account;
 import ee.avok.consultation.auth.domain.model.Role;
@@ -54,14 +55,18 @@ public class RequestController {
 
 	@RequestMapping(value = "/request", method = RequestMethod.POST)
 	public String createConsulation(@ModelAttribute ConsultationRequest conReq,
-			@RequestParam("manualfile") MultipartFile file, Model model) {
+			@RequestParam("manualfile") MultipartFile file, Model model, RedirectAttributes ra) {
 
 		LOG.info("Received file: " + file.getOriginalFilename());
 		LOG.info("Saving Consultation " + conReq.getTextType());
 		model.addAttribute("consultation", new ConsultationRequest());
 
 		conServ.createConsultation(conReq, file);
-		return "redirect:" + "/";
+
+		// There should be other messages
+		ra.addFlashAttribute("message", "consultation.success");
+		ra.addFlashAttribute("type", "success");
+		return "redirect:/";
 
 	}
 
@@ -164,16 +169,17 @@ public class RequestController {
 
 		return "shared-between-consultant-and-admin/setmeeting";
 	}
-	
+
 	@RequestMapping(method = RequestMethod.POST, value = "/requests/{id}/setmeeting")
 	public String postSetMeetingPage(@PathVariable int id, @ModelAttribute SetTimeDTO setTime,
-			@CookieValue(value = "session", defaultValue = "none") String session) throws UnauthorizedException, ParseException {
+			@CookieValue(value = "session", defaultValue = "none") String session)
+			throws UnauthorizedException, ParseException {
 		authServ.authenticateRequestForRole(session, Role.CONSULTANT);
 		LOG.info("Set time to {}", setTime.toString());
 		conServ.setConsultationDate(id, setTime);
 		return "redirect:" + "/requests/scheduled";
 	}
-	
+
 	/*
 	 * ADMIN
 	 */
@@ -194,7 +200,7 @@ public class RequestController {
 	public String handleNotFound(Exception exc) {
 		return "redirect:" + "/";
 	}
-	
+
 	@ExceptionHandler(ParseException.class)
 	public String handleBadDate(Exception exc) {
 		return "redirect:" + "/";

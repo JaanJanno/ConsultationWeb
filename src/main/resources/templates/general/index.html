@@ -24,6 +24,7 @@
 								<h1 th:text="#{welcome}">Welcome to AVOK</h1>
 							</div>
 							<div class="panel-body">
+								<div th:replace="fragments/alert :: alert (type=${type}, message=${message})">...</div>
 								<h2>
 									<small>Thanks for choosing the Centre for Academic Writing and Communication
 										(AVOK). In this portal, we help our users to improve their articles, essaies, and theses,
