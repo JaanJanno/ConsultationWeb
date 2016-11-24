@@ -1,6 +1,8 @@
 package ee.avok.consultation.domain.model;
 
+import java.util.Arrays;
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -13,6 +15,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+
+import org.springframework.core.env.Environment;
 
 import ee.avok.consultation.auth.domain.model.Account;
 import lombok.Data;
@@ -43,8 +47,6 @@ public class ConsultationRequest {
 	private String language;
 	@Column(columnDefinition = "TEXT")
 	private String comments;
-
-	//@OneToOne
 	@Enumerated(EnumType.STRING)
 	private ConsultationStatus status;
 
@@ -81,6 +83,16 @@ public class ConsultationRequest {
 
 	public String generateUploadUrl() {
 		return "/uploads/" + Integer.toString(upload.getId()) + "/" + upload.getFilename();
+	}
+
+	public String generateFeedbackUrl(Environment env) {
+		List<String> profiles = Arrays.asList(env.getActiveProfiles());
+		String url;
+		if (profiles.contains("test"))
+			url = "localhost:8080";
+		else
+			url = env.getProperty("production_url");
+		return url + "/requests/" + Integer.toString(id) + "/studetfeedback?uid=" + studentFeedback.getUid();
 	}
 
 	public boolean hasFile() {
