@@ -71,11 +71,15 @@ public class FeedbackController {
 
 	@RequestMapping(value = "/requests/{id}/consultantfeedback", method = RequestMethod.POST)
 	public String submitConsultantFeedbackForm(@ModelAttribute ConsultantFeedback feedback, Model model,
-			@PathVariable int id, @CookieValue(value = "session", defaultValue = "none") String session) throws UnauthorizedException {
+			@PathVariable int id, @CookieValue(value = "session", defaultValue = "none") String session, RedirectAttributes ra) throws UnauthorizedException {
 		Account user = authServ.authenticateAndAddToModel(model, session, Role.CONSULTANT);
 		feedServ.verifyConsultantFeedbackUser(user, id);
 		feedServ.submitConsultantFeedback(id, feedback);
-		return "redirect:" + "/requests/completed";
+		
+		// There should be other messages
+		ra.addFlashAttribute("message", "consultant.feedback.success");
+		ra.addFlashAttribute("type", "success");
+		return "redirect:/requests/completed";
 
 	}
 

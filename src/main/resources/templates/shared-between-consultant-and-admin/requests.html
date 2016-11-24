@@ -37,6 +37,7 @@
 				<div class="col-md-12 padding-0">
 					<div class="col-md-12 padding-0">
 						<div class="panel-body">
+						<div th:replace="fragments/alert :: alert (type=${type}, message=${message})">...</div>
 							<div class="responsive-table">
 								<table class="table table-bordered table-striped">
 									<thead>
@@ -68,15 +69,14 @@
 												th:if="${consultation.hasFile()}"> <span class="glyphicon glyphicon-download-alt"></span>
 													Download
 											</a></td>
-											
-												<form style='float: left; padding: 5px; height: 0px' id="request-form"
+											<td>
+												<form  id="request-form"
 													th:object="${consultation}" th:method="post"
 													th:action="@{/requests/{id}(id=${consultation.id})}">
-											<td>
 													<button class="btn btn-primary" type="submit">Accept</button>
-											</td>	
+												
 												</form>
-											
+											</td>
 										</tr>
 									</tbody>
 								</table>
@@ -85,8 +85,6 @@
 					</div>
 
 				</div>
-
-				<div class="col-md-12 card-wrap padding-0"></div>
 
 			</div>
 		</div>
