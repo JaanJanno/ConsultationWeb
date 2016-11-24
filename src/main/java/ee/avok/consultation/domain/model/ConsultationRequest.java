@@ -92,7 +92,7 @@ public class ConsultationRequest {
 			url = "localhost:8080";
 		else
 			url = env.getProperty("production_url");
-		return url + "/requests/" + Integer.toString(id) + "/studetfeedback?uid=" + studentFeedback.getUid();
+		return url + "/requests/" + Integer.toString(id) + "/studentfeedback?uid=" + studentFeedback.getUid();
 	}
 
 	public boolean hasFile() {

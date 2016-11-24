@@ -36,6 +36,9 @@ public class ConsultationServiceImpl implements ConsultationService {
 
 	@Autowired
 	FeedbackService feedServ;
+	
+	@Autowired
+	EmailService mailServ;
 
 	@Override
 	public void createConsultation(ConsultationRequest conReq) {
@@ -156,7 +159,8 @@ public class ConsultationServiceImpl implements ConsultationService {
 		r.setMeetingPlace(setTime.getPlace());
 		r.setStatus(ConsultationStatus.SCHEDULED);
 		conReqRepo.save(r);
-
+		
+		mailServ.sendReminder(r);
 	}
 
 }

@@ -12,6 +12,7 @@ import ee.avok.consultation.auth.domain.model.UnauthorizedException;
 import ee.avok.consultation.domain.model.ConsultantFeedback;
 import ee.avok.consultation.domain.model.ConsultationRequest;
 import ee.avok.consultation.domain.model.ConsultationStatus;
+import ee.avok.consultation.domain.model.NewConsultationOption;
 import ee.avok.consultation.domain.model.StudentFeedback;
 import ee.avok.consultation.domain.repository.ConsultantFeedbackRepository;
 import ee.avok.consultation.domain.repository.ConsultationRequestRepository;
@@ -26,6 +27,8 @@ public class FeedbackService {
 	ConsultantFeedbackRepository consultantFeedbackRepo;
 	@Autowired
 	ConsultationRequestRepository consultationRepo;
+	@Autowired
+	EmailService mailServ;
 
 	public void verifyStudentFeedbackUID(Integer id, String uid) throws UnauthorizedException {
 		ConsultationRequest req = consultationRepo.findOne(id);
@@ -63,6 +66,10 @@ public class FeedbackService {
 		req.setStatus(ConsultationStatus.COMPLETED);
 		req.setCompletedDate(Date.from(Instant.now()));
 		consultationRepo.save(req);
+		
+		if(feedbackForm.getSuggestedNewConsultation().equals(NewConsultationOption.NO)) {
+			mailServ.sendFeedbackRequest(req);
+		}
 	}
 	
 	public void addStudentFeedback(ConsultationRequest req) {
