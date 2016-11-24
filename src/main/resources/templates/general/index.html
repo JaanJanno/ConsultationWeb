@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html th:with="lang=${#locale.language}" th:lang="${lang}" xmlns:th="http://www.thymeleaf.org">
 <head>
 
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
@@ -21,7 +21,7 @@
 					<div class="col-md-8 col-md-push-2">
 						<div class="panel text-center">
 							<div class="panel-heading ">
-								<h1>Welcome to AVOK</h1>
+								<h1 th:text="#{welcome}">Welcome to AVOK</h1>
 							</div>
 							<div class="panel-body">
 								<h2>
