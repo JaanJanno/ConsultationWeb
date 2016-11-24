@@ -13,14 +13,13 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 import org.springframework.web.servlet.i18n.LocaleChangeInterceptor;
 import org.springframework.web.servlet.i18n.SessionLocaleResolver;
 
-//@Configuration
 @SpringBootApplication
 public class ConsultationWebApplication extends WebMvcConfigurerAdapter {
 
 	public static void main(String[] args) {
 		SpringApplication.run(ConsultationWebApplication.class, args);
 	}
-
+	
 	// The following is locale stuff
 	@Bean
 	public MessageSource messageSource() {
