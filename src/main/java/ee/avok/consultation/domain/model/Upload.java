@@ -2,12 +2,13 @@ package ee.avok.consultation.domain.model;
 
 import java.util.Arrays;
 
+import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Lob;
 
 @Entity
 public class Upload {
@@ -15,14 +16,15 @@ public class Upload {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
-	@Lob
+
+	@Basic(fetch = FetchType.LAZY)
 	private byte[] upload;
 	@Column
 	private String filename;
 
 	public Upload() {
 		super();
-	}	
+	}
 
 	public int getId() {
 		return id;
