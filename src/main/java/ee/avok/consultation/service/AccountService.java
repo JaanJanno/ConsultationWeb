@@ -22,6 +22,10 @@ public class AccountService {
 	public List<Account> getAllConsultants() {
 		return accountRepo.findByRole(Role.CONSULTANT);
 	}
+	
+	public List<Account> findAll() {
+		return accountRepo.findAll();
+	}
 
 	public void deactivate(int id) {
 		Account user = accountRepo.findById(id);
