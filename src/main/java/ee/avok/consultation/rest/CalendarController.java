@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CookieValue;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -37,6 +38,18 @@ public class CalendarController {
 		LOG.info("All calendar events");
 
 		List<CalendarDTO> events = statServ.getAllMeetings();
+		return new ResponseEntity<List<CalendarDTO>>(events, HttpStatus.OK);
+
+	}
+
+	@RequestMapping(method = RequestMethod.GET, value = "/{id}")
+	public ResponseEntity<List<CalendarDTO>> eventsForConsultant(@PathVariable int id,
+			@CookieValue(value = "session", defaultValue = "none") String session) throws UnauthorizedException {
+		authServ.authenticateRequestForRole(session, Role.ADMINISTRATOR);
+
+		LOG.info("All calendar events for consultant {}", id);
+
+		List<CalendarDTO> events = statServ.getMeetings(id);
 		return new ResponseEntity<List<CalendarDTO>>(events, HttpStatus.OK);
 
 	}
