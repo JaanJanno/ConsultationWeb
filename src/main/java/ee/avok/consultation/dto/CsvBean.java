@@ -1,5 +1,6 @@
 package ee.avok.consultation.dto;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 
 /**
@@ -9,13 +10,14 @@ import lombok.Data;
  *
  */
 @Data
+@AllArgsConstructor
 public class CsvBean {
 
 	private String studentName;
 	private String consultantName;
 	private String consultationDate;
 	private String consultationTime;
-	
+
 	private String language;
 	private String programme;
 	private String degree;

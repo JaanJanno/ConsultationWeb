@@ -16,9 +16,6 @@ public interface ConsultationRequestRepository extends CrudRepository<Consultati
 
 	List<ConsultationRequest> findByStatusAndConsultant(ConsultationStatus status, Account consultant);
 
-	@Query("select count(*) from ConsultationRequest where receivedDate >=?1")
-	int countReceivedByDate(String todayDate);
-
 	@Query("select count(*) from ConsultationRequest where acceptedDate >=?1")
 	int countAcceptedByDate(Date date);
 
