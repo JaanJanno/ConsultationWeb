@@ -5,6 +5,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <title>Statistic page</title>
 <object th:replace="fragments/util :: standardCSS"></object>
+<script type="text/javascript" src="js/statistic_request.js"></script>
 
 </head>
 
@@ -25,9 +26,11 @@
 
 			<div th:replace="fragments/statistic/menu/statistic_menu :: statistic_menu"></div>
 
-
 			<div class="col-md-12" style="padding: 20px;">
-				<div th:replace="fragments/statistic/boxes/aggregated_boxes :: aggregated_boxes"></div>
+				<div id="resultsBlock">
+					<div th:replace="fragments/statistic/boxes/aggregated_boxes :: aggregated_boxes"></div>
+        		</div>
+				
 
 				<div th:replace="fragments/statistic/calendar :: calendar(${cons})"></div>
 			</div>

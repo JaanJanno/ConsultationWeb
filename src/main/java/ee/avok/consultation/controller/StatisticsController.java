@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import ee.avok.consultation.auth.domain.model.Account;
@@ -41,6 +42,15 @@ public class StatisticsController {
 		model.addAttribute("cons", accountServ.findAll());
 		return "admin/statistics";
 	}
+	
+	@RequestMapping("/statistics/{period}")
+	public String getStatistics(Model model,@PathVariable("period") String period){
+		
+		StatisticsDTO stats = statServ.getStatistics(period);
+		model.addAttribute("stats", stats);
+
+		return "fragments/statistic/boxes/aggregated_boxes :: aggregated_boxes";
+	} 
 
 	@ExceptionHandler(UnauthorizedException.class)
 	public String handleNotFound(Exception exc) {
