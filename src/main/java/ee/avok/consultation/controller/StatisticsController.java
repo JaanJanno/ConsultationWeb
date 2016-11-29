@@ -37,7 +37,6 @@ public class StatisticsController {
 		StatisticsDTO stats = statServ.getStatistics("all");
 
 		model.addAttribute("stats", stats);
-		model.addAttribute("events", statServ.getAllMeetings());
 
 		model.addAttribute("cons", accountServ.findAll());
 		return "admin/statistics";

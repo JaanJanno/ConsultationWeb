@@ -14,6 +14,7 @@
 					<div class="form-group">
 						<div class="col-sm-6">
 							<select class="form-control" id="consultants" th:required="required">
+								<option value="0">All consultants</option>
 								<option th:each="c : ${cons}" th:value="${c.id}" th:text="${c.name}">name here</option>
 							</select>
 						</div>
