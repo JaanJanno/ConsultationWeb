@@ -15,6 +15,7 @@ import ee.avok.consultation.auth.domain.model.Role;
 import ee.avok.consultation.auth.domain.model.UnauthorizedException;
 import ee.avok.consultation.auth.service.AuthService;
 import ee.avok.consultation.dto.StatisticsDTO;
+import ee.avok.consultation.service.AccountService;
 import ee.avok.consultation.service.StatisticsService;
 
 @Controller
@@ -25,9 +26,11 @@ public class StatisticsController {
 	StatisticsService statServ;
 	@Autowired
 	AuthService authServ;
+	@Autowired
+	AccountService accountServ;
 
 	@RequestMapping("/statistics")
-	public String statisticsPage(Model model  , @CookieValue(value = "session", defaultValue = "none") String session)
+	public String statisticsPage(Model model, @CookieValue(value = "session", defaultValue = "none") String session)
 			throws UnauthorizedException {
 		Account user = authServ.authenticateAndAddToModel(model, session, Role.ADMINISTRATOR);
 
@@ -35,8 +38,8 @@ public class StatisticsController {
 		StatisticsDTO stats = statServ.getStatistics("all");
 
 		model.addAttribute("stats", stats);
-		model.addAttribute("events", statServ.getAllMeetings());
-		// TODO a proper HTML template path
+
+		model.addAttribute("cons", accountServ.findAll());
 		return "admin/statistics";
 	}
 	
