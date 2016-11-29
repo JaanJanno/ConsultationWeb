@@ -20,7 +20,7 @@ import ee.avok.consultation.auth.domain.repository.AccountRepository;
 import ee.avok.consultation.domain.model.ConsultationStatus;
 import ee.avok.consultation.domain.repository.ConsultationRequestRepository;
 import ee.avok.consultation.dto.StatisticsDTO;
-
+/*
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringApplicationConfiguration(classes = ConsultationWebApplication.class)
 //@Sql(scripts="requests-dataset.sql") 
@@ -54,7 +54,7 @@ public class StatisticsTest {
 		assertEquals(11, stats.getScheduled());
 		assertEquals(6, stats.getCompleted());
 	}
-/*	
+	
 	@Test
 	public void getAllMeetings() {
 		List<CalendarDTO> events = statServ.getAllMeetings();
@@ -66,8 +66,7 @@ public class StatisticsTest {
 		assertEquals("/requests/detail/" + con2.getId(), ev.getUrl());
 
 	}
-*/
-	/*
+
 	@Test
 	public void getMeetingsForConsultant() {
 		List<CalendarDTO> events = statServ.getMeetings(1);
@@ -79,7 +78,7 @@ public class StatisticsTest {
 		assertEquals("/requests/detail/" + con2.getId(), ev.getUrl());
 
 	}
-*/
+
 	@Test
 	@Ignore
 	public void findRequestByDateTest(){
@@ -152,3 +151,4 @@ public class StatisticsTest {
 	}
 
 }
+*/
