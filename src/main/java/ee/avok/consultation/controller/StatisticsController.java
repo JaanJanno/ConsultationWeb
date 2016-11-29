@@ -1,5 +1,9 @@
 package ee.avok.consultation.controller;
 
+import java.io.IOException;
+
+import javax.servlet.http.HttpServletResponse;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +20,7 @@ import ee.avok.consultation.auth.domain.model.UnauthorizedException;
 import ee.avok.consultation.auth.service.AuthService;
 import ee.avok.consultation.dto.StatisticsDTO;
 import ee.avok.consultation.service.AccountService;
+import ee.avok.consultation.service.CsvService;
 import ee.avok.consultation.service.StatisticsService;
 
 @Controller
@@ -28,6 +33,8 @@ public class StatisticsController {
 	AuthService authServ;
 	@Autowired
 	AccountService accountServ;
+	@Autowired
+	CsvService csvServ;
 
 	@RequestMapping("/statistics")
 	public String statisticsPage(Model model, @CookieValue(value = "session", defaultValue = "none") String session)
@@ -42,15 +49,33 @@ public class StatisticsController {
 		model.addAttribute("cons", accountServ.findAll());
 		return "admin/statistics";
 	}
-	
+
 	@RequestMapping("/statistics/{period}")
-	public String getStatistics(Model model,@PathVariable("period") String period){
-		
+	public String getStatistics(Model model, @PathVariable("period") String period) {
+
 		StatisticsDTO stats = statServ.getStatistics(period);
 		model.addAttribute("stats", stats);
 
 		return "fragments/statistic/boxes/aggregated_boxes :: aggregated_boxes";
-	} 
+	}
+
+	@RequestMapping(value = "/statistics/csv")
+	public void downloadCSV(@CookieValue(value = "session", defaultValue = "none") String session,
+			HttpServletResponse response) throws IOException, UnauthorizedException {
+		authServ.authenticateRequestForRole(session, Role.ADMINISTRATOR);
+
+		LOG.info("Statistics CSV request");
+		String csvFileName = "statistics.csv";
+		response.setContentType("text/csv");
+
+		String headerKey = "Content-Disposition";
+		String headerValue = String.format("attachment; filename=\"%s\"", csvFileName);
+		response.setHeader(headerKey, headerValue);
+
+		csvServ.writeCSV(response.getWriter());
+
+		LOG.info("CSV writing done");
+	}
 
 	@ExceptionHandler(UnauthorizedException.class)
 	public String handleNotFound(Exception exc) {

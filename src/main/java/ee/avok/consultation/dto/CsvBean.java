@@ -15,8 +15,8 @@ public class CsvBean {
 
 	private String studentName;
 	private String consultantName;
-	private String consultationDate;
-	private String consultationTime;
+	private String date;
+	private String time;
 
 	private String language;
 	private String programme;
