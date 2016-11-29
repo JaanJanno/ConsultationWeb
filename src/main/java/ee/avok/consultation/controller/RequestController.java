@@ -114,6 +114,7 @@ public class RequestController {
 	public String requestsScheduled(Model model, @CookieValue(value = "session", defaultValue = "none") String session)
 			throws UnauthorizedException {
 		Account user = authServ.authenticateAndAddToModel(model, session, Role.CONSULTANT);
+		
 
 		List<ConsultationRequest> conReqs = conServ.findByStatusAndConsultant("scheduled", user);
 		LOG.info("Requests size: {}, status {}", conReqs.size(), "scheduled");

@@ -23,7 +23,7 @@ import ee.avok.consultation.dto.StatisticsDTO;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringApplicationConfiguration(classes = ConsultationWebApplication.class)
-@Sql(scripts="requests-dataset.sql") 
+//@Sql(scripts="requests-dataset.sql") 
 @DirtiesContext(classMode= ClassMode.AFTER_EACH_TEST_METHOD)
 @ActiveProfiles("test")
 public class StatisticsTest {
