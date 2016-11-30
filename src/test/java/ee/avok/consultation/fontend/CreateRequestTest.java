@@ -46,7 +46,7 @@ public class CreateRequestTest {
 		baseUrl = driver.getCurrentUrl();
 		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 	}
-	
+/*	
 	@Ignore
 	@Test
 	public void testCreateRequest() throws Exception {
@@ -54,7 +54,7 @@ public class CreateRequestTest {
 		testLoginConsultant();
 		testValidateRequest();
 	}
-
+*/
 	public void testRequest() {
 		driver.get(baseUrl + "/");
 		driver.findElement(By.xpath("//a[contains(text(),'Request\n									form')]")).click();
