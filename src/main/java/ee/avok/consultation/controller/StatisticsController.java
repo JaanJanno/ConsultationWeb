@@ -51,14 +51,9 @@ public class StatisticsController {
 	}
 
 	@RequestMapping("/statistics/{period}")
-<<<<<<< HEAD
 	public String getStatistics(Model model,@PathVariable("period") String period,
 			@CookieValue(value = "session", defaultValue = "none") String session){
 		
-=======
-	public String getStatistics(Model model, @PathVariable("period") String period) {
-
->>>>>>> 14925b1d118e74661bc584b76a294a3cc6f83d75
 		StatisticsDTO stats = statServ.getStatistics(period);
 		model.addAttribute("stats", stats);
 
