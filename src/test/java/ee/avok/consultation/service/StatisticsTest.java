@@ -20,7 +20,7 @@ import ee.avok.consultation.auth.domain.repository.AccountRepository;
 import ee.avok.consultation.domain.model.ConsultationStatus;
 import ee.avok.consultation.domain.repository.ConsultationRequestRepository;
 import ee.avok.consultation.dto.StatisticsDTO;
-/*
+
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringApplicationConfiguration(classes = ConsultationWebApplication.class)
 //@Sql(scripts="requests-dataset.sql") 
@@ -38,6 +38,7 @@ public class StatisticsTest {
 	AccountRepository accountRepo;
 
 	@Test
+	@Ignore
 	public void statsAll() {
 		StatisticsDTO stats = statServ.statsAll();
 		assertEquals(18, stats.getReceived());
@@ -47,6 +48,7 @@ public class StatisticsTest {
 	}
 
 	@Test
+	@Ignore
 	public void getAllStats() {
 		StatisticsDTO stats = statServ.getStatistics("all");
 		assertEquals(18, stats.getReceived());
@@ -54,7 +56,7 @@ public class StatisticsTest {
 		assertEquals(11, stats.getScheduled());
 		assertEquals(6, stats.getCompleted());
 	}
-	
+/*	
 	@Test
 	public void getAllMeetings() {
 		List<CalendarDTO> events = statServ.getAllMeetings();
@@ -78,7 +80,7 @@ public class StatisticsTest {
 		assertEquals("/requests/detail/" + con2.getId(), ev.getUrl());
 
 	}
-
+*/
 	@Test
 	@Ignore
 	public void findRequestByDateTest(){
@@ -119,6 +121,7 @@ public class StatisticsTest {
 	}
 
 	@Test
+	@Ignore
 	public void getStatisticsWeek(){
 		StatisticsDTO statistic = statServ.getStatistics("week");
 		assertEquals(6, statistic.getReceived());
@@ -128,6 +131,7 @@ public class StatisticsTest {
 	}
 	
 	@Test
+	@Ignore
 	public void getStatisticsMonth(){
 		StatisticsDTO statistic = statServ.getStatistics("month");
 		assertEquals(10, statistic.getReceived());
@@ -136,6 +140,7 @@ public class StatisticsTest {
 		assertEquals(4, statistic.getCompleted());
 	}
 	@Test
+	@Ignore
 	public void findRequestsByPeriodTotalTest(){
 		StatisticsDTO statistic = statServ.getStatistics("all");
 		assertEquals(18, statistic.getReceived());
@@ -145,10 +150,10 @@ public class StatisticsTest {
 	}
 
 	@Test
+	@Ignore
 	public void setdataShouldbeLoadedTest(){
 		long count=conReqRepo.count();
 		assertEquals(18, count);
 	}
 
 }
-*/
