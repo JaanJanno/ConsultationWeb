@@ -27,9 +27,13 @@ import ee.avok.consultation.ConsultationWebApplication;
 import ee.avok.consultation.auth.domain.model.Account;
 import ee.avok.consultation.auth.domain.model.Role;
 import ee.avok.consultation.auth.domain.repository.AccountRepository;
+import ee.avok.consultation.domain.model.ConsultantFeedback;
 import ee.avok.consultation.domain.model.ConsultationRequest;
 import ee.avok.consultation.domain.model.ConsultationStatus;
+import ee.avok.consultation.domain.model.StudentFeedback;
+import ee.avok.consultation.domain.repository.ConsultantFeedbackRepository;
 import ee.avok.consultation.domain.repository.ConsultationRequestRepository;
+import ee.avok.consultation.domain.repository.StudentFeedbackRepository;
 import ee.avok.consultation.dto.CsvBean;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -44,6 +48,10 @@ public class CsvServiceTest {
 	ConsultationRequestRepository conReqRepo;
 	@Autowired
 	CsvService csvServ;
+	@Autowired
+	ConsultantFeedbackRepository conFeedRepo;
+	@Autowired
+	StudentFeedbackRepository stuFeedRepo;
 
 	private Date now;
 
@@ -60,6 +68,11 @@ public class CsvServiceTest {
 
 		now = new Date();
 
+		ConsultantFeedback f = new ConsultantFeedback();
+		StudentFeedback s = new StudentFeedback();
+		conFeedRepo.save(f);
+		stuFeedRepo.save(s);
+
 		ConsultationRequest con1 = new ConsultationRequest();
 		con1.setMeetingDate(now);
 		con1.setStatus(ConsultationStatus.COMPLETED);
@@ -71,6 +84,8 @@ public class CsvServiceTest {
 		con1.setDepartment("Faculty of Science and Technology");
 		con1.setProgramme("Programming");
 		con1.setTextType("Essay");
+		con1.setConsultantFeedback(f);
+		con1.setStudentFeedback(s);
 
 		// Not suitable con, should not be in CSV
 		ConsultationRequest con2 = new ConsultationRequest();
@@ -84,6 +99,8 @@ public class CsvServiceTest {
 		con2.setDepartment("Faculty of Social Sciences");
 		con2.setProgramme("History");
 		con2.setTextType("Exam");
+		con2.setConsultantFeedback(f);
+		con2.setStudentFeedback(s);
 
 		ConsultationRequest con3 = new ConsultationRequest();
 		con3.setMeetingDate(now);
@@ -96,6 +113,8 @@ public class CsvServiceTest {
 		con3.setDepartment("Faculty of Social Sciences");
 		con3.setProgramme("Social studies");
 		con3.setTextType("Essay");
+		con3.setConsultantFeedback(f);
+		con3.setStudentFeedback(s);
 
 		conReqRepo.save(con1);
 		conReqRepo.save(con2);

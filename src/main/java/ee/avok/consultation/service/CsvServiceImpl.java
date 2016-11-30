@@ -14,8 +14,10 @@ import org.supercsv.io.CsvBeanWriter;
 import org.supercsv.io.ICsvBeanWriter;
 import org.supercsv.prefs.CsvPreference;
 
+import ee.avok.consultation.domain.model.ConsultantFeedback;
 import ee.avok.consultation.domain.model.ConsultationRequest;
 import ee.avok.consultation.domain.model.ConsultationStatus;
+import ee.avok.consultation.domain.model.StudentFeedback;
 import ee.avok.consultation.dto.CsvBean;
 
 @Service
@@ -33,11 +35,11 @@ public class CsvServiceImpl implements CsvService {
 		List<ConsultationRequest> cons = conServ.findByStatus(ConsultationStatus.COMPLETED);
 		List<CsvBean> beans = new ArrayList<>();
 		for (ConsultationRequest c : cons) {
-			String date = df.format(c.getMeetingDate());
-			String time = tf.format(c.getMeetingDate());
-
-			beans.add(new CsvBean(c.getName(), c.getConsultant().getName(), date, time, c.getLanguage(),
-					c.getProgramme(), c.getDegree(), c.getDepartment(), c.getTextType(), c.getComments()));
+			CsvBean bean = new CsvBean();
+			addConsultation(bean, c);
+			addConsultantFeedback(bean, c.getConsultantFeedback());
+			addStudentFeedback(bean, c.getStudentFeedback());
+			beans.add(bean);
 		}
 		return beans;
 	}
@@ -47,11 +49,16 @@ public class CsvServiceImpl implements CsvService {
 		ICsvBeanWriter csvWriter = new CsvBeanWriter(printWriter, CsvPreference.EXCEL_NORTH_EUROPE_PREFERENCE);
 
 		// Header will go to header
+		// Header can have spaces, mapping cannot
 		String[] header = { "Student name", "Consultant name", "Consultation date", "Consultation time", "Language",
-				"Programme", "Degree", "Department", "Text type", "Comments" };
+				"Programme", "Degree", "Department", "Text type", "Comments", "Discussion element",
+				"Discussed material", "Covered issues", "Summary", "Further consultation", "First consultation?",
+				"Useful?", "Provided support?", "Coming back?", "Student comments" };
 		// Mapping must match header positions
 		String[] dataMapping = { "studentname", "consultantname", "Date", "Time", "Language", "Programme", "Degree",
-				"Department", "TextType", "Comments" };
+				"Department", "TextType", "Comments", "discussionElement", "discussedMaterial", "coveredIssues",
+				"summary", "suggestedNewConsultation", "firstConsultation", "useful", "providedSupport", "comingBack",
+				"studentComments" };
 
 		csvWriter.writeHeader(header);
 
@@ -63,6 +70,39 @@ public class CsvServiceImpl implements CsvService {
 
 		csvWriter.close();
 
+	}
+
+	private void addConsultation(CsvBean bean, ConsultationRequest c) {
+		String date = df.format(c.getMeetingDate());
+		String time = tf.format(c.getMeetingDate());
+
+		bean.setStudentName(c.getName());
+		bean.setConsultantName(c.getConsultant().getName());
+		bean.setDate(date);
+		bean.setTime(time);
+		bean.setLanguage(c.getLanguage());
+		bean.setProgramme(c.getProgramme());
+		bean.setDegree(c.getDegree());
+		bean.setDepartment(c.getDepartment());
+		bean.setTextType(c.getTextType());
+		bean.setComments(c.getComments());
+
+	}
+
+	private void addConsultantFeedback(CsvBean bean, ConsultantFeedback f) {
+		bean.setDiscussedMaterial(f.getDiscussedMaterial());
+		bean.setCoveredIssues(f.getCoveredIssues());
+		bean.setDiscussionElement(f.getDiscussionElement());
+		bean.setSummary(f.getSummary());
+		bean.setSuggestedNewConsultation(f.getSuggestedNewConsultation());
+	}
+
+	private void addStudentFeedback(CsvBean bean, StudentFeedback s) {
+		bean.setFirstConsultation(s.getFirstConsultation());
+		bean.setUseful(s.getUseful());
+		bean.setProvidedSupport(s.getProvidedSupport());
+		bean.setComingBack(s.getComingBack());
+		bean.setStudentComments(s.getComments());
 	}
 
 }
