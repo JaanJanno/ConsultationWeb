@@ -23,7 +23,7 @@ public class CsvServiceImpl implements CsvService {
 
 	private static Logger LOG = LoggerFactory.getLogger(CsvServiceImpl.class);
 
-	SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+	SimpleDateFormat df = new SimpleDateFormat("dd.MM.yyyy");
 	SimpleDateFormat tf = new SimpleDateFormat("HH:mm");
 	@Autowired
 	ConsultationService conServ;
