@@ -35,7 +35,10 @@ public class CsvServiceImpl implements CsvService {
 		List<ConsultationRequest> cons = conServ.findByStatus(ConsultationStatus.COMPLETED);
 		List<CsvBean> beans = new ArrayList<>();
 		for (ConsultationRequest c : cons) {
-			CsvBean bean = new CsvBean();
+			if (!c.hasStudentFeedback())
+				continue;
+			
+			CsvBean bean = new CsvBean();			
 			addConsultation(bean, c);
 			addConsultantFeedback(bean, c.getConsultantFeedback());
 			addStudentFeedback(bean, c.getStudentFeedback());
