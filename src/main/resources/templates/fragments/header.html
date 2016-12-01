@@ -24,12 +24,12 @@
 					<li class="dropdown avatar-dropdown"><img src="/img/avatar.jpg" class="img-circle avatar"
 						th:alt="${username}" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" />
 						<ul class="dropdown-menu user-dropdown">
-							<li><a href="/account/edit" class="fa fa-cogs"> Account Setting</a></li>
+							<li><a href="/account/edit"><span class="fa fa-cogs"></span> Account Setting</a></li>
 							<li>
-										<form action="#" data-th-action="@{/logout}" data-th-object="${model}" method="post">
-											<button class="fa fa-power-off button-logout" style="margin-left: 16px;" type="submit"
-												name="action" value="logout">  Log Out</button>
-										</form>
+								<form action="#" data-th-action="@{/logout}" data-th-object="${model}" method="post">
+									<button class="button-logout" style="margin-left: 16px;" type="submit"
+										name="action" value="logout"><span class="fa fa-power-off"></span> Log Out</button>
+								</form>
 							</li>
 							
 						</ul></li>

@@ -8,8 +8,8 @@
     cursor:pointer;
     overflow: hidden;
     outline:none;
-    color: #716767 !important;;
-    font-family: "Source Sans Pro","Helvetica Neue",Helvetica,Arial,sans-serif;
+    color: #716767 !important;
+    font-family: "Source Sans Pro","Helvetica Neue",Helvetica,Arial,sans-serif !important;
   	font-size: 14px;
 }
 body {
