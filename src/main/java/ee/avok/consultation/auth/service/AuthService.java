@@ -28,7 +28,7 @@ public class AuthService {
 	public Account authenticateUser(String username, String password, HttpServletResponse response)
 			throws UnauthorizedException {
 
-		Account user = accountRepo.findByUsername(username.toLowerCase());
+		Account user = accountRepo.findByUsername(username);
 
 		if (user == null) {
 			throw new UnauthorizedException("Invalid username.");
