@@ -37,7 +37,7 @@ public class FeedbackController {
 	ConsultationService consServ;
 
 	@RequestMapping(value = "/requests/{id}/studentfeedback", method = RequestMethod.GET)
-	public String studentFeedbackForm(Model model, @PathVariable int id, @RequestParam("uid") String uid)
+	public String studentFeedbackForm(Model model, @PathVariable int id , @RequestParam("uid") String uid)
 			throws UnauthorizedException {
 		feedServ.verifyStudentFeedbackUID(id, uid); // Check if UID matches
 													// parameter given in e-mail
@@ -70,8 +70,8 @@ public class FeedbackController {
 	}
 
 	@RequestMapping(value = "/requests/{id}/consultantfeedback", method = RequestMethod.POST)
-	public String submitConsultantFeedbackForm(@ModelAttribute ConsultantFeedback feedback, Model model,
-			@PathVariable int id, @CookieValue(value = "session", defaultValue = "none") String session, RedirectAttributes ra) throws UnauthorizedException {
+	public String submitConsultantFeedbackForm(@ModelAttribute ConsultantFeedback feedback, Model model
+			,@PathVariable int id, @CookieValue(value = "session", defaultValue = "none") String session, RedirectAttributes ra) throws UnauthorizedException {
 		Account user = authServ.authenticateAndAddToModel(model, session, Role.CONSULTANT);
 		feedServ.verifyConsultantFeedbackUser(user, id);
 		feedServ.submitConsultantFeedback(id, feedback);
