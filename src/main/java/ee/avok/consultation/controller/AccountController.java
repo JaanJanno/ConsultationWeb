@@ -108,6 +108,15 @@ public class AccountController {
 		accountService.activate(id);
 		return "redirect:" + "/accounts/manage";
 	}
+	
+	@RequestMapping(value = "/accounts/{id}/setadmin", method = RequestMethod.POST)
+	public String setAdminAccount(@PathVariable int id,
+			@CookieValue(value = "session", defaultValue = "none") String session, Model model)
+					throws UnauthorizedException {
+		authServ.authenticateRequestForRole(session, Role.ADMINISTRATOR);
+		accountService.setAdmin(id);
+		return "redirect:" + "/accounts/manage";
+	}
 
 	@ExceptionHandler(UnauthorizedException.class)
 	public String handleNotFound(Exception exc) {

@@ -87,4 +87,10 @@ public class AccountService {
 		accountpendingRepo.delete(id);
 	}
 
+	public void setAdmin(int id) {
+		Account user = accountRepo.findById(id);
+		user.setRole(Role.ADMINISTRATOR);
+		accountRepo.save(user);
+	}
+
 }
