@@ -5,10 +5,8 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <title>Consultation Report</title>
 <object th:replace="fragments/util :: standardCSS"></object>
-<link rel="stylesheet" type="text/css"
-	th:href="@{/webjars/summernote/0.8.1/dist/summernote.css}" />
-<link rel="stylesheet" type="text/css"
-	th:href="@{/webjars/select2/4.0.2/dist/css/select2.min.css}" />
+<link rel="stylesheet" type="text/css"	th:href="@{/webjars/summernote/0.8.1/dist/summernote.css}" />
+<link rel="stylesheet" type="text/css" th:href="@{/webjars/select2/4.0.2/dist/css/select2.min.css}" />
 </head>
 
 <body id="mimin" class="dashboard">
@@ -121,15 +119,7 @@
 	<div th:replace="fragments/util :: standardJS"></div>
 	<script th:src="@{/webjars/summernote/0.8.1/dist/summernote.min.js}"></script>
 	<script th:src="@{/webjars/select2/4.0.2/dist/js/select2.full.min.js}"></script>
+	<script src="/js/summer_note_builder.js"></script>	
 
-	<script th:inline="javascript">
-		$(document).ready(function() {
-			$('#summernote').summernote({
-				height : 300, // set editor height
-				minHeight : 300
-			// set minimum height of editor
-			});
-		});
-	</script>
 </body>
 </html>

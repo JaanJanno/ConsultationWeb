@@ -61,8 +61,8 @@ public class FeedbackController {
 	}
 
 	@RequestMapping(value = "/requests/{id}/consultantfeedback")
-	public String consultantFeedbackForm(Model model, @PathVariable int id,
-			@CookieValue(value = "session", defaultValue = "none") String session) throws UnauthorizedException {
+	public String consultantFeedbackForm(Model model, @PathVariable int id
+			,@CookieValue(value = "session", defaultValue = "none") String session) throws UnauthorizedException {
 		Account user = authServ.authenticateAndAddToModel(model, session, Role.CONSULTANT);
 		feedServ.verifyConsultantFeedbackUser(user, id);
 		model.addAttribute("feedback", new ConsultantFeedback());

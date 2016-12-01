@@ -154,28 +154,9 @@
 	<!-- plugins -->
 	<script th:src="@{/webjars/summernote/0.8.1/dist/summernote.min.js}"></script>
 	<script th:src="@{/webjars/select2/4.0.2/dist/js/select2.full.min.js}"></script>
-
+	<script src="/js/summer_note_builder.js"></script>
+	<script src="/js/tooltip.js"></script>
 	<!-- custom -->
-	<script th:inline="javascript">
-		$(document).ready(function() {
-			
-			$('#summernote').summernote({
-				height : 300, // set editor height
-				minHeight : 300
-			// set minimum height of editor
-			});
-
-		});
-		
-		$(document).ready(function(){
-		    $('[data-toggle="purpose"]').tooltip();
-		});  
-		
-		$(document).ready(function(){
-		    $('[data-toggle="Programme"]').tooltip();
-		});
-		
-	</script>
 	<!-- end: Javascript -->
 </body>
 </html>
