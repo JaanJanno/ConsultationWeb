@@ -52,13 +52,14 @@ public class CsvServiceTest {
 	FeedbackService feedServ;
 
 	private Date now;
+	private Account user;
 
 	@Before
 	public void setup() {
 		conReqRepo.deleteAll();
 		accountRepo.deleteAll();
 
-		Account user = new Account();
+		user = new Account();
 		user.setUsername("kalevipoeg");
 		user.setName("Kalev Kalevson");
 		user.setRole(Role.CONSULTANT);
@@ -118,7 +119,7 @@ public class CsvServiceTest {
 		ConsultationRequest con4 = new ConsultationRequest();
 		con4.setMeetingDate(now);
 		con4.setStatus(ConsultationStatus.COMPLETED);
-		con4.setName("Jon Snow");
+		con4.setName("Jon Snow2");
 		con4.setLanguage("English");
 		con4.setComments("I know nothing");
 		con4.setConsultant(user);
@@ -152,6 +153,54 @@ public class CsvServiceTest {
 
 		assertThat(beans,
 				containsInAnyOrder(hasProperty("language", is("English")), hasProperty("language", is("Estonian"))));
+
+		assertThat(beans, everyItem(hasProperty("textType", is("Essay"))));
+	}
+
+	/**
+	 * Tests if requests more than 30 days old and with no student feedback are
+	 * added.
+	 */
+	@SuppressWarnings("unchecked")
+	@Test
+	public void beansWithStudentFeedbackTimeout() {
+		// Sets time 31 days back
+		Date past = new Date();
+		past.setTime(past.getTime() - 2678400000l);
+
+		// Has no student feedback, but is more than 30 days old
+		ConsultationRequest con5 = new ConsultationRequest();
+		con5.setMeetingDate(past);
+		con5.setStatus(ConsultationStatus.COMPLETED);
+		con5.setName("Bla bla");
+		con5.setLanguage("English");
+		con5.setComments("I know nothing");
+		con5.setConsultant(user);
+		con5.setDegree("Bsc");
+		con5.setDepartment("Faculty of Social Sciences");
+		con5.setProgramme("Social studies");
+		con5.setTextType("Essay");
+
+		ConsultantFeedback f1 = new ConsultantFeedback();
+
+		con5.setConsultantFeedback(f1);
+		conFeedRepo.save(f1);
+		feedServ.addStudentFeedback(con5);
+		conReqRepo.save(con5);
+
+		List<CsvBean> beans = csvServ.createBeans();
+
+		assertEquals(3, beans.size());
+
+		// Names
+		assertThat(beans, containsInAnyOrder(hasProperty("studentName", is("Bernard Lowe")),
+				hasProperty("studentName", is("Jon Snow")), hasProperty("studentName", is("Bla bla"))));
+
+		// Consultant name
+		assertThat(beans, everyItem(hasProperty("consultantName", is("Kalev Kalevson"))));
+
+		assertThat(beans, containsInAnyOrder(hasProperty("language", is("English")),
+				hasProperty("language", is("English")), hasProperty("language", is("Estonian"))));
 
 		assertThat(beans, everyItem(hasProperty("textType", is("Essay"))));
 	}

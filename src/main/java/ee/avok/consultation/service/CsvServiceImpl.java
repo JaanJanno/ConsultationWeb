@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -23,6 +24,7 @@ import ee.avok.consultation.dto.CsvBean;
 @Service
 public class CsvServiceImpl implements CsvService {
 
+	public static final long STUDENT_TIMEOUT_PERIOD = 2592000000l;
 	private static Logger LOG = LoggerFactory.getLogger(CsvServiceImpl.class);
 
 	SimpleDateFormat df = new SimpleDateFormat("dd.MM.yyyy");
@@ -35,9 +37,9 @@ public class CsvServiceImpl implements CsvService {
 		List<ConsultationRequest> cons = conServ.findByStatus(ConsultationStatus.COMPLETED);
 		List<CsvBean> beans = new ArrayList<>();
 		for (ConsultationRequest c : cons) {
-			if (!c.hasStudentFeedback())
+			// Dont work if Have no feedback and is less then month old
+			if (!c.hasStudentFeedback() && !studentFeedbackTimeout(c))
 				continue;
-			
 			CsvBean bean = new CsvBean();			
 			addConsultation(bean, c);
 			addConsultantFeedback(bean, c.getConsultantFeedback());
@@ -72,6 +74,22 @@ public class CsvServiceImpl implements CsvService {
 		}
 
 		csvWriter.close();
+
+	}
+
+	/**
+	 * Returns true if the meeting took place more time ago than
+	 * {@value #STUDENT_TIMEOUT_PERIOD}.
+	 * 
+	 * @param con
+	 * @return
+	 */
+	private boolean studentFeedbackTimeout(ConsultationRequest con) {
+		Date now = new Date();
+		if (now.getTime() - con.getMeetingDate().getTime() > STUDENT_TIMEOUT_PERIOD) {
+			return true;
+		} else
+			return false;
 
 	}
 
