@@ -24,22 +24,14 @@
 					<li class="dropdown avatar-dropdown"><img src="/img/avatar.jpg" class="img-circle avatar"
 						th:alt="${username}" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" />
 						<ul class="dropdown-menu user-dropdown">
-							<li><a href="#"><span class="fa fa-user"></span> My Profile</a></li>
-							<li><a href="#"><span class="fa fa-calendar"></span> My Calendar</a></li>
-							<li role="separator" class="divider"></li>
-							<li class="more">
-								<ul>
-									<li><a href="/account/edit"><span class="fa fa-cogs"></span></a></li>
-									<li><a href=""><span class="fa fa-lock"></span></a></li>
-									<!--li><a href=""><span class="fa fa-power-off"></span></a></li-->
-									<li>
+							<li><a href="/account/edit" class="fa fa-cogs"> Account Setting</a></li>
+							<li>
 										<form action="#" data-th-action="@{/logout}" data-th-object="${model}" method="post">
-											<button class="fa fa-power-off button-logout" style="color: black" type="submit"
-												name="action" value="logout"></button>
+											<button class="fa fa-power-off button-logout" style="margin-left: 16px;" type="submit"
+												name="action" value="logout">  Log Out</button>
 										</form>
-									</li>
-								</ul>
 							</li>
+							
 						</ul></li>
 
 				</ul>

@@ -20,7 +20,7 @@ import ee.avok.consultation.auth.domain.repository.AccountRepository;
 import ee.avok.consultation.domain.model.ConsultationStatus;
 import ee.avok.consultation.domain.repository.ConsultationRequestRepository;
 import ee.avok.consultation.dto.StatisticsDTO;
-/*
+
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringApplicationConfiguration(classes = ConsultationWebApplication.class)
 //@Sql(scripts="requests-dataset.sql") 
@@ -57,29 +57,6 @@ public class StatisticsTest {
 		assertEquals(6, stats.getCompleted());
 	}
 	
-	@Test
-	public void getAllMeetings() {
-		List<CalendarDTO> events = statServ.getAllMeetings();
-		assertEquals(1, events.size());
-
-		CalendarDTO ev = events.get(0);
-		assertEquals(con2.getId(), ev.getId());
-		assertEquals(con2.getMeetingDate(), ev.getDate());
-		assertEquals("/requests/detail/" + con2.getId(), ev.getUrl());
-
-	}
-
-	@Test
-	public void getMeetingsForConsultant() {
-		List<CalendarDTO> events = statServ.getMeetings(1);
-		assertEquals(1, events.size());
-
-		CalendarDTO ev = events.get(0);
-		assertEquals(con2.getId(), ev.getId());
-		assertEquals(con2.getMeetingDate(), ev.getDate());
-		assertEquals("/requests/detail/" + con2.getId(), ev.getUrl());
-
-	}
 
 	@Test
 	@Ignore
@@ -155,6 +132,4 @@ public class StatisticsTest {
 		long count=conReqRepo.count();
 		assertEquals(18, count);
 	}
-
 }
-*/
