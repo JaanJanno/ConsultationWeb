@@ -44,10 +44,10 @@
 				  				<strong>Create Account </strong>
 				  			  </div>						
 							  <div class="panel-body">
-							  		<form th:object="${account}" th:method="post">					                   
+							  		<form action="#" th:object="${accountform}" th:method="post">					                   
 									    <div class="form-group">
 									      <label for="name">Fullname:</label>
-									      <input type="text" class="form-control" id="name" placeholder="Enter fullname"></input>
+									      <input name="name" type="text" class="form-control" id="name" placeholder="Enter fullname"></input>
 									    </div>
 									    <!--div class="form-group">
 									      <label for="email">Email:</label>
@@ -55,11 +55,11 @@
 									    </div-->
 									    <div class="form-group">
 									      <label for="username">Username:</label>
-									      <input type="text" class="form-control" placeholder="Enter username"></input>
+									      <input name="username" type="text" class="form-control" placeholder="Enter username"></input>
 									    </div>
 									    <div class="form-group">
 									      <label for="pwd">Password:</label>
-									      <input type="password" class="form-control" placeholder="Enter password"></input>
+									      <input name="password" type="password" class="form-control" placeholder="Enter password"></input>
 									    </div>
 									    <button type="submit" class="btn btn-primary">Submit</button>
 									</form>

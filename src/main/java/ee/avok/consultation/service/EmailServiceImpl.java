@@ -8,6 +8,7 @@ import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.stereotype.Service;
 
+import ee.avok.consultation.auth.domain.model.AccountPending;
 import ee.avok.consultation.domain.model.ConsultationRequest;
 
 @Service
@@ -24,6 +25,11 @@ public class EmailServiceImpl implements EmailService {
 		sender.setHost("mailhost.ut.ee");
 		sender.setProtocol("smtps");
 	}
+	
+	@Override
+	public void sendAccountCreation(AccountPending account) {
+		send("AVOK account creation", getBaseUrl()+account.generateUrl(), account.getEmail());
+	}
 
 	@Override
 	public void sendReminder(ConsultationRequest req) {
@@ -36,6 +42,8 @@ public class EmailServiceImpl implements EmailService {
 		String url = req.generateFeedbackUrl(getBaseUrl());
 		send("AVOK consultation feedback", url, req.getEmail());
 	}
+	
+	
 
 	private void send(String subject, String text, String to) {
 		SimpleMailMessage message = new SimpleMailMessage();

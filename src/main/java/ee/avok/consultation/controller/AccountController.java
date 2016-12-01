@@ -11,8 +11,10 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import ee.avok.consultation.auth.domain.model.Account;
+import ee.avok.consultation.auth.domain.model.AccountPending;
 import ee.avok.consultation.auth.domain.model.InvalidPasswordException;
 import ee.avok.consultation.auth.domain.model.Role;
 import ee.avok.consultation.auth.domain.model.UnauthorizedException;
@@ -31,10 +33,28 @@ public class AccountController {
 	@Autowired
 	AccountService accountService;
 	
-	@RequestMapping(value = "/account/create", method = RequestMethod.GET)
-	public String createAccount( Model model)
+	@RequestMapping(value = "/account/create/{id}", method = RequestMethod.GET)
+	public String createAccountView(@RequestParam("uid") String uid, @PathVariable int id, Model model)
 			throws UnauthorizedException {
+		accountService.validateUid(id, uid);
+		model.addAttribute("accountform", new Account());
 		return "admin/create_account";
+	}
+	
+	@RequestMapping(value = "/account/create/{id}", method = RequestMethod.POST)
+	public String createAccount(@ModelAttribute Account account, @RequestParam("uid") String uid, @PathVariable int id, Model model)
+			throws UnauthorizedException {
+		accountService.validateUid(id, uid);
+		accountService.createAccount(id, account);
+		return "redirect:" + "/login";
+	}
+	
+	@RequestMapping(value = "/accounts/createpending", method = RequestMethod.POST)
+	public String newPendingAccount(@ModelAttribute AccountPending account, @CookieValue(value = "session", defaultValue = "none") String session)
+			throws UnauthorizedException {
+		authServ.authenticateRequestForRole(session, Role.ADMINISTRATOR);
+		accountService.createNewAccountPending(account);
+		return "redirect:" + "/accounts/manage";
 	}
 
 	@RequestMapping(value = "/account/edit", method = RequestMethod.GET)
