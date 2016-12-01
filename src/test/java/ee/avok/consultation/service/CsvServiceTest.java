@@ -30,10 +30,8 @@ import ee.avok.consultation.auth.domain.repository.AccountRepository;
 import ee.avok.consultation.domain.model.ConsultantFeedback;
 import ee.avok.consultation.domain.model.ConsultationRequest;
 import ee.avok.consultation.domain.model.ConsultationStatus;
-import ee.avok.consultation.domain.model.StudentFeedback;
 import ee.avok.consultation.domain.repository.ConsultantFeedbackRepository;
 import ee.avok.consultation.domain.repository.ConsultationRequestRepository;
-import ee.avok.consultation.domain.repository.StudentFeedbackRepository;
 import ee.avok.consultation.dto.CsvBean;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -51,7 +49,7 @@ public class CsvServiceTest {
 	@Autowired
 	ConsultantFeedbackRepository conFeedRepo;
 	@Autowired
-	StudentFeedbackRepository stuFeedRepo;
+	FeedbackService feedServ;
 
 	private Date now;
 
@@ -69,9 +67,7 @@ public class CsvServiceTest {
 		now = new Date();
 
 		ConsultantFeedback f = new ConsultantFeedback();
-		StudentFeedback s = new StudentFeedback();
 		conFeedRepo.save(f);
-		stuFeedRepo.save(s);
 
 		ConsultationRequest con1 = new ConsultationRequest();
 		con1.setMeetingDate(now);
@@ -85,7 +81,8 @@ public class CsvServiceTest {
 		con1.setProgramme("Programming");
 		con1.setTextType("Essay");
 		con1.setConsultantFeedback(f);
-		con1.setStudentFeedback(s);
+		feedServ.addStudentFeedback(con1);
+		con1.getStudentFeedback().setUid(null);
 
 		// Not suitable con, should not be in CSV
 		ConsultationRequest con2 = new ConsultationRequest();
@@ -100,7 +97,7 @@ public class CsvServiceTest {
 		con2.setProgramme("History");
 		con2.setTextType("Exam");
 		con2.setConsultantFeedback(f);
-		con2.setStudentFeedback(s);
+		feedServ.addStudentFeedback(con2);
 
 		ConsultationRequest con3 = new ConsultationRequest();
 		con3.setMeetingDate(now);
@@ -114,11 +111,28 @@ public class CsvServiceTest {
 		con3.setProgramme("Social studies");
 		con3.setTextType("Essay");
 		con3.setConsultantFeedback(f);
-		con3.setStudentFeedback(s);
+		feedServ.addStudentFeedback(con3);
+		con3.getStudentFeedback().setUid(null);
+
+		// Has no student feedback
+		ConsultationRequest con4 = new ConsultationRequest();
+		con4.setMeetingDate(now);
+		con4.setStatus(ConsultationStatus.COMPLETED);
+		con4.setName("Jon Snow");
+		con4.setLanguage("English");
+		con4.setComments("I know nothing");
+		con4.setConsultant(user);
+		con4.setDegree("Bsc");
+		con4.setDepartment("Faculty of Social Sciences");
+		con4.setProgramme("Social studies");
+		con4.setTextType("Essay");
+		con4.setConsultantFeedback(f);
+		feedServ.addStudentFeedback(con4);
 
 		conReqRepo.save(con1);
 		conReqRepo.save(con2);
 		conReqRepo.save(con3);
+		conReqRepo.save(con4);
 
 	}
 
