@@ -104,6 +104,25 @@ public class ConsultationRequest {
 	public ConsultationRequest(int id) {
 		this.id = id;
 	}
+
+	public ConsultationRequest reConsultation(boolean sameConsultant) {
+		ConsultationRequest req = new ConsultationRequest();
+		req.name = this.name;
+		req.email = this.email;
+		req.programme = this.programme;
+		req.degree = this.degree;
+		req.textType = this.textType;
+		req.department = this.department;
+		req.language = this.language;
+		req.comments = this.comments;
+		if(hasFile()) {
+			req.upload = this.upload;
+		}
+		if(sameConsultant) {
+			req.consultant = this.consultant;
+		}
+		return req;
+	}
 	
 				
 }

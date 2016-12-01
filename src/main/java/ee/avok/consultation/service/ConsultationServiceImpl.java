@@ -163,4 +163,29 @@ public class ConsultationServiceImpl implements ConsultationService {
 		mailServ.sendReminder(r);
 	}
 
+	@Override
+	public void reconsultationWithSame(ConsultationRequest req) {
+		ConsultationRequest newReq = req.reConsultation(true);
+		newReq.setPrevious(req);
+		newReq.setStatus(ConsultationStatus.ACCEPTED);
+		feedServ.addStudentFeedback(newReq);
+		newReq.setReceivedDate(new Date());
+		newReq.setAcceptedDate(new Date());
+		newReq = conReqRepo.save(newReq);
+		req.setNext(newReq);
+		conReqRepo.save(req);
+	}
+
+	@Override
+	public void reconsultationWithNew(ConsultationRequest req) {
+		ConsultationRequest newReq = req.reConsultation(false);
+		newReq.setPrevious(req);
+		newReq.setStatus(ConsultationStatus.RECEIVED);
+		feedServ.addStudentFeedback(newReq);
+		newReq.setReceivedDate(new Date());
+		newReq = conReqRepo.save(newReq);
+		req.setNext(newReq);
+		conReqRepo.save(req);
+	}
+
 }
