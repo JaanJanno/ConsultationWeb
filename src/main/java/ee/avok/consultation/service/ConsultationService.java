@@ -54,4 +54,8 @@ public interface ConsultationService {
 	
 	void setConsultationDate(int id, SetTimeDTO date) throws ParseException;
 
+	void reconsultationWithSame(ConsultationRequest req);
+
+	void reconsultationWithNew(ConsultationRequest req);
+
 }

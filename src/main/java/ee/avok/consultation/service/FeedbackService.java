@@ -29,10 +29,12 @@ public class FeedbackService {
 	ConsultationRequestRepository consultationRepo;
 	@Autowired
 	EmailService mailServ;
+	@Autowired
+	ConsultationService conServ;
 
 	public void verifyStudentFeedbackUID(Integer id, String uid) throws UnauthorizedException {
 		ConsultationRequest req = consultationRepo.findOne(id);
-		if(!req.getStudentFeedback().getUid().equals(uid)) {
+		if (!req.getStudentFeedback().getUid().equals(uid)) {
 			throw new UnauthorizedException("Incorrect feedback UID.");
 		}
 	}
@@ -48,17 +50,17 @@ public class FeedbackService {
 		feedback.setUid(null);
 		studentFeedbackRepo.save(feedback);
 	}
-	
+
 	public void verifyConsultantFeedbackUser(Account user, Integer id) throws UnauthorizedException {
 		ConsultationRequest req = consultationRepo.findOne(id);
-		if(req.getConsultantFeedback() != null) {
+		if (req.getConsultantFeedback() != null) {
 			throw new UnauthorizedException("Already has feedback.");
 		}
-		if(!req.getConsultant().equals(user)) {
+		if (!req.getConsultant().equals(user)) {
 			throw new UnauthorizedException("Incorrect user.");
 		}
 	}
-	
+
 	public void submitConsultantFeedback(int id, ConsultantFeedback feedbackForm) {
 		ConsultationRequest req = consultationRepo.findOne(id);
 		feedbackForm = consultantFeedbackRepo.save(feedbackForm);
@@ -66,12 +68,22 @@ public class FeedbackService {
 		req.setStatus(ConsultationStatus.COMPLETED);
 		req.setCompletedDate(Date.from(Instant.now()));
 		consultationRepo.save(req);
-		
-		if(feedbackForm.getSuggestedNewConsultation().equals(NewConsultationOption.NO)) {
+
+		switch (feedbackForm.getSuggestedNewConsultation()) {
+		case NO:
 			mailServ.sendFeedbackRequest(req);
+			break;
+		case WITH_ME:
+			conServ.reconsultationWithSame(req);
+			break;
+		case WITH_NEW:
+			conServ.reconsultationWithNew(req);
+			break;
+
 		}
+
 	}
-	
+
 	public void addStudentFeedback(ConsultationRequest req) {
 		StudentFeedback feedback = new StudentFeedback();
 		feedback.setUid(UUID.randomUUID().toString());

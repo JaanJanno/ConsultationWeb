@@ -32,7 +32,6 @@ public class HerokuConfiguration {
 
 	@Bean
 	public DataSource dataSource() {
-		EmailServiceImpl.setBaseUrl("avok.herokuapp.com");
 		String databaseUrl = System.getenv("DATABASE_URL");
 		// LOG.info("Using Heroku configuration with variable: " + databaseUrl);
 
