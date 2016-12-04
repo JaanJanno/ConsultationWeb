@@ -60,7 +60,7 @@ public class AccountService {
 			throw new InvalidPasswordException("New password cannot be empty!");
 		}
 		
-		user.setPassword(newPassword);
+		authService.setPassword(user, newPassword);
 		accountRepo.save(user);
 	}
 
@@ -79,6 +79,7 @@ public class AccountService {
 
 	public void createAccount(int id, Account account) {
 		AccountPending newAcc = accountpendingRepo.findOne(id);
+		authService.setPassword(account, account.getPassword());
 		account.setEmail(newAcc.getEmail());
 		account.setActive(true);
 		account.setRole(Role.CONSULTANT);

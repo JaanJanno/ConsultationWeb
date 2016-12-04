@@ -40,7 +40,7 @@
 		"name": "Testy Mc'Testface",
 		"email": "testy@testface.ee",
 		"role": "CONSULTANT",
-		"password": "testy",
+		"password": "$2a$10$jfqzm1w6l4eMW6Wej1P/jOqS31ye.QRbrS3T4QzSZetyxA4VoBWZ6",
 		"active": true
 	},
 	{
@@ -50,7 +50,7 @@
 		"name": "Admin Mc'Adminface",
 		"email": "admin@admin.ee",
 		"role": "ADMINISTRATOR",
-		"password": "admin",
+		"password": "$2a$10$OGarhUsBeiouMHicKxffL.gnZxe24Sw2xfcVRYu.BT07S8Wki3lLi",
 		"active": true
 	},
 	{

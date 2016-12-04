@@ -22,6 +22,9 @@ public class AuthService {
 
 	@Autowired
 	AccountRepository accountRepo;
+	
+	@Autowired
+	CryptoServiceImpl cryptoServ;
 
 	Map<String, Account> sessionMap = new HashMap<>();
 
@@ -38,7 +41,7 @@ public class AuthService {
 			throw new UnauthorizedException("User account is deactivated.");
 		}
 
-		if (!user.getPassword().equals(password)) {
+		if (!checkPassword(user.getId(), password)) {
 			throw new UnauthorizedException("Invalid password.");
 		}
 
@@ -112,7 +115,11 @@ public class AuthService {
 
 	public boolean checkPassword(int userId, String password) {
 		Account user = accountRepo.findById(userId);
-		return user.getPassword().equals(password);
+		return cryptoServ.verify(password, user.getPassword());
+	}
+	
+	public void setPassword(Account user, String password) {
+		user.setPassword(cryptoServ.encrypt(password));
 	}
 
 }
