@@ -30,80 +30,88 @@
 				</div>
 			</div>
 
-			<div class="col-md-12" style="padding: 20px;">
-				<div class="col-md-12 padding-0">
-					<div class="col-md-12 padding-0">
+			<div class="col-md-12 padding-0">
+
+				<div class="col-md-12">
+
+					<div class="panel panel-default">
+						<div class="panel-heading">
+							<strong>Request Info</strong>
+						</div>
 						<div class="panel-body">
-							<div class="panel panel-default">
-								<div class="panel-heading">
-									<strong>Request Info</strong>
-								</div>
-								<div class="panel-body">
-									<div th:replace="fragments/detail/request_detail_info :: request_detail_info"></div>
-								</div>
+							<div th:replace="fragments/detail/request_detail_info :: request_detail_info"></div>
+						</div>
 
-							</div>
+					</div>
+				</div>
 
-							<div class="panel panel-default">
-								<div class="panel-heading">
-									<strong>Comment On Request</strong>
-								</div>
-								<div class="panel-body">
-									<div class="col-sm-10">
-										<label for="name" th:utext="${consultation.comments}"></label>
-									</div>
-								</div>
+				<div class="col-md-12">
+					<div class="panel panel-default">
+						<div class="panel-heading">
+							<strong>Comment On Request</strong>
+						</div>
+						<div class="panel-body">
+							<div class="col-sm-10">
+								<label for="name" th:utext="${consultation.comments}"></label>
 							</div>
-
-							<div class="panel panel-default">
-								<div class="panel-heading">
-									<strong>Request Related Dates</strong>
-								</div>
-								<div class="panel-body">
-									<div th:replace="fragments/detail/request_detail_date :: request_detail_date"></div>
-								</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-12">
+					<div class="panel panel-default">
+						<div class="panel-heading">
+							<strong>Request Related Dates</strong>
+						</div>
+						<div class="panel-body">
+							<div th:replace="fragments/detail/request_detail_date :: request_detail_date"></div>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-12 padding-0">
+					<div class="col-md-6">
+						<div class="panel panel-default" th:if="${consultation.hasStudentFeedback()}">
+							<div class="panel-heading">
+								<strong>Student Feedback</strong>
 							</div>
-
-							<div class="panel panel-default" th:if="${consultation.hasStudentFeedback()}">
-								<div class="panel-heading">
-									<strong>Student Feedback</strong>
-								</div>
-								<div class="panel-body">
-									<div th:replace="fragments/detail/request_detail_student_feedback :: request-detail-student-feedback"></div>	
-								</div>
+							<div class="panel-body">
+								<div
+									th:replace="fragments/detail/request_detail_student_feedback :: request-detail-student-feedback"></div>
 							</div>
-							
-							<div class="panel panel-default" th:if="${consultation.getConsultantFeedback() != null}">
-								<div class="panel-heading">
-									<strong>Consultant Feedback</strong>
-								</div>
-								<div class="panel-body">
-									<div
-										th:replace="fragments/detail/request_detail_consultant_feedback :: request-detail-consultant-feedback">
-									</div>
-								</div>
+						</div>
+					</div>
+					<div class="col-md-6">
+						<div class="panel panel-default" th:if="${consultation.getConsultantFeedback() != null}">
+							<div class="panel-heading">
+								<strong>Consultant Feedback</strong>
 							</div>
-						
-							<div class="panel panel-default"
-								th:if="${(consultation.getNext()!=null) or (consultation.getPrevious()!=null)} ">
-								<div class="panel-body">
-									<div
-										th:replace="fragments/detail/request_detail_links_to_prvious_or_next_consultation :: request_detail_links_to_prvious_or_next_consultation"></div>
+							<div class="panel-body">
+								<div
+									th:replace="fragments/detail/request_detail_consultant_feedback :: request-detail-consultant-feedback">
 								</div>
 							</div>
-
-
+						</div>
+					</div>
+				</div>
+				<div class="col-md-12">
+					<div class="panel panel-default"
+						th:if="${(consultation.getNext()!=null) or (consultation.getPrevious()!=null)} ">
+						<div class="panel-body">
+							<div
+								th:replace="fragments/detail/request_detail_links_to_prvious_or_next_consultation :: request_detail_links_to_prvious_or_next_consultation"></div>
 						</div>
 					</div>
 				</div>
 			</div>
 
-
-
-
-
 		</div>
 	</div>
+
+
+
+
+
+
+
 
 
 	<!-- start: Mobile -->

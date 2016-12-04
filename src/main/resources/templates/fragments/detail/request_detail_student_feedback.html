@@ -6,59 +6,25 @@
 	<div th:fragment="request-detail-student-feedback">
 
 		<div class="col-md-12">
-			<div>
-				<label class="col-sm-3 control-label text-left">Have you had peer consultation before?</label>
-				<div class="col-sm-9">
-					<label class="text-left" th:text="Yes"
-						th:if="${consultation.getStudentFeedback().firstConsultation==true}"></label> <label
-						class="control-label text-right" th:text="No"
-						th:if="${consultation.getStudentFeedback().firstConsultation!=true}"></label>
-				</div>
-			</div>
-
-			<div class="form-group">
-				<label class="col-sm-3 control-label text-left">Was the consultation useful?</label>
-				<div class="col-sm-9">
-					<label class="text-left" th:text="Yes"
-						th:if="${consultation.getStudentFeedback().useful==true}"></label> <label
-						class="control-label text-right" th:text="No"
-						th:if="${consultation.getStudentFeedback().useful!=true}"></label>
-				</div>
-			</div>
-
-			<div class="form-group">
-				<label class="col-sm-3 control-label text-left">Provided enough support?</label>
-				<div class="col-sm-9">
-					<label class="text-left" th:text="Yes"
-						th:if="${consultation.getStudentFeedback().providedSupport==true}"></label> <label
-						class="control-label text-right" th:text="No"
-						th:if="${consultation.getStudentFeedback().providedSupport!=true}"></label>
-				</div>
-			</div>
-
-			<div class="form-group">
-				<label class="col-sm-3 control-label text-left">Will you back again?</label>
-				<div class="col-sm-9">
-					<label class="text-left" th:text="Yes"
-						th:if="${consultation.getStudentFeedback().comingBack==true}"></label> <label
-						class="control-label text-right" th:text="No"
-						th:if="${consultation.getStudentFeedback().comingBack!=true}"></label>
-				</div>
-			</div>
-
-			<div class="form-group">
-				<label class="col-sm-3 control-label text-left">Comments</label>
-				<div class="col-sm-9">
-					<label class="text-left" th:utext="${consultation.getStudentFeedback().comments}"
-						th:if="${consultation.getStudentFeedback().comments!=true}"></label>
-				</div>
-			</div>
+			<dl class="dl-vertical">
+				<dt>Have you had peer consultation before?</dt>
+				<dd th:text="Yes" th:if="${consultation.getStudentFeedback().firstConsultation==true}"></dd>
+				<dd th:text="No" th:if="${consultation.getStudentFeedback().firstConsultation!=true}"></dd>
+				<dt>Was the consultation useful?</dt>
+				<dd th:text="Yes" th:if="${consultation.getStudentFeedback().useful==true}"></dd>
+				<dd th:text="No" th:if="${consultation.getStudentFeedback().useful!=true}"></dd>
+				<dt>Provided enough support?</dt>
+				<dd th:text="Yes" th:if="${consultation.getStudentFeedback().providedSupport==true}"></dd>
+				<dd th:text="No" th:if="${consultation.getStudentFeedback().providedSupport!=true}"></dd>
+				<dt>Will you come back again?</dt>
+				<dd th:text="Yes" th:if="${consultation.getStudentFeedback().comingBack==true}"></dd>
+				<dd th:text="No" th:if="${consultation.getStudentFeedback().comingBack!=true}"></dd>
+				<dt>Comments</dt>
+				<dd th:utext="${consultation.getStudentFeedback().comments}"></dd>
+			</dl>
 
 		</div>
 	</div>
-
-
-
 
 </body>
 </html>
