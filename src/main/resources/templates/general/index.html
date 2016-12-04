@@ -21,20 +21,20 @@
 					<div class="col-md-8 col-md-push-2">
 						<div class="panel text-center">
 							<div class="panel-heading ">
-								<h1 th:text="#{welcome}">Welcome to AVOK</h1>
+								<h1 th:text="#{index.welcome}">Welcome to AVOK</h1>
 							</div>
 							<div class="panel-body">
 								<div th:replace="fragments/alert :: alert (type=${type}, message=${message})">...</div>
 								<h2>
-									<small>Thanks for choosing the Centre for Academic Writing and Communication
+									<small th:text="#{index.text}">Thanks for choosing the Centre for Academic Writing and Communication
 										(AVOK). In this portal, we help our users to improve their articles, essaies, and theses,
 										in different languages. The students can submit their written document in our request form
 										and our consultants make an appointment for them as soon as possible. Please feel free to
 										make a feedback about our services at the end. We hope our service improve your results.</small>
 								</h2>
 
-								<a href="/" th:href="@{/request}" class="btn btn-primary btn-round blue btn-lg"> Request
-									form <span style="margin-left: 10px;" class="fa fa-check-square-o"></span>
+								<a href="/" th:href="@{/request}" class="btn btn-primary btn-round blue btn-lg"> <span th:text="#{index.formbutton}">Request
+									form</span> <span style="margin-left: 10px;" class="fa fa-check-square-o"></span>
 								</a>
 
 								<h2>

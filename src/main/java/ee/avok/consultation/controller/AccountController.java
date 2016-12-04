@@ -33,16 +33,16 @@ public class AccountController {
 	@Autowired
 	AccountService accountService;
 	
-	@RequestMapping(value = "/account/create/{id}", method = RequestMethod.GET)
-	public String createAccountView(@RequestParam("uid") String uid, @PathVariable int id, Model model)
+	@RequestMapping(value = "/account/create/{id}/{uid}", method = RequestMethod.GET)
+	public String createAccountView(@PathVariable("uid") String uid, @PathVariable int id, Model model)
 			throws UnauthorizedException {
 		accountService.validateUid(id, uid);
 		model.addAttribute("accountform", new Account());
 		return "admin/create_account";
 	}
 	
-	@RequestMapping(value = "/account/create/{id}", method = RequestMethod.POST)
-	public String createAccount(@ModelAttribute Account account, @RequestParam("uid") String uid, @PathVariable int id, Model model)
+	@RequestMapping(value = "/account/create/{id}/{uid}", method = RequestMethod.POST)
+	public String createAccount(@ModelAttribute Account account, @PathVariable("uid") String uid, @PathVariable int id, Model model)
 			throws UnauthorizedException {
 		accountService.validateUid(id, uid);
 		accountService.createAccount(id, account);

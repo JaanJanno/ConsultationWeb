@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html th:with="lang=${#locale.language}" th:lang="${lang}" lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
 
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
@@ -23,7 +23,7 @@
 							<div class="col-md-12" style="margin-top: 20px;">
 								<div class="panel form-element-padding">
 										<div class="panel-heading">
-											<h4>Please fill the form</h4>
+											<h4 th:text="#{form.title}">Please fill the form</h4>
 										</div>
 
 										<div class="panel-body" style="padding-bottom: 30px;">
@@ -33,33 +33,33 @@
 													<form action="#" th:action="@{/request}" th:object="${consultation}" method="post" enctype="multipart/form-data"
 													class="form-horizontal" content="text/html; charset=UTF-8">
 													<div class="form-group">
-														<label for="name" class="col-sm-2 control-label text-right">Name</label>
+														<label th:text="#{form.name.label}" for="name" class="col-sm-2 control-label text-right">Name</label>
 														<div class="col-sm-6">
-															<input type="text" class="form-control"   placeholder="Full name"
+															<input type="text" class="form-control" th:placeholder="#{form.name.placeholder}" th:title="#{form.name.mouseover}"
 																th:field="*{name}" th:required="required" id="name"/>
 				
 														</div>                     
 													</div>
 													<div class="form-group">
-														<label for="email" class="col-sm-2 control-label text-right">Email</label>
+														<label th:text="#{form.email.label}" for="email" class="col-sm-2 control-label text-right">Email</label>
 														<div class="col-sm-6">
-															<input type="email" class="form-control" id="email" placeholder="email@asd.ee"
-																th:field="*{email}" th:required="required"/>
+															<input type="email" class="form-control" id="email" th:placeholder="#{form.email.placeholder}"
+																th:field="*{email}" th:required="required" th:title="#{form.email.mouseover}"/>
 														</div>
 													</div>
 													<div class="form-group">
-														<label for="programme" class="col-sm-2 control-label text-right">Programme</label>
+														<label th:text="#{form.programme.label}" for="programme" class="col-sm-2 control-label text-right">Programme</label>
 														<div class="col-sm-6">
-															<input type="text" class="form-control" id="programme" placeholder="Programme"
-															data-toggle="Programme" title="Math, Physic, Software engineering, etc."
+															<input type="text" class="form-control" id="programme" th:placeholder="#{form.programme.placeholder}"
+															th:title="#{form.programme.mouseover}"
 																th:field="*{programme}" th:required="required"/>
 														</div>
 													</div>
 													
 													<div class="form-group">
-														<label for="degree" class="col-sm-2 control-label text-right">Degree</label>
+														<label th:text="#{form.degree.label}" for="degree" class="col-sm-2 control-label text-right">Degree</label>
 														<div class="col-sm-6">
-															<select class="select2-A form-control" id="degree" th:field="*{degree}" th:required="required">
+															<select class="select2-A form-control" id="degree" th:title="#{form.degree.mouseover}" th:field="*{degree}" th:required="required">
 																<option value="Bsc">Bsc</option>
 																<option value="Ba">Ba</option>
 																<option value="Msc">Msc</option>
@@ -71,38 +71,32 @@
 													 
 												
 													<div class="form-group">
-														<label for="department" class="col-sm-2 control-label text-right">Department</label>
+														<label th:text="#{form.department.label}" for="department" class="col-sm-2 control-label text-right">Department</label>
 														<div class="col-sm-6">
-															<select class="select2-A form-control" id="department" th:field="*{department}" th:required="required">
-																<option value="Faculty of Art and Humanities">Faculty of Art and Humanities</option>
-																<option value="Faculty of Social Sciences">Faculty of Social Sciences</option>
-																<option value="Faculty of Medicine">Faculty of Medicine</option>
-																<option value="Faculty of Science and Technology">Faculty of Science and
-																	Technology</option>
-																<option value="Office of Academic Affairs">Office of Academic Affairs</option>
-																<option value="Estonian Genom Center, Univercity of Tartu">Estonian Genom
-																	Center, Univercity of Tartu</option>
+															<select class="select2-A form-control" id="department" th:title="#{form.department.mouseover}" th:field="*{department}" th:required="required">
+																<option th:text="#{form.department.option1}" th:value="#{form.department.option1}">Faculty of Art and Humanities</option>
+																<option th:text="#{form.department.option2}" th:value="#{form.department.option2}">Faculty of Social Sciences</option>
+																<option th:text="#{form.department.option3}" th:value="#{form.department.option3}">Faculty of Medicine</option>
+																<option th:text="#{form.department.option4}" th:value="#{form.department.option4}">Faculty of Science and Technology</option>
 															</select>
 														</div>
 													</div>
 													<div class="form-group">
-														<label for="language" class="col-sm-2 control-label text-right">Language</label>
+														<label th:text="#{form.language.label}" for="language" class="col-sm-2 control-label text-right">Language</label>
 														<div class="col-sm-6">
-															<select class="select2-A form-control" id="language" th:field="*{language}" th:required="required">
-																<option value="English">English</option>
-																<option value="Estonian">Estonian</option>
-																<option value="Russian">Russian</option>
-																<option value="German">German</option>
+															<select class="select2-A form-control" id="language" th:title="#{form.language.mouseover}" th:field="*{language}" th:required="required">
+																<option th:text="#{form.language.option1}" th:value="#{form.language.option1}">Estonian</option>
+																<option th:text="#{form.language.option2}" th:value="#{form.language.option2}">English</option>
 															</select>
 														</div>
 													</div>
 						
 												    
 												    <div class="form-group">
-														<label for="programme" class="col-sm-2 control-label text-right">Text type</label>
+														<label th:text="#{form.texttype.label}" for="programme" class="col-sm-2 control-label text-right">Text type</label>
 														<div class="col-sm-6">
-												         <input type="text" class="form-control"  data-toggle="purpose" title="Article, Essay, Thesis,etc."
-												         placeholder="Text Type" th:field="*{textType}" th:required="required"/>
+												         <input type="text" class="form-control" th:title="#{form.texttype.mouseover}"
+												         th:placeholder="#{form.texttype.placeholder}" th:field="*{textType}" th:required="required"/>
 														</div>
 													</div>
 												    
@@ -110,14 +104,14 @@
 												    
 												      
 													<div class="form-group"> 
-														<label for="File" class="col-sm-2 control-label text-right">Upload File</label>	
+														<label th:text="#{form.fileupload.label}" for="File" class="col-sm-2 control-label text-right">Upload File</label>	
 									                      <div class="row">
 									                        <div class="col-sm-6">
 									                          <div class="input-group fileupload-v1" style="float: right;">
 									                            <input type="file" name="manualfile" accept=".doc,.docx,.pdf" class="fileupload-v1-file hidden"/>
-									                            <input type="text" class="form-control fileupload-v1-path"  placeholder="File Path..." />
+									                            <input type="text" th:title="#{form.fileupload.mouseover}" class="form-control fileupload-v1-path"  th:placeholder="#{form.fileupload.path}" />
 									                            <span class="input-group-btn">
-									                              <button class="btn fileupload-v1-btn" type="button"><i class="fa fa-folder"></i> Choose File</button>
+									                              <button class="btn fileupload-v1-btn" th:text="#{form.fileupload.choose}" type="button"><i class="fa fa-folder"></i>Choose File</button>
 									                            </span>
 									                          </div>
 									                        </div>
@@ -125,7 +119,7 @@
 								                    </div> 
 													
 													<div class="form-group">
-														<label for="comments" class="col-sm-2 control-label text-right">Comments</label>
+														<label th:text="#{form.comments.label}" th:title="#{form.comments.mouseover}" for="comments" class="col-sm-2 control-label text-right">Comments</label>
 														<div class="col-sm-6">
 															<textarea id="summernote" th:field="*{comments}" class="summernote "></textarea>
 														</div>
@@ -133,7 +127,7 @@
 													
 													<div class="form-group">
 														<div class="col-sm-offset-2 col-sm-10">
-															<input type="submit" value="Save" class="btn btn-primary" />
+															<input type="submit" th:value="#{form.submit}" class="btn btn-primary" />
 														</div>
 													</div>
 												</form>

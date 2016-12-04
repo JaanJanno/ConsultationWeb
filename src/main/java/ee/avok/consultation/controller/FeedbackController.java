@@ -36,8 +36,8 @@ public class FeedbackController {
 	@Autowired
 	ConsultationService consServ;
 
-	@RequestMapping(value = "/requests/{id}/studentfeedback", method = RequestMethod.GET)
-	public String studentFeedbackForm(Model model, @PathVariable int id , @RequestParam("uid") String uid)
+	@RequestMapping(value = "/requests/{id}/studentfeedback/{uid}", method = RequestMethod.GET)
+	public String studentFeedbackForm(Model model, @PathVariable int id , @PathVariable("uid") String uid)
 			throws UnauthorizedException {
 		feedServ.verifyStudentFeedbackUID(id, uid); // Check if UID matches
 													// parameter given in e-mail
@@ -46,9 +46,9 @@ public class FeedbackController {
 		return "general/feedback";
 	}
 
-	@RequestMapping(value = "/requests/{id}/studentfeedback", method = RequestMethod.POST)
+	@RequestMapping(value = "/requests/{id}/studentfeedback/{uid}", method = RequestMethod.POST)
 	public String submitStudentFeedbackForm(@ModelAttribute StudentFeedback feedback, Model model, @PathVariable int id,
-			@RequestParam("uid") String uid, RedirectAttributes ra) throws UnauthorizedException {
+			@PathVariable("uid") String uid, RedirectAttributes ra) throws UnauthorizedException {
 		feedServ.verifyStudentFeedbackUID(id, uid); // Check if UID matches
 													// parameter given in e-mail
 													// for authentication.

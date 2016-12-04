@@ -5,96 +5,117 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <title>Consultation request</title>
 <object th:replace="fragments/util :: standardCSS"></object>
-<link rel="stylesheet" type="text/css" th:href="@{/webjars/summernote/0.8.1/dist/summernote.css}" />
-<link rel="stylesheet" type="text/css" th:href="@{/webjars/select2/4.0.2/dist/css/select2.min.css}" />
+<link rel="stylesheet" type="text/css"
+	th:href="@{/webjars/summernote/0.8.1/dist/summernote.css}" />
+<link rel="stylesheet" type="text/css"
+	th:href="@{/webjars/select2/4.0.2/dist/css/select2.min.css}" />
 <!--link rel="stylesheet" type="text/css" th:href="@{/css/Tool-Tip.css}" /-->
 
 </head>
 
 <body id="mimin" class="dashboard">
-		<div th:replace="fragments/request-header :: header"></div>
+	<div th:replace="fragments/request-header :: header"></div>
 
 	<div class="container-fluid mimin-wrapper">
 
-		
+
 		<div id="content" style="padding-left: 0px">
 			<div class="panel box-shadow-none content-header">
 				<div class="panel-body">
 
-							<div class="col-md-12" style="margin-top: 20px;">
-								<div class="panel form-element-padding">
-										<div class="panel-heading">
-											<h4>Please fill the form</h4>
+					<div class="col-md-12" style="margin-top: 20px;">
+						<div class="panel form-element-padding">
+							<div class="panel-heading">
+								<h4 th:text="#{form.title}" >Please fill the form</h4>
+							</div>
+
+							<div class="panel-body"
+								style="padding-bottom: 30px; padding-right: 0px">
+
+								<div class="col-md-12">
+
+									<form action="#" th:action="@{#}" th:object="${feedback}"
+										method="post" enctype="multipart/form-data"
+										class="form-horizontal" content="text/html; charset=UTF-8">
+
+
+										<div class="form-group">
+											<label th:text="#{sfeed.first}" for="background"
+												class="col-sm-3 control-label text-right">Have you
+												had peer consultation before?</label>
+											<div class="col-sm-6">
+												<select class="select2-A form-control"
+													id="firstConsultation" th:field="*{firstConsultation}"
+													th:required="required">
+													<option th:text="#{option.yes}" value="true">Yes</option>
+													<option th:text="#{option.no}" value="false">No</option>
+												</select>
+											</div>
 										</div>
 
-										<div class="panel-body" style="padding-bottom: 30px; padding-right:0px">
-											
-												<div class="col-md-12">
-													
-													<form action="#" th:action="@{#}" th:object="${feedback}" method="post" enctype="multipart/form-data"
-													class="form-horizontal" content="text/html; charset=UTF-8">
 
-													
-													<div class="form-group">
-														<label for="background" class="col-sm-3 control-label text-right">Have you had peer consultation before?</label>
-														<div class="col-sm-6">
-															<select class="select2-A form-control" id="firstConsultation" th:field="*{firstConsultation}" th:required="required">
-																<option value="true">Yes</option>
-																<option value="false">No</option>
-															</select>
-														</div>
-													</div>
-													 
-												
-													<div class="form-group">
-														<label for="usefulness" class="col-sm-3 control-label text-right">Was the consultation useful?</label>
-														<div class="col-sm-6">
-															<select class="select2-A form-control" id="useful" th:field="*{useful}" th:required="required">
-																<option value="true">Yes</option>
-																<option value="false">No</option>
-															</select>
-														</div>
-													</div>
-													<div class="form-group">
-														<label for="language" class="col-sm-3 control-label text-right">Did the consultant provide you the support you needed?</label>
-														<div class="col-sm-6">
-															<select class="select2-A form-control" id="providedSupport" th:field="*{providedSupport}" th:required="required">
-																<option value="true">Yes</option>
-																<option value="false">No</option>
-															</select>
-														</div>
-													</div>
-													
-													<div class="form-group">
-														<label for="language" class="col-sm-3 control-label text-right">Will you come again?</label>
-														<div class="col-sm-6">
-															<select class="select2-A form-control" id="comingBack" th:field="*{comingBack}" th:required="required">
-																<option value="true">Yes</option>
-																<option value="false">No</option>
-															</select>
-														</div>
-													</div>
-												    
-													
-													<div class="form-group">
-														<label for="comments" class="col-sm-3 control-label text-right">Do you have any suggestions or comments?</label>
-														<div class="col-sm-6">
-															<textarea id="summernote" th:field="*{comments}" class="summernote "></textarea>
-														</div>
-													</div>
-													
-													<div class="col-sm-offset-3 col-sm-9" style="float: left;">
-																<input type="submit"  value="Submit The Feedback" class="btn btn-primary" />
-													</div>
-												</form>
-						
-												</div>							
-											
+										<div class="form-group">
+											<label th:text="#{sfeed.useful}" for="usefulness"
+												class="col-sm-3 control-label text-right">Was the
+												consultation useful?</label>
+											<div class="col-sm-6">
+												<select class="select2-A form-control" id="useful"
+													th:field="*{useful}" th:required="required">
+													<option th:text="#{option.yes}" value="true">Yes</option>
+													<option th:text="#{option.no}" value="false">No</option>
+												</select>
+											</div>
 										</div>
+										<div class="form-group">
+											<label th:text="#{sfeed.support}" for="language"
+												class="col-sm-3 control-label text-right">Did the
+												consultant provide you the support you needed?</label>
+											<div class="col-sm-6">
+												<select class="select2-A form-control" id="providedSupport"
+													th:field="*{providedSupport}" th:required="required">
+													<option th:text="#{option.yes}" value="true">Yes</option>
+													<option th:text="#{option.no}" value="false">No</option>
+												</select>
+											</div>
+										</div>
+
+										<div class="form-group">
+											<label th:text="#{sfeed.back}" for="language"
+												class="col-sm-3 control-label text-right">Will you
+												come again?</label>
+											<div class="col-sm-6">
+												<select class="select2-A form-control" id="comingBack"
+													th:field="*{comingBack}" th:required="required">
+													<option th:text="#{option.yes}" value="true">Yes</option>
+													<option th:text="#{option.no}" value="false">No</option>
+												</select>
+											</div>
+										</div>
+
+
+										<div class="form-group">
+											<label th:text="#{sfeed.comments}" for="comments"
+												class="col-sm-3 control-label text-right">Do you
+												have any suggestions or comments?</label>
+											<div class="col-sm-6">
+												<textarea id="summernote" th:field="*{comments}"
+													class="summernote "></textarea>
+											</div>
+										</div>
+
+										<div class="col-sm-offset-3 col-sm-9" style="float: left;">
+											<input type="submit" th:value="#{option.submit}"
+												class="btn btn-primary" />
+										</div>
+									</form>
+
 								</div>
-							</div>				
-								
+
+							</div>
+						</div>
 					</div>
+
+				</div>
 			</div>
 		</div>
 	</div>
@@ -108,7 +129,7 @@
 	<script src="/js/select.js"></script>
 	<script src="/js/tooltip.js"></script>
 	<!-- custom -->
-	
+
 	<!-- end: Javascript -->
 </body>
 </html>

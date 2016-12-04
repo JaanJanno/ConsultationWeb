@@ -83,7 +83,7 @@ public class ConsultationRequest {
 
 	public String generateFeedbackUrl(String baseUrl) {
 		String url = baseUrl;
-		return url + "/requests/" + Integer.toString(id) + "/studentfeedback?uid=" + studentFeedback.getUid();
+		return url + "/requests/" + Integer.toString(id) + "/studentfeedback/" + studentFeedback.getUid();
 	}
 
 	public boolean hasFile() {

@@ -21,7 +21,7 @@ public class AccountPending {
 	private String uid; // SECRET field for authorization.
 	
 	public String generateUrl() {
-		return "/account/create/" + Integer.toString(id) + "?uid=" + uid;
+		return "/account/create/" + Integer.toString(id) + "/" + uid;
 	}
 
 }
