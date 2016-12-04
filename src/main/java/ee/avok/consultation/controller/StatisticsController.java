@@ -52,8 +52,8 @@ public class StatisticsController {
 
 	@RequestMapping("/statistics/{period}")
 	public String getStatistics(Model model,@PathVariable("period") String period,
-			@CookieValue(value = "session", defaultValue = "none") String session){
-		
+			@CookieValue(value = "session", defaultValue = "none") String session) throws UnauthorizedException{
+		authServ.authenticateRequestForRole(session, Role.ADMINISTRATOR);
 		StatisticsDTO stats = statServ.getStatistics(period);
 		model.addAttribute("stats", stats);
 
