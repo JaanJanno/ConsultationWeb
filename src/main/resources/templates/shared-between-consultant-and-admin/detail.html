@@ -72,18 +72,6 @@
 									<div th:replace="fragments/detail/request_detail_student_feedback :: request-detail-student-feedback"></div>	
 								</div>
 							</div>
-							<div class="panel panel-default">
-										<div class="panel-heading">
-											<strong>Student Comments On Feedback:</strong>
-										</div>
-										<div class="panel-body">
-											<div class="col-sm-10">
-												<label class="control-label text-left"
-														th:utext="${consultation.getStudentFeedback().comments}"
-														th:if="${consultation.getStudentFeedback().comments!=true}"></label>
-											</div>
-										</div>
-							</div>
 							
 							<div class="panel panel-default" th:if="${consultation.getConsultantFeedback() != null}">
 								<div class="panel-heading">
