@@ -30,10 +30,6 @@ $(document).ready(function() {
 		},
 		firstDay : 1, // Monday because Estonia :D
 		timeFormat : 'H(:mm)', // uppercase H for 24-hour clock
-
-		eventRender : function(event, element) {
-			element.attr('href', 'javascript:void(0);');
-		}
 	});
 
 	dropDownListener();
