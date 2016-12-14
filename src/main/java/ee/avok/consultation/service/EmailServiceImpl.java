@@ -13,7 +13,7 @@ import ee.avok.consultation.domain.model.ConsultationRequest;
 
 @Service
 public class EmailServiceImpl implements EmailService {
-	
+
 	@Autowired
 	Environment env;
 
@@ -25,10 +25,10 @@ public class EmailServiceImpl implements EmailService {
 		sender.setHost("mailhost.ut.ee");
 		sender.setProtocol("smtps");
 	}
-	
+
 	@Override
 	public void sendAccountCreation(AccountPending account) {
-		send("AVOK account creation", getBaseUrl()+account.generateUrl(), account.getEmail());
+		send("AVOK account creation", getBaseUrl() + account.generateUrl(), account.getEmail());
 	}
 
 	@Override
@@ -42,23 +42,24 @@ public class EmailServiceImpl implements EmailService {
 		String url = req.generateFeedbackUrl(getBaseUrl());
 		send("AVOK consultation feedback", url, req.getEmail());
 	}
-	
-	
 
 	private void send(String subject, String text, String to) {
-		SimpleMailMessage message = new SimpleMailMessage();
-		message.setFrom("no-reply-avok@ut.ee");
-		message.setTo(to);
-		message.setText(text);
-		message.setSubject(subject);
-		sender.send(message);
-	}
-	
-	private String getBaseUrl() {
-		if(Arrays.asList(env.getActiveProfiles()).contains("test")) {
-			return "localhost:8080";
+		try {
+			SimpleMailMessage message = new SimpleMailMessage();
+			message.setFrom("no-reply-avok@ut.ee");
+			message.setTo(to);
+			message.setText(text);
+			message.setSubject(subject);
+			sender.send(message);
+		} catch (Exception e) {
+			// TODO: handle exception
 		}
-		else {
+	}
+
+	private String getBaseUrl() {
+		if (Arrays.asList(env.getActiveProfiles()).contains("test")) {
+			return "localhost:8080";
+		} else {
 			return "avok.herokuapp.com";
 		}
 	}
