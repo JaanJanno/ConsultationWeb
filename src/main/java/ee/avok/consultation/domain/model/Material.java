@@ -18,4 +18,13 @@ public class Material {
 	private String name;
 	@Column
 	private String link;
+	
+	public String generateURL() {
+		if (link.matches(".*://.*")) {
+			return link;
+		}
+		else {
+			return "http://" + link;
+		}
+	}
 }

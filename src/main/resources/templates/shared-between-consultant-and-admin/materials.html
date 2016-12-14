@@ -54,7 +54,7 @@
 								<tr th:each="m : ${materials}">
 									<td th:text="${m.getId()}">000</td>
 									<td th:text="${m.getName()}">000</td>
-									<td><a th:text="${m.getLink()}" th:href="${m.getLink()}">ipsum</a></td>
+									<td><a th:text="${m.generateURL()}" th:href="${m.generateURL()}">ipsum</a></td>
 									<td th:if="${role}==ADMINISTRATOR"><a th:href="@{'/materials/'+${m.getId()}+'/edit'}"><button
 												type="button" class="btn btn-warning" value="warning">Edit</button></a></td>
 									<td th:if="${role}==ADMINISTRATOR"><a
