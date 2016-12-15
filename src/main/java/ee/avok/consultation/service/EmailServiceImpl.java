@@ -1,8 +1,10 @@
 package ee.avok.consultation.service;
 
 import java.util.Arrays;
+import java.util.Locale;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.MessageSource;
 import org.springframework.core.env.Environment;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
@@ -16,6 +18,9 @@ public class EmailServiceImpl implements EmailService {
 
 	@Autowired
 	Environment env;
+	
+	@Autowired
+	private MessageSource messageSource;
 
 	private final JavaMailSenderImpl sender;
 
@@ -28,19 +33,42 @@ public class EmailServiceImpl implements EmailService {
 
 	@Override
 	public void sendAccountCreation(AccountPending account) {
-		send("AVOK account creation", getBaseUrl() + account.generateUrl(), account.getEmail());
+		String subject = messageSource.getMessage("email.accountcreate.subject", null, new Locale("en"));
+		String text = messageSource.getMessage("email.accountcreate.text", null, new Locale("en"));
+		send(subject, text + "\n" + getBaseUrl() + account.generateUrl(), account.getEmail());
 	}
 
 	@Override
 	public void sendReminder(ConsultationRequest req) {
-		send("AVOK consultation reminder", req.getMeetingDate().toString() + "\n" + req.getMeetingPlace(),
+		String subject;
+		String text;
+		System.out.println(req.getLanguage());
+		if(req.getLanguage().equals("Estonian")) {
+			subject = messageSource.getMessage("email.reminder.subject", null, new Locale("et"));
+			text = messageSource.getMessage("email.reminder.text", null, new Locale("et"));
+		}
+		else {
+			subject = messageSource.getMessage("email.reminder.subject", null, new Locale("en"));
+			text = messageSource.getMessage("email.reminder.text", null, new Locale("en"));
+		}
+		send(subject, text + "\n" + req.getMeetingDate().toString() + "\n" + req.getMeetingPlace(),
 				req.getEmail());
 	}
 
 	@Override
 	public void sendFeedbackRequest(ConsultationRequest req) {
+		String subject;
+		String text;
+		if(req.getLanguage().equals("Estonian")) {
+			subject = messageSource.getMessage("email.feedback.subject", null, new Locale("et"));
+			text = messageSource.getMessage("email.feedback.text", null, new Locale("et"));
+		}
+		else {
+			subject = messageSource.getMessage("email.feedback.subject", null, new Locale("en"));
+			text = messageSource.getMessage("email.feedback.text", null, new Locale("en"));
+		}
 		String url = req.generateFeedbackUrl(getBaseUrl());
-		send("AVOK consultation feedback", url, req.getEmail());
+		send(subject, text + "\n" + url, req.getEmail());
 	}
 
 	private void send(String subject, String text, String to) {
@@ -58,9 +86,9 @@ public class EmailServiceImpl implements EmailService {
 
 	private String getBaseUrl() {
 		if (Arrays.asList(env.getActiveProfiles()).contains("test")) {
-			return "localhost:8080";
+			return "http://localhost:8080";
 		} else {
-			return "avok.herokuapp.com";
+			return "http://avok.herokuapp.com";
 		}
 	}
 
