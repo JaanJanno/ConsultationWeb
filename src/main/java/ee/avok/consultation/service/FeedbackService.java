@@ -12,7 +12,6 @@ import ee.avok.consultation.auth.domain.model.UnauthorizedException;
 import ee.avok.consultation.domain.model.ConsultantFeedback;
 import ee.avok.consultation.domain.model.ConsultationRequest;
 import ee.avok.consultation.domain.model.ConsultationStatus;
-import ee.avok.consultation.domain.model.NewConsultationOption;
 import ee.avok.consultation.domain.model.StudentFeedback;
 import ee.avok.consultation.domain.repository.ConsultantFeedbackRepository;
 import ee.avok.consultation.domain.repository.ConsultationRequestRepository;

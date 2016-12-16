@@ -22,11 +22,7 @@ public class MailTest {
 	public void mailTest() {
 		System.out.println("ter");
 
-		JavaMailSenderImpl sender = new JavaMailSenderImpl() {
-			void set() {
-
-			}
-		};
+		JavaMailSenderImpl sender = new JavaMailSenderImpl();
 		sender.setHost("mailhost.ut.ee");
 		sender.setProtocol("smtps");
 		sender.setPort(465);

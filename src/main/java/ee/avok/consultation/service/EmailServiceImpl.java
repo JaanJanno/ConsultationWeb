@@ -18,17 +18,49 @@ public class EmailServiceImpl implements EmailService {
 
 	@Autowired
 	Environment env;
-	
+
 	@Autowired
 	private MessageSource messageSource;
 
-	private final JavaMailSenderImpl sender;
+	private final JavaMailSenderImpl sender = new JavaMailSenderImpl();
 
-	public EmailServiceImpl() {
-		super();
-		sender = new JavaMailSenderImpl();
-		sender.setHost("mailhost.ut.ee");
-		sender.setProtocol("smtps");
+	private String mailer;
+
+	public EmailServiceImpl() { 
+		mailer = getEnv("EMAIL_USER", "no-reply-avok@ut.ee");
+		sender.setHost(getEnv("EMAIL_HOST", "mailhost.ut.ee"));
+		sender.setProtocol(getEnv("EMAIL_PROTOCOL", "smtps"));
+		sender.setPort(getEnvInt("EMAIL_PORT", 465));
+		String username = getEnv("EMAIL_USER", null);
+		String password = getEnv("EMAIL_PW", null);
+		if (password != null && username != null) {
+			sender.setUsername(username);
+			sender.setPassword(password);
+		}
+		sender.getSession().getProperties().setProperty("mail.smtp.starttls.enable", getEnvBool("EMAIL_TLS", false).toString());
+	}
+	
+	private static String getEnv(String key, String def) {
+		String value = System.getenv(key);
+		return value == null ? def : value;
+	}
+	
+	private static Boolean getEnvBool(String key, boolean def) {
+		String value = System.getenv(key);
+		if (value == null) 
+			return def;
+		return value.equals("true") ? true : false;
+	}
+	
+	private static Integer getEnvInt(String key, Integer def) {
+		String value = System.getenv(key);
+		if (value == null)
+			return def;	
+		try {
+			return Integer.parseInt(value);
+		} catch (Exception e) {
+			return def;
+		}
 	}
 
 	@Override
@@ -42,28 +74,24 @@ public class EmailServiceImpl implements EmailService {
 	public void sendReminder(ConsultationRequest req) {
 		String subject;
 		String text;
-		System.out.println(req.getLanguage());
-		if(req.getLanguage().equals("Estonian")) {
+		if (req.getLanguage().equals("Estonian")) {
 			subject = messageSource.getMessage("email.reminder.subject", null, new Locale("et"));
 			text = messageSource.getMessage("email.reminder.text", null, new Locale("et"));
-		}
-		else {
+		} else {
 			subject = messageSource.getMessage("email.reminder.subject", null, new Locale("en"));
 			text = messageSource.getMessage("email.reminder.text", null, new Locale("en"));
 		}
-		send(subject, text + "\n" + req.getMeetingDate().toString() + "\n" + req.getMeetingPlace(),
-				req.getEmail());
+		send(subject, text + "\n" + req.getMeetingDate().toString() + "\n" + req.getMeetingPlace(), req.getEmail());
 	}
 
 	@Override
 	public void sendFeedbackRequest(ConsultationRequest req) {
 		String subject;
 		String text;
-		if(req.getLanguage().equals("Estonian")) {
+		if (req.getLanguage().equals("Estonian")) {
 			subject = messageSource.getMessage("email.feedback.subject", null, new Locale("et"));
 			text = messageSource.getMessage("email.feedback.text", null, new Locale("et"));
-		}
-		else {
+		} else {
 			subject = messageSource.getMessage("email.feedback.subject", null, new Locale("en"));
 			text = messageSource.getMessage("email.feedback.text", null, new Locale("en"));
 		}
@@ -74,13 +102,13 @@ public class EmailServiceImpl implements EmailService {
 	private void send(String subject, String text, String to) {
 		try {
 			SimpleMailMessage message = new SimpleMailMessage();
-			message.setFrom("no-reply-avok@ut.ee");
+			message.setFrom(mailer);
 			message.setTo(to);
 			message.setText(text);
 			message.setSubject(subject);
 			sender.send(message);
 		} catch (Exception e) {
-			// TODO: handle exception
+			e.printStackTrace();
 		}
 	}
 
